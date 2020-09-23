@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "arcanis.vscode-zipfs",
+    "prisma.prisma",
+    "esbenp.prettier-vscode"
+  ]
+}

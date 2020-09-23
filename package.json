@@ -1,0 +1,29 @@
+{
+  "name": "website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "prisma:generate": "yarn prisma generate",
+    "prisma:instrospect": "yarn prisma instrospect",
+    "prisma:migrate": "yarn prisma migrate save --experimental",
+    "prisma:up": "yarn prisma migrate up --experimental"
+  },
+  "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
+    "@emotion/core": "^10.0.35",
+    "@emotion/styled": "^10.0.27",
+    "@prisma/client": "^2.7.1",
+    "emotion-theming": "^10.0.27",
+    "next": "9.5.3",
+    "next-auth": "^3.1.0",
+    "prop-types": "^15.7.2",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.7.1"
+  }
+}
