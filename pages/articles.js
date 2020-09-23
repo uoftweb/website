@@ -12,7 +12,7 @@ import {
   StatHelpText,
   StatArrow,
 } from "@chakra-ui/core";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
 function Feature({ title, desc, ...rest }) {
   return (
@@ -39,28 +39,13 @@ function StackEx() {
 }
 
 export default function Articles() {
-  const [session, loading] = useSession();
-
   return (
     <>
       <Head>
         <title>Articles</title>
       </Head>
-      <Box>
-        <p>
-          {!session && (
-            <>
-              Not signed in <br />
-              <button onClick={signIn}>Sign in</button>
-            </>
-          )}
-          {session && (
-            <>
-              Signed in as {session.user.name} <br />
-              <button onClick={signOut}>Sign out</button>
-            </>
-          )}
-        </p>
+      <SiteNavigationBar />
+      <Box p={4}>
         <Heading>Articles</Heading>
         <StatGroup>
           <Stat>
