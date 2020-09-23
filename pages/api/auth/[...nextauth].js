@@ -1,4 +1,5 @@
-require("dotenv").config()
+import * as dotenv from "dotenv";
+dotenv.config();
 
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";

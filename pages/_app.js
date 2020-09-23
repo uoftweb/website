@@ -1,5 +1,3 @@
-import "../styles/globals.css";
-
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 
 function MyApp({ Component, pageProps }) {
