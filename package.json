@@ -24,6 +24,7 @@
     "react-dom": "16.13.1"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.7.1"
+    "@prisma/cli": "^2.7.1",
+    "dotenv": "^8.2.0"
   }
 }
