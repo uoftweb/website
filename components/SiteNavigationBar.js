@@ -68,7 +68,9 @@ export function SiteNavigationBar() {
             <Text>
               Signed in as{" "}
               <Text as="span" fontWeight="bold">
-                {session.user.name}
+                <Link as={NextLink} href={`/user/${session?.user?.id}`}>
+                  {session?.user?.name}
+                </Link>
               </Text>
             </Text>
             <Button onClick={signOut}>Sign out</Button>

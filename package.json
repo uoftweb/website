@@ -9,7 +9,8 @@
     "prisma:generate": "yarn prisma generate",
     "prisma:instrospect": "yarn prisma instrospect",
     "prisma:migrate": "yarn prisma migrate save --experimental",
-    "prisma:up": "yarn prisma migrate up --experimental"
+    "prisma:up": "yarn prisma migrate up --experimental",
+    "prisma:admin": "yarn prisma studio --experimental"
   },
   "dependencies": {
     "@chakra-ui/core": "^0.8.0",
