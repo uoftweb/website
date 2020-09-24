@@ -33,7 +33,7 @@ export async function getStaticPaths() {
   };
 }
 
-export default function Profile({ user }) {
+export default function ProfilePage({ user }) {
   const [session, loading] = useSession();
 
   const router = useRouter();

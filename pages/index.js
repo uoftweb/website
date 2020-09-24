@@ -3,7 +3,7 @@ import Head from "next/head";
 
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
-export default function Home() {
+export default function HomePage() {
   return (
     <>
       <SiteNavigationBar />
