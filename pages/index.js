@@ -1,5 +1,4 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/core";
-import Head from "next/head";
 
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
