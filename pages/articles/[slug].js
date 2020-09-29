@@ -211,8 +211,8 @@ export default function ArticlePage({ source, frontmatter, meta }) {
                 <Text as="span" fontWeight="bold">
                   {frontmatter.author}
                 </Text>{" "}
-                on {creationDate.toDateString()} &middot;{" "}
-                {meta.readingTimeStats.text} &middot; 51 stars
+                on {creationDate.toDateString()} &bull;{" "}
+                {meta.readingTimeStats.text} &bull; 51 stars
               </Text>
               <ButtonGroup spacing={4} size="sm">
                 {session ? (
