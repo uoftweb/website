@@ -1,4 +1,4 @@
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
 import { Provider as AuthProvider } from "next-auth/client";
 import Head from "next/head";
 
@@ -29,12 +29,15 @@ function App({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <title>UofT Web Development Club</title>
       </Head>
-    <AuthProvider session={pageProps.session}>
-      <ThemeProvider>
-        <CSSReset />
-        <Component {...pageProps} />
-      </ThemeProvider>
-    </AuthProvider>
+      <AuthProvider session={pageProps.session}>
+        <ThemeProvider>
+          <ColorModeProvider>
+            <CSSReset />
+            <Component {...pageProps} />
+          </ColorModeProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </>
   );
 }
 
