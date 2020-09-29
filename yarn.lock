@@ -6479,6 +6479,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"nprogress@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "nprogress@npm:0.2.0"
+  checksum: 652dfcfea776f9d9a2c3ad1f79b4cbd3056a03e7c6884966eab70fb184e8e70bfca9e0343ba89d11aa1ed95370d648fb638fab91b5dc027bdad54c8d37c96478
+  languageName: node
+  linkType: hard
+
 "number-is-nan@npm:^1.0.0":
   version: 1.0.1
   resolution: "number-is-nan@npm:1.0.1"
@@ -9195,6 +9202,7 @@ fsevents@~2.1.2:
     next: 9.5.3
     next-auth: ^3.1.0
     next-mdx-remote: ^1.0.0
+    nprogress: ^0.2.0
     prism-react-renderer: ^1.1.1
     prop-types: ^15.7.2
     react: 16.13.1

@@ -1,6 +1,15 @@
 import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
 import { Provider as AuthProvider } from "next-auth/client";
 import Head from "next/head";
+import Router from "next/router";
+import NProgress from "nprogress";
+import "nprogress/nprogress.css";
+
+NProgress.configure({ showSpinner: false, parent: "#site-header" });
+
+Router.events.on("routeChangeStart", () => NProgress.start());
+Router.events.on("routeChangeComplete", () => NProgress.done());
+Router.events.on("routeChangeError", () => NProgress.done());
 
 function App({ Component, pageProps }) {
   return (
