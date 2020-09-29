@@ -40,6 +40,8 @@ export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const icon = useColorModeValue("moon", "sun");
+  const borderColor = useColorModeValue("gray.200", "gray.700");
+  const bg = useColorModeValue("rgb(255 255 255 / 80%)", "rgb(0 0 0 / 50%)");
 
   return (
     <Flex
@@ -47,7 +49,12 @@ export function SiteNavigationBar() {
       justify="space-between"
       p={4}
       borderBottom="1px"
-      borderColor={{ light: "gray.200", dark: "gray.700" }[colorMode]}
+      borderColor={borderColor}
+      bg={bg}
+      position="sticky"
+      top={0}
+      style={{ backdropFilter: "blur(20px)" }}
+      zIndex="sticky"
     >
       {/* Logo */}
       <Link as={NextLink} href="/">
