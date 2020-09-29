@@ -180,6 +180,8 @@ export default function ArticlePage({ source, frontmatter, meta }) {
     start: lastWeekDate,
     end: currentDate,
   });
+  const headerBg = useColorModeValue("gray.50", "gray.900");
+  const headerColor = useColorModeValue("gray.900", "gray.100");
 
   return (
     <>
@@ -190,7 +192,7 @@ export default function ArticlePage({ source, frontmatter, meta }) {
       <SiteNavigationBar />
 
       <Box as="article">
-        <Box as="header" bg="gray.50" color="gray.900" py={16}>
+        <Box as="header" bg={headerBg} color={headerColor} py={16}>
           <Box maxW="xl" mx="auto" px={3} py={5}>
             <Stack spacing={4}>
               <Text as="span" color="blue.500">
