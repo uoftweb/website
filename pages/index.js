@@ -7,14 +7,18 @@ export default function HomePage() {
     <>
       <SiteNavigationBar />
 
-      <Box as="section" p={16}>
-        <Stack spacing={3}>
-          <Heading>Home</Heading>
-          <Text>
-            We write about topics related to web development from time to time.
-            Have a read and let us know what you think
-          </Text>
-        </Stack>
+      <Box as="section" py={32}>
+        <Box maxW="3xl" mx="auto" px={3}>
+          <Stack spacing={3}>
+            <Heading>Home</Heading>
+            <Text>
+              Welcome to the <strong>UofT Web Development Club</strong> website!
+              Here you'll learn all about web design and development from the
+              basics of HTML, CSS, and Javascript to more advanced topics like
+              JS frameworks, cloud deployment, domains, and more.
+            </Text>
+          </Stack>
+        </Box>
       </Box>
     </>
   );

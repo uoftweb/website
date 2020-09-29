@@ -3699,6 +3699,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"date-fns@npm:^2.16.1":
+  version: 2.16.1
+  resolution: "date-fns@npm:2.16.1"
+  checksum: fbe5d9aa1dc4c92c7cf9c0b31e58f532ac9fe059f85fc622641b1ac9c673150329620ea6bf941a8ba10e8e677aa0b6ccdc04ce001f81e70fd49acd1760edcba0
+  languageName: node
+  linkType: hard
+
 "debug@npm:4, debug@npm:^4.1.0":
   version: 4.2.0
   resolution: "debug@npm:4.2.0"
@@ -3831,6 +3838,13 @@ __metadata:
     miller-rabin: ^4.0.0
     randombytes: ^2.0.0
   checksum: c988be315dc9ec83948605da58a25912daaae787d6a5cfa0b0574383dcf9b953aa81ba3109d06bc8590b037259753d2962a362e351efcb4274e94f1b0f277065
+  languageName: node
+  linkType: hard
+
+"dom-confetti@npm:0.2.2":
+  version: 0.2.2
+  resolution: "dom-confetti@npm:0.2.2"
+  checksum: 47ebd2388adf3f146ea6e39ad82b51016cd1c93d23a0ae8cb7ef24ad35a17877614606423addd804344969f075e56e87a7de81c2469c29bc77d6f5ed55bd43e4
   languageName: node
   linkType: hard
 
@@ -7209,6 +7223,17 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"react-dom-confetti@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "react-dom-confetti@npm:0.2.0"
+  dependencies:
+    dom-confetti: 0.2.2
+  peerDependencies:
+    react: "*"
+  checksum: 741aa63f0f5829382e262ab51fb7392fc41ad1e75a28222282a1f49177ec2c26b933ca0d20eb799d755d9c792885ac6367c6be9f8b5e520dc023a3b5d260f504
+  languageName: node
+  linkType: hard
+
 "react-dom@npm:16.13.1":
   version: 16.13.1
   resolution: "react-dom@npm:16.13.1"
@@ -9163,6 +9188,7 @@ fsevents@~2.1.2:
     "@emotion/styled": ^10.0.27
     "@prisma/cli": ^2.7.1
     "@prisma/client": ^2.7.1
+    date-fns: ^2.16.1
     dotenv: ^8.2.0
     emotion-theming: ^10.0.27
     gray-matter: ^4.0.2
@@ -9173,6 +9199,7 @@ fsevents@~2.1.2:
     prop-types: ^15.7.2
     react: 16.13.1
     react-dom: 16.13.1
+    react-dom-confetti: ^0.2.0
     reading-time: ^1.2.0
     remark-slug: ^6.0.0
   languageName: unknown

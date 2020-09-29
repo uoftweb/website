@@ -31,27 +31,29 @@ export default function ArticleListingPage({ articlesMetadata }) {
 
       <SiteNavigationBar />
 
-      <Box as="section" p={16}>
-        <Stack spacing={3}>
-          <Heading>Articles</Heading>
-          <Text>
-            We write about topics related to web development from time to time.
-            Have a read and let us know what you think
-          </Text>
-          <ul>
-            {articlesMetadata
-              .filter((a) => a.frontMatter.published)
-              .map((data) => (
-                <li key={data.slug}>
-                  <Text as="span" color="blue.500">
-                    <Link as={NextLink} href={`/articles/${data.slug}`}>
-                      {data.frontMatter.title}
-                    </Link>
-                  </Text>
-                </li>
-              ))}
-          </ul>
-        </Stack>
+      <Box as="section" py={32}>
+        <Box maxW="3xl" mx="auto" px={3}>
+          <Stack spacing={3}>
+            <Heading>Articles</Heading>
+            <Text>
+              We write about topics related to web development from time to
+              time. Have a read and let us know what you think
+            </Text>
+            <ul>
+              {articlesMetadata
+                .filter((a) => a.frontMatter.published)
+                .map((data) => (
+                  <li key={data.slug}>
+                    <Text as="span" color="blue.500">
+                      <Link as={NextLink} href={`/articles/${data.slug}`}>
+                        {data.frontMatter.title}
+                      </Link>
+                    </Text>
+                  </li>
+                ))}
+            </ul>
+          </Stack>
+        </Box>
       </Box>
     </>
   );

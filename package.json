@@ -17,6 +17,7 @@
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
     "@prisma/client": "^2.7.1",
+    "date-fns": "^2.16.1",
     "emotion-theming": "^10.0.27",
     "gray-matter": "^4.0.2",
     "next": "9.5.3",
@@ -26,6 +27,7 @@
     "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-dom-confetti": "^0.2.0",
     "reading-time": "^1.2.0",
     "remark-slug": "^6.0.0"
   },
