@@ -7323,6 +7323,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"reading-time@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "reading-time@npm:1.2.0"
+  checksum: 411ff81920c1c6841bd2542276a4ed5c529d2b0ab182cedf072eb768f1ac4acd3c50b6adc9572ac9540e6109bb9e5a004a553b510b15a70748f87047d2788ccf
+  languageName: node
+  linkType: hard
+
 "reflect-metadata@npm:^0.1.13":
   version: 0.1.13
   resolution: "reflect-metadata@npm:0.1.13"
@@ -9166,6 +9173,7 @@ fsevents@~2.1.2:
     prop-types: ^15.7.2
     react: 16.13.1
     react-dom: 16.13.1
+    reading-time: ^1.2.0
     remark-slug: ^6.0.0
   languageName: unknown
   linkType: soft

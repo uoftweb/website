@@ -9,6 +9,7 @@ import path from "path";
 import NextLink from "next/link";
 import Highlight, { defaultProps } from "prism-react-renderer";
 import dracula from "prism-react-renderer/themes/dracula";
+import readingTime from "reading-time";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { useColorModeValue } from "hooks/chakra";
@@ -118,10 +119,13 @@ export async function getStaticProps({ params }) {
     scope: data,
     mdxOptions: { remarkPlugins: [slug] },
   });
-  return { props: { source: mdxSource, frontmatter: data } };
+  const readingTimeStats = readingTime(content);
+  return {
+    props: { source: mdxSource, frontmatter: data, meta: { readingTimeStats } },
+  };
 }
 
-export default function ArticlePage({ source, frontmatter }) {
+export default function ArticlePage({ source, frontmatter, meta }) {
   const content = hydrate(source, {
     components: MDXComponents,
   });
@@ -148,7 +152,8 @@ export default function ArticlePage({ source, frontmatter }) {
               <Text as="span" fontWeight="bold">
                 {frontmatter.author}
               </Text>{" "}
-              on {new Date(Date.parse(frontmatter.created_at)).toDateString()}
+              on {new Date(Date.parse(frontmatter.created_at)).toDateString()}{" "}
+              &middot; {meta.readingTimeStats.text}
             </Text>
           </Stack>
           <Box py={5}>{content}</Box>
