@@ -11,6 +11,7 @@ import {
   Tooltip,
   useColorMode,
 } from "@chakra-ui/core";
+import { features } from "configs/features";
 import { siteConfig } from "configs/site";
 import { useColorModeValue } from "hooks/chakra";
 import { signIn, signOut, useSession } from "next-auth/client";
@@ -87,17 +88,21 @@ export function SiteNavigationBar() {
         <Link as={NextLink} href="/articles">
           Articles
         </Link>
-        <Link as={NextLink} href="/workshops">
-          Workshops
-        </Link>
-        <Box>
-          {/* <Link as={NextLink} href="/projects"> */}
-          Projects
-          {/* </Link> */}
-          <Badge ml={2} variant="subtle" variantColor="purple">
-            Coming soon
-          </Badge>
-        </Box>
+        {features.workshops && (
+          <Link as={NextLink} href="/workshops">
+            Workshops
+          </Link>
+        )}
+        {features.projects && (
+          <Box>
+            {/* <Link as={NextLink} href="/projects"> */}
+            Projects
+            {/* </Link> */}
+            <Badge ml={2} variant="subtle" variantColor="purple">
+              Coming soon
+            </Badge>
+          </Box>
+        )}
         <Link href="https://trello.com/b/p5fiez3v/public-roadmap" isExternal>
           Roadmap <Icon name="external-link" mx="2px" />
         </Link>
@@ -136,26 +141,27 @@ export function SiteNavigationBar() {
             icon={icon}
           />
         </Stack>
-        {session ? (
-          <Stack isInline spacing={6} align="center">
-            <Text>
-              Signed in as{" "}
-              <Text as="span" fontWeight="bold">
-                <Link as={NextLink} href={`/user/${session?.user?.id}`}>
-                  {session?.user?.name}
-                </Link>
+        {features.accounts &&
+          (session ? (
+            <Stack isInline spacing={6} align="center">
+              <Text>
+                Signed in as{" "}
+                <Text as="span" fontWeight="bold" color="blue.500">
+                  <Link as={NextLink} href={`/user/${session?.user?.id}`}>
+                    {session?.user?.name}
+                  </Link>
+                </Text>
               </Text>
-            </Text>
-            <Button onClick={signOut}>Sign out</Button>
-          </Stack>
-        ) : (
-          <Stack isInline spacing={6}>
-            <Button variant="link" onClick={signIn}>
-              Sign in
-            </Button>
-            <Button variantColor="green">Become a member</Button>
-          </Stack>
-        )}
+              <Button onClick={signOut}>Sign out</Button>
+            </Stack>
+          ) : (
+            <Stack isInline spacing={6}>
+              <Button variant="link" onClick={signIn}>
+                Sign in
+              </Button>
+              <Button variantColor="green">Become a member</Button>
+            </Stack>
+          ))}
       </Stack>
     </Flex>
   );
