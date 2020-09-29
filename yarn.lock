@@ -7015,6 +7015,15 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"prism-react-renderer@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "prism-react-renderer@npm:1.1.1"
+  peerDependencies:
+    react: ">=0.14.9"
+  checksum: f3996b4fb45a620d806501b8b8c411e9084e779ef58986f45e988cc46759ae7dc9e27bd2a29dc7bff7cb9561d4ead8c8c66eeaba34bdbe65504dce66f718ee06
+  languageName: node
+  linkType: hard
+
 "process-nextick-args@npm:~2.0.0":
   version: 2.0.1
   resolution: "process-nextick-args@npm:2.0.1"
@@ -9153,6 +9162,7 @@ fsevents@~2.1.2:
     next: 9.5.3
     next-auth: ^3.1.0
     next-mdx-remote: ^1.0.0
+    prism-react-renderer: ^1.1.1
     prop-types: ^15.7.2
     react: 16.13.1
     react-dom: 16.13.1

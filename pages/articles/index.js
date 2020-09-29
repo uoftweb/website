@@ -38,19 +38,20 @@ export default function ArticleListingPage({ articlesMetadata }) {
             We write about topics related to web development from time to time.
             Have a read and let us know what you think
           </Text>
+          <ul>
+            {articlesMetadata
+              .filter((a) => a.frontMatter.published)
+              .map((data) => (
+                <li key={data.slug}>
+                  <Text as="span" color="blue.500">
+                    <Link as={NextLink} href={`/articles/${data.slug}`}>
+                      {data.frontMatter.title}
+                    </Link>
+                  </Text>
+                </li>
+              ))}
+          </ul>
         </Stack>
-      </Box>
-
-      <Box as="section" p={16}>
-        <ul>
-          {articlesMetadata.map((data) => (
-            <li key={data.slug}>
-              <Link as={NextLink} href={`/articles/${data.slug}`}>
-                <a>{data.frontMatter.title}</a>
-              </Link>
-            </li>
-          ))}
-        </ul>
       </Box>
     </>
   );
