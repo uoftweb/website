@@ -181,6 +181,7 @@ export function SiteNavigationBar() {
                 aria-label="Open GitHub repo"
                 icon={GithubIcon}
                 variant="ghost"
+                _hover={{ color: "white" }}
               />
             </Link>
             <Link isExternal aria-label="Discord" href={siteConfig.discord.url}>
@@ -190,6 +191,7 @@ export function SiteNavigationBar() {
                 aria-label="Open Discord server"
                 icon={DiscordIcon}
                 variant="ghost"
+                _hover={{ color: "white" }}
               />
             </Link>
             <IconButton
@@ -197,6 +199,7 @@ export function SiteNavigationBar() {
               fontSize="xl"
               aria-label={`Switch to ${colorMode} mode`}
               variant="ghost"
+              _hover={{ color: "white" }}
               onClick={toggleColorMode}
               icon={colorModeIcon}
             />
@@ -206,6 +209,7 @@ export function SiteNavigationBar() {
               fontSize="2xl"
               aria-label={`Open navigation menu`}
               variant="ghost"
+              _hover={{ color: "white" }}
               onClick={onOpen}
               icon={MenuIcon}
             />
@@ -241,7 +245,7 @@ export function SiteNavigationBar() {
                 spacing={6}
                 display={{ base: "none", lg: "flex" }}
               >
-                <Button variant="link" variantColor="brand" onClick={signIn}>
+                <Button variantColor="brand" onClick={signIn}>
                   Sign in
                 </Button>
                 <Link as={NextLink} href="/membership">
@@ -311,7 +315,7 @@ export function SiteNavigationBar() {
 
               {features.accounts &&
                 (session ? (
-                  <Stack isInline spacing={6} align="center">
+                  <Stack isInline spacing={3} align="center">
                     <Text>
                       Signed in as{" "}
                       <Text as="span" fontWeight="bold" whiteSpace="nowrap">
@@ -325,14 +329,8 @@ export function SiteNavigationBar() {
                     </Button>
                   </Stack>
                 ) : (
-                  <Stack isInline spacing={6}>
-                    <Button
-                      variant="link"
-                      variantColor="brand"
-                      onClick={signIn}
-                    >
-                      Sign in
-                    </Button>
+                  <Stack isInline spacing={3}>
+                    <Button onClick={signIn}>Sign in</Button>
                     <Link as={NextLink} href="/membership">
                       <Button variantColor="green">Become a member</Button>
                     </Link>
