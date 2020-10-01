@@ -36,27 +36,32 @@ const GithubIcon = (props) => (
   </svg>
 );
 
+function SiteNavigationBarLink({ href, children, isExternal }) {
+  return (
+    <Link as={NextLink} href={href} isExternal>
+      <Button variantColor="brand">
+        {children} {isExternal && <Icon name="external-link" mx="2px" />}
+      </Button>
+    </Link>
+  );
+}
+
 export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const icon = useColorModeValue("moon", "sun");
-  const borderColor = useColorModeValue("gray.200", "gray.700");
-  const bg = useColorModeValue("rgb(255 255 255 / 80%)", "rgb(0 0 0 / 50%)");
+  const bg = useColorModeValue("brand.500", "brand.600");
 
   return (
-    <Box
-      as="header"
-      id="site-header"
-      py={1}
-      borderBottom="1px"
-      borderColor={borderColor}
-      position="sticky"
-      top={0}
-      zIndex="sticky"
-      bg={bg}
-      style={{ backdropFilter: "blur(20px)" }}
-    >
-      <Flex align="center" justify="space-between" p={4}>
+    <Box as="header" id="site-header" py={1} bg={bg} color="brand.100">
+      <Stack
+        isInline
+        spacing={3}
+        align="center"
+        justify="space-between"
+        py={4}
+        px={8}
+      >
         {/* Logo */}
         <Link as={NextLink} href={session?.user ? "/dashboard" : "/"}>
           <a>
@@ -68,7 +73,7 @@ export function SiteNavigationBar() {
                 aria-labelledby="logoTitle"
               >
                 <title id="logoTitle">UofT Web Dev Club</title>
-                <rect width="64" height="64" rx="8" fill="#216BFF" />
+                <rect width="64" height="64" rx="8" fill="#fff" opacity={0.2} />
                 <g clipPath="url(#clip0)">
                   <path
                     fillRule="evenodd"
@@ -93,27 +98,25 @@ export function SiteNavigationBar() {
 
         {/* Navigation Menu */}
         <Stack isInline shouldWrapChildren spacing={6}>
-          <Link as={NextLink} href="/articles">
+          <SiteNavigationBarLink href="/articles">
             Articles
-          </Link>
+          </SiteNavigationBarLink>
           {features.workshops && (
-            <Link as={NextLink} href="/workshops">
+            <SiteNavigationBarLink href="/workshops">
               Workshops
-            </Link>
+            </SiteNavigationBarLink>
           )}
           {features.projects && (
-            <Box>
-              {/* <Link as={NextLink} href="/projects"> */}
+            <SiteNavigationBarLink href="/projects">
               Projects
-              {/* </Link> */}
-              <Badge ml={2} variant="subtle" variantColor="purple">
-                Coming soon
-              </Badge>
-            </Box>
+            </SiteNavigationBarLink>
           )}
-          <Link href="https://trello.com/b/p5fiez3v/public-roadmap" isExternal>
-            Roadmap <Icon name="external-link" mx="2px" />
-          </Link>
+          <SiteNavigationBarLink
+            href="https://trello.com/b/p5fiez3v/public-roadmap"
+            isExternal
+          >
+            Roadmap
+          </SiteNavigationBarLink>
         </Stack>
 
         {/* Actions */}
@@ -126,7 +129,7 @@ export function SiteNavigationBar() {
                 aria-label="Open GitHub repo"
                 icon={GithubIcon}
                 variant="ghost"
-                color="gray.400"
+                variantColor="white"
               />
             </Link>
             <Link isExternal aria-label="Discord" href={siteConfig.discord.url}>
@@ -136,7 +139,7 @@ export function SiteNavigationBar() {
                 aria-label="Open Discord server"
                 icon={DiscordIcon}
                 variant="ghost"
-                color="gray.400"
+                variantColor="white"
               />
             </Link>
             <IconButton
@@ -144,7 +147,7 @@ export function SiteNavigationBar() {
               fontSize="xl"
               aria-label={`Switch to ${colorMode} mode`}
               variant="ghost"
-              color="gray.400"
+              variantColor="white"
               onClick={toggleColorMode}
               icon={icon}
             />
@@ -154,17 +157,19 @@ export function SiteNavigationBar() {
               <Stack isInline spacing={6} align="center">
                 <Text>
                   Signed in as{" "}
-                  <Text as="span" fontWeight="bold" color="blue.500">
+                  <Text as="span" fontWeight="bold" color="white">
                     <Link as={NextLink} href={`/user/${session?.user?.id}`}>
                       {session?.user?.name}
                     </Link>
                   </Text>
                 </Text>
-                <Button onClick={signOut}>Sign out</Button>
+                <Button variantColor="green" onClick={signOut}>
+                  Sign out
+                </Button>
               </Stack>
             ) : (
               <Stack isInline spacing={6}>
-                <Button variant="link" onClick={signIn}>
+                <Button variant="link" variantColor="white" onClick={signIn}>
                   Sign in
                 </Button>
                 <Link as={NextLink} href="/membership">
@@ -173,7 +178,7 @@ export function SiteNavigationBar() {
               </Stack>
             ))}
         </Stack>
-      </Flex>
+      </Stack>
     </Box>
   );
 }

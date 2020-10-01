@@ -1,4 +1,9 @@
-import { ThemeProvider, CSSReset, ColorModeProvider } from "@chakra-ui/core";
+import {
+  ThemeProvider,
+  CSSReset,
+  ColorModeProvider,
+  theme,
+} from "@chakra-ui/core";
 import { Provider as AuthProvider } from "next-auth/client";
 import Head from "next/head";
 import Router from "next/router";
@@ -13,6 +18,31 @@ NProgress.configure({ showSpinner: false, parent: "#site-header" });
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
+
+const customTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    brand: {
+      50: "#dfeeff",
+      100: "#b0cbff",
+      200: "#7ea8ff",
+      300: "#4b86ff",
+      400: "#1a63ff",
+      500: "#004ae6",
+      600: "#0039b4",
+      700: "#002982",
+      800: "#001951",
+      900: "#000821",
+    },
+  },
+  fonts: {
+    ...theme.fonts,
+    body: "Inter, system-ui, sans-serif",
+    heading: "Inter, system-ui, sans-serif",
+    mono: "'Fira Code', Menlo, monospace",
+  },
+};
 
 function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps.initialApolloState);
@@ -44,7 +74,7 @@ function App({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={apolloClient}>
         <AuthProvider session={pageProps.session}>
-          <ThemeProvider>
+          <ThemeProvider theme={customTheme}>
             <ColorModeProvider>
               <CSSReset />
               <Component {...pageProps} />

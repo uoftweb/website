@@ -9,6 +9,8 @@ import readingTime from "reading-time";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { ArticleCard } from "../../components/ArticleCard";
 import { gql, useQuery } from "@apollo/client";
+import { PageHeader } from "../../components/PageHeader";
+import { Container } from "../../components/Container";
 
 const root = process.cwd();
 
@@ -53,15 +55,17 @@ export default function ArticleListingPage({ articlesMetadata }) {
 
       <SiteNavigationBar />
 
-      <Box as="section" py={32}>
-        <Box maxW="3xl" mx="auto" px={3}>
+      <PageHeader title="Articles" />
+
+      <Box as="section" py={16}>
+        <Container>
           <Stack spacing={3}>
             <Heading>Articles</Heading>
             <Text>
               We write about topics related to web development from time to
               time. Have a read and let us know what you think
             </Text>
-            <Grid templateColumns="1fr 1fr" gap={3}>
+            <Grid templateColumns="1fr 1fr" gap={3} mt={5}>
               {articlesMetadata
                 .filter((a) => a.frontmatter.published)
                 .map((a) => (
@@ -75,7 +79,7 @@ export default function ArticleListingPage({ articlesMetadata }) {
                 ))}
             </Grid>
           </Stack>
-        </Box>
+        </Container>
       </Box>
     </>
   );

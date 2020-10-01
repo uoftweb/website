@@ -1,6 +1,8 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/core";
 import Head from "next/head";
 
+import { Container } from "../components/Container";
+import { PageHeader } from "../components/PageHeader";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
 export default function WorkshopsPage() {
@@ -12,14 +14,18 @@ export default function WorkshopsPage() {
 
       <SiteNavigationBar />
 
-      <Box as="section" p={16}>
-        <Stack spacing={3}>
-          <Heading>Workshops</Heading>
-          <Text>
-            Build and learn how to use the latest web technology with our
-            amazing workshop instructors.
-          </Text>
-        </Stack>
+      <PageHeader title="Workshops" />
+
+      <Box as="section" py={16}>
+        <Container>
+          <Stack spacing={3}>
+            <Heading>Workshops</Heading>
+            <Text>
+              Build and learn how to use the latest web technology with our
+              amazing workshop instructors.
+            </Text>
+          </Stack>
+        </Container>
       </Box>
     </>
   );

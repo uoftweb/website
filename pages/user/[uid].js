@@ -10,6 +10,8 @@ import readingTime from "reading-time";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { gql, useQuery } from "@apollo/client";
 import { ArticleCard } from "../../components/ArticleCard";
+import { PageHeader } from "../../components/PageHeader";
+import { Container } from "../../components/Container";
 
 const root = process.cwd();
 
@@ -68,8 +70,10 @@ export default function ProfilePage({ user, articlesMetadata }) {
     <>
       <SiteNavigationBar />
 
-      <Box as="section" py={32}>
-        <Box maxW="3xl" mx="auto" px={3}>
+      <PageHeader title="User Profile" />
+
+      <Box as="section" py={16}>
+        <Container>
           <Stack isInline align="center" spacing={10}>
             <Avatar
               size="2xl"
@@ -81,26 +85,26 @@ export default function ProfilePage({ user, articlesMetadata }) {
               <Text>Description</Text>
             </Stack>
           </Stack>
-        </Box>
+        </Container>
       </Box>
 
-      <Box as="section" py={8}>
-        <Box maxW="3xl" mx="auto" px={3}>
-          <Stack spacing={3}>
-            <Heading as="h2">Starred Articles</Heading>
-            <Grid templateColumns="1fr 1fr" gap={3}>
-              {data?.user.starredArticles.map((a) => (
-                <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
-                  <Box as="a">
-                    <ArticleCard
-                      article={{ ...articlesMetadata[a.slug], ...a }}
-                    />
-                  </Box>
-                </NextLink>
-              ))}
-            </Grid>
-          </Stack>
-        </Box>
+      <Box as="section" py={16}>
+        <Container>
+          <Heading as="h2" size="lg" mb={5}>
+            Starred Articles
+          </Heading>
+          <Grid templateColumns="1fr 1fr" gap={3}>
+            {data?.user.starredArticles.map((a) => (
+              <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
+                <Box as="a">
+                  <ArticleCard
+                    article={{ ...articlesMetadata[a.slug], ...a }}
+                  />
+                </Box>
+              </NextLink>
+            ))}
+          </Grid>
+        </Container>
       </Box>
     </>
   );
