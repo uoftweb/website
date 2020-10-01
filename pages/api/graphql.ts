@@ -70,11 +70,19 @@ const Mutation = mutationType({
       },
       async resolve(_root, args, ctx) {
         const { id } = ctx?.session?.user;
-        const article = await ctx.prisma.article.update({
+        const article = await ctx.prisma.article.upsert({
           where: {
             slug: args.slug,
           },
-          data: {
+          create: {
+            slug: args.slug,
+            stargazers: {
+              connect: {
+                id,
+              },
+            },
+          },
+          update: {
             stargazers: {
               connect: {
                 id,

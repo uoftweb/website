@@ -48,7 +48,7 @@ export function ArticleCard({ article }) {
         <Box d="flex" mt="2" alignItems="center">
           <Icon name="star" color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            {article?.stargazers?.length} stars
+            {article?.stargazers?.length ?? "0"} stars
           </Box>
         </Box>
       </Box>

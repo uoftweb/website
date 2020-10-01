@@ -39,7 +39,7 @@ const DiscordIcon = (props) => (
   </svg>
 );
 
-const config = {
+const confettiConfig = {
   angle: 90,
   spread: "145",
   startVelocity: "24",
@@ -254,7 +254,7 @@ export default function ArticlePage({ source, frontmatter, meta }) {
                 </Text>{" "}
                 on {creationDate.toDateString()} &bull;{" "}
                 {meta.readingTimeStats.text} &bull;{" "}
-                {data?.article?.stargazers.length} stars
+                {data?.article?.stargazers.length ?? "0"} stars
               </Text>
               <ButtonGroup spacing={4} size="sm">
                 {session ? (
@@ -264,7 +264,7 @@ export default function ArticlePage({ source, frontmatter, meta }) {
                     variant={starred ? "solid" : "outline"}
                     onClick={() => (starred ? unstarArticle() : starArticle())}
                   >
-                    <Confetti active={starred} config={config} />
+                    <Confetti active={starred} config={confettiConfig} />
                     {starred ? "Unstar" : "Star"}
                   </Button>
                 ) : (
