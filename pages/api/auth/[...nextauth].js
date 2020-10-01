@@ -4,10 +4,9 @@ dotenv.config();
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import Adapters from "next-auth/adapters";
+import { PrismaClient } from "@prisma/client";
 
-import { getPrisma } from "lib/prisma";
-
-const prisma = getPrisma();
+const prisma = new PrismaClient();
 
 const options = {
   providers: [

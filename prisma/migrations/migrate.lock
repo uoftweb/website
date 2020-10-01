@@ -1,3 +1,5 @@
 # Prisma Migrate lockfile v1
 
 20200923204535-create-auth
+20200929234919-articles-stars
+20200929235441-rename-articles-map

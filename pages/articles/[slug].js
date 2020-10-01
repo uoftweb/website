@@ -21,12 +21,13 @@ import dracula from "prism-react-renderer/themes/dracula";
 import readingTime from "reading-time";
 import { subWeeks, isWithinInterval } from "date-fns";
 import Confetti from "react-dom-confetti";
+import { signIn, useSession } from "next-auth/client";
+import { useRouter } from "next/router";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { useColorModeValue } from "hooks/chakra";
-import { useState } from "react";
 import { siteConfig } from "configs/site";
-import { signIn, useSession } from "next-auth/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -167,12 +168,50 @@ function scrollToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
+const GET_ARTICLE = gql`
+  query GetArticle($slug: String) {
+    article(where: { slug: $slug }) {
+      slug
+      stargazers {
+        id
+      }
+    }
+  }
+`;
+
+const STAR_ARTICLE = gql`
+  mutation StarArticle($slug: String!) {
+    starArticle(slug: $slug) {
+      slug
+      stargazers {
+        id
+      }
+    }
+  }
+`;
+
+const UNSTAR_ARTICLE = gql`
+  mutation UnstarArticle($slug: String!) {
+    unstarArticle(slug: $slug) {
+      slug
+      stargazers {
+        id
+      }
+    }
+  }
+`;
+
 export default function ArticlePage({ source, frontmatter, meta }) {
+  const router = useRouter();
+  const { slug } = router.query;
+  const { data } = useQuery(GET_ARTICLE, { variables: { slug } });
+  const [starArticle] = useMutation(STAR_ARTICLE, { variables: { slug } });
+  const [unstarArticle] = useMutation(UNSTAR_ARTICLE, { variables: { slug } });
   const [session, loading] = useSession();
-  const content = hydrate(source, {
-    components: MDXComponents,
-  });
-  const [starred, setStarred] = useState(false);
+  const content = hydrate(source, { components: MDXComponents });
+  const starred = Boolean(
+    data?.article?.stargazers.find((u) => u.id === session?.user.id)
+  );
   const creationDate = new Date(Date.parse(frontmatter.created_at));
   const currentDate = new Date(Date.now());
   const lastWeekDate = subWeeks(currentDate, 1);
@@ -214,7 +253,8 @@ export default function ArticlePage({ source, frontmatter, meta }) {
                   {frontmatter.author}
                 </Text>{" "}
                 on {creationDate.toDateString()} &bull;{" "}
-                {meta.readingTimeStats.text} &bull; 51 stars
+                {meta.readingTimeStats.text} &bull;{" "}
+                {data?.article?.stargazers.length} stars
               </Text>
               <ButtonGroup spacing={4} size="sm">
                 {session ? (
@@ -222,7 +262,7 @@ export default function ArticlePage({ source, frontmatter, meta }) {
                     leftIcon="star"
                     variantColor="purple"
                     variant={starred ? "solid" : "outline"}
-                    onClick={() => setStarred(!starred)}
+                    onClick={() => (starred ? unstarArticle() : starArticle())}
                   >
                     <Confetti active={starred} config={config} />
                     {starred ? "Unstar" : "Star"}

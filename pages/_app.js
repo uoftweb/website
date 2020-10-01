@@ -4,6 +4,9 @@ import Head from "next/head";
 import Router from "next/router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { ApolloProvider } from "@apollo/client";
+
+import { useApollo } from "../lib/apolloClient";
 
 NProgress.configure({ showSpinner: false, parent: "#site-header" });
 
@@ -12,6 +15,7 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function App({ Component, pageProps }) {
+  const apolloClient = useApollo(pageProps.initialApolloState);
   return (
     <>
       <Head>
@@ -38,14 +42,16 @@ function App({ Component, pageProps }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <title>UofT Web Development Club</title>
       </Head>
-      <AuthProvider session={pageProps.session}>
-        <ThemeProvider>
-          <ColorModeProvider>
-            <CSSReset />
-            <Component {...pageProps} />
-          </ColorModeProvider>
-        </ThemeProvider>
-      </AuthProvider>
+      <ApolloProvider client={apolloClient}>
+        <AuthProvider session={pageProps.session}>
+          <ThemeProvider>
+            <ColorModeProvider>
+              <CSSReset />
+              <Component {...pageProps} />
+            </ColorModeProvider>
+          </ThemeProvider>
+        </AuthProvider>
+      </ApolloProvider>
     </>
   );
 }

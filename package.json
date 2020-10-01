@@ -10,19 +10,24 @@
     "prisma:instrospect": "yarn prisma instrospect",
     "prisma:migrate": "yarn prisma migrate save --experimental",
     "prisma:up": "yarn prisma migrate up --experimental",
-    "prisma:admin": "yarn prisma studio --experimental"
+    "prisma:admin": "yarn prisma studio"
   },
   "dependencies": {
+    "@apollo/client": "^3.2.1",
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
+    "@nexus/schema": "^0.16.0",
     "@prisma/client": "^2.7.1",
+    "apollo-server-micro": "^2.18.1",
     "date-fns": "^2.16.1",
     "emotion-theming": "^10.0.27",
+    "graphql": "^15.3.0",
     "gray-matter": "^4.0.2",
     "next": "9.5.3",
     "next-auth": "^3.1.0",
     "next-mdx-remote": "^1.0.0",
+    "nexus-plugin-prisma": "^0.20.0",
     "nprogress": "^0.2.0",
     "prism-react-renderer": "^1.1.1",
     "prop-types": "^15.7.2",
@@ -33,7 +38,10 @@
     "remark-slug": "^6.0.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.7.1",
-    "dotenv": "^8.2.0"
+    "@prisma/cli": "^2.8.0",
+    "@types/next-auth": "^3.1.10",
+    "@types/react": "^16.9.49",
+    "dotenv": "^8.2.0",
+    "typescript": "^4.0.3"
   }
 }
