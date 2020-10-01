@@ -6,6 +6,8 @@ import {
   ButtonGroup,
   Heading,
   Link,
+  List,
+  ListItem,
   Stack,
   Text,
 } from "@chakra-ui/core";
@@ -77,19 +79,31 @@ const MDXComponents = {
     </Link>
   ),
   ul: (props) => (
-    <Box as="ul" my={5}>
+    <List
+      as="ul"
+      listStyleType="disc"
+      listStylePosition="outside"
+      px={5}
+      py={3}
+    >
       {props.children}
-    </Box>
+    </List>
   ),
   ol: (props) => (
-    <Box as="ol" my={5}>
+    <List
+      as="ol"
+      listStyleType="decimal"
+      listStylePosition="outside"
+      px={5}
+      py={3}
+    >
       {props.children}
-    </Box>
+    </List>
   ),
   li: (props) => (
-    <Text as="li" pb={2}>
+    <ListItem as="li" py={2} ml={3}>
       {props.children}
-    </Text>
+    </ListItem>
   ),
   inlineCode: (props) => (
     <Box

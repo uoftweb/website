@@ -129,7 +129,6 @@ export function SiteNavigationBar() {
                 aria-label="Open GitHub repo"
                 icon={GithubIcon}
                 variant="ghost"
-                variantColor="white"
               />
             </Link>
             <Link isExternal aria-label="Discord" href={siteConfig.discord.url}>
@@ -139,7 +138,6 @@ export function SiteNavigationBar() {
                 aria-label="Open Discord server"
                 icon={DiscordIcon}
                 variant="ghost"
-                variantColor="white"
               />
             </Link>
             <IconButton
@@ -147,7 +145,6 @@ export function SiteNavigationBar() {
               fontSize="xl"
               aria-label={`Switch to ${colorMode} mode`}
               variant="ghost"
-              variantColor="white"
               onClick={toggleColorMode}
               icon={icon}
             />
@@ -169,7 +166,7 @@ export function SiteNavigationBar() {
               </Stack>
             ) : (
               <Stack isInline spacing={6}>
-                <Button variant="link" variantColor="white" onClick={signIn}>
+                <Button variant="link" variantColor="brand" onClick={signIn}>
                   Sign in
                 </Button>
                 <Link as={NextLink} href="/membership">
