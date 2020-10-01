@@ -13,7 +13,8 @@ export function ArticleCard({ article }) {
   return (
     <Box
       display="block"
-      maxW="sm"
+      w="100%"
+      h="100%"
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
