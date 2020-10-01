@@ -1,15 +1,14 @@
 import {
-  Badge,
   Box,
   Button,
-  Flex,
+  Heading,
   Icon,
   IconButton,
   Link,
   Stack,
   Text,
-  Tooltip,
   useColorMode,
+  useDisclosure,
 } from "@chakra-ui/core";
 import { features } from "configs/features";
 import { siteConfig } from "configs/site";
@@ -37,6 +36,42 @@ const GithubIcon = (props) => (
   </svg>
 );
 
+const MenuIcon = (props) => (
+  <svg
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ height: "1em", width: "1em" }}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M4 6h16M4 12h16M4 18h16"
+    />
+  </svg>
+);
+
+const CloseIcon = (props) => (
+  <svg
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{ height: "1em", width: "1em" }}
+    {...props}
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M6 18L18 6M6 6l12 12"
+    />
+  </svg>
+);
+
 function SiteNavigationBarLink({ href, children, isExternal }) {
   const router = useRouter();
   return (
@@ -51,8 +86,10 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
-  const icon = useColorModeValue("moon", "sun");
+  const colorModeIcon = useColorModeValue("moon", "sun");
   const bg = useColorModeValue("brand.500", "brand.600");
+  const mobileMenuBg = useColorModeValue("white", "gray.700");
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Box as="header" id="site-header" py={1} bg={bg} color="brand.100">
@@ -106,7 +143,12 @@ export function SiteNavigationBar() {
           </Link>
 
           {/* Navigation Menu */}
-          <Stack isInline shouldWrapChildren spacing={4}>
+          <Stack
+            isInline
+            shouldWrapChildren
+            spacing={4}
+            display={{ base: "none", lg: "flex" }}
+          >
             <SiteNavigationBarLink href="/articles">
               Articles
             </SiteNavigationBarLink>
@@ -130,7 +172,7 @@ export function SiteNavigationBar() {
         </Stack>
 
         {/* Actions */}
-        <Stack isInline spacing={6}>
+        <Stack isInline spacing={{ base: 0, lg: 6 }}>
           <Stack isInline>
             <Link isExternal aria-label="GitHub" href={siteConfig.github.url}>
               <IconButton
@@ -156,15 +198,34 @@ export function SiteNavigationBar() {
               aria-label={`Switch to ${colorMode} mode`}
               variant="ghost"
               onClick={toggleColorMode}
-              icon={icon}
+              icon={colorModeIcon}
+            />
+            <IconButton
+              display={{ base: "inline", lg: "none" }}
+              size="md"
+              fontSize="2xl"
+              aria-label={`Open navigation menu`}
+              variant="ghost"
+              onClick={onOpen}
+              icon={MenuIcon}
             />
           </Stack>
           {features.accounts &&
             (session ? (
-              <Stack isInline spacing={6} align="center">
+              <Stack
+                isInline
+                spacing={6}
+                align="center"
+                display={{ base: "none", lg: "flex" }}
+              >
                 <Text>
                   Signed in as{" "}
-                  <Text as="span" fontWeight="bold" color="white">
+                  <Text
+                    as="span"
+                    fontWeight="bold"
+                    color="white"
+                    whiteSpace="nowrap"
+                  >
                     <Link as={NextLink} href={`/user/${session?.user?.id}`}>
                       {session?.user?.name}
                     </Link>
@@ -175,7 +236,11 @@ export function SiteNavigationBar() {
                 </Button>
               </Stack>
             ) : (
-              <Stack isInline spacing={6}>
+              <Stack
+                isInline
+                spacing={6}
+                display={{ base: "none", lg: "flex" }}
+              >
                 <Button variant="link" variantColor="brand" onClick={signIn}>
                   Sign in
                 </Button>
@@ -185,6 +250,97 @@ export function SiteNavigationBar() {
               </Stack>
             ))}
         </Stack>
+
+        {/* Mobile Menu */}
+        {isOpen && (
+          <Box
+            position="absolute"
+            top={0}
+            left={0}
+            right={0}
+            width="100%"
+            p={5}
+            display={{ base: "block", lg: "none" }}
+            zIndex="popover"
+          >
+            <IconButton
+              position="absolute"
+              right={8}
+              top={8}
+              size="md"
+              fontSize="2xl"
+              aria-label={`Open navigation menu`}
+              variant="ghost"
+              onClick={onClose}
+              icon={CloseIcon}
+            />
+
+            <Stack
+              bg={mobileMenuBg}
+              color="gray.500"
+              borderRadius="lg"
+              p={5}
+              boxShadow="lg"
+              spacing={6}
+            >
+              <Heading as="h3" size="lg">
+                Navigation Menu
+              </Heading>
+
+              <Stack spacing={3} shouldWrapChildren>
+                <SiteNavigationBarLink href="/articles">
+                  Articles
+                </SiteNavigationBarLink>
+                {features.workshops && (
+                  <SiteNavigationBarLink href="/workshops">
+                    Workshops
+                  </SiteNavigationBarLink>
+                )}
+                {features.projects && (
+                  <SiteNavigationBarLink href="/projects">
+                    Projects
+                  </SiteNavigationBarLink>
+                )}
+                <SiteNavigationBarLink
+                  href="https://trello.com/b/p5fiez3v/public-roadmap"
+                  isExternal
+                >
+                  Roadmap
+                </SiteNavigationBarLink>
+              </Stack>
+
+              {features.accounts &&
+                (session ? (
+                  <Stack isInline spacing={6} align="center">
+                    <Text>
+                      Signed in as{" "}
+                      <Text as="span" fontWeight="bold" whiteSpace="nowrap">
+                        <Link as={NextLink} href={`/user/${session?.user?.id}`}>
+                          {session?.user?.name}
+                        </Link>
+                      </Text>
+                    </Text>
+                    <Button variantColor="green" onClick={signOut}>
+                      Sign out
+                    </Button>
+                  </Stack>
+                ) : (
+                  <Stack isInline spacing={6}>
+                    <Button
+                      variant="link"
+                      variantColor="brand"
+                      onClick={signIn}
+                    >
+                      Sign in
+                    </Button>
+                    <Link as={NextLink} href="/membership">
+                      <Button variantColor="green">Become a member</Button>
+                    </Link>
+                  </Stack>
+                ))}
+            </Stack>
+          </Box>
+        )}
       </Stack>
     </Box>
   );
