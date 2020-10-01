@@ -4,24 +4,10 @@ import {
   Box,
   Button,
   ButtonGroup,
-  Editable,
-  EditableInput,
-  EditablePreview,
-  Flex,
   Heading,
-  Input,
   Link,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
   Stack,
   Text,
-  useClipboard,
-  useDisclosure,
 } from "@chakra-ui/core";
 import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
@@ -42,7 +28,7 @@ import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { useColorModeValue } from "hooks/chakra";
 import { siteConfig } from "configs/site";
 import { gql, useMutation, useQuery } from "@apollo/client";
-import { useState } from "react";
+import { useShare } from "../../hooks/share";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -216,111 +202,13 @@ const UNSTAR_ARTICLE = gql`
   }
 `;
 
-function useShare({ title, url, text, fallback }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = useState(url);
-  const { onCopy, hasCopied } = useClipboard(value);
-
-  function share() {
-    if (navigator.share) {
-      navigator
-        .share({
-          title,
-          url,
-          text,
-        })
-        .then(() => console.log(`Successfully shared ${title}`))
-        .catch(console.error);
-    } else {
-      onOpen();
-    }
-  }
-
-  function ShareModal() {
-    return (
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Share {title}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack spacing={4} mb={4}>
-              <Text>
-                Copy the link for this item to your clipboard and share it
-                wherever you like:
-              </Text>
-              <Flex>
-                <Input value={value} isReadOnly placeholder="Welcome" />
-                <Button variantColor="blue" onClick={onCopy} ml={2}>
-                  {hasCopied ? "Copied" : "Copy"}
-                </Button>
-              </Flex>
-            </Stack>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    );
-  }
-
-  return {
-    share,
-    ShareModal,
-  };
-}
-
-function ShareButton({ article }) {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  function handleClick() {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: article?.title,
-          url: window.location.href,
-          text: `${article?.title} - ${article?.excerpt}\nRead more at: `,
-        })
-        .then(() => console.log(`Successfully shared ${article?.title}`))
-        .catch(console.error);
-    } else {
-      onOpen();
-    }
-  }
-
-  return (
-    <>
-      <Button variantColor="blue" variant="ghost" onClick={handleClick}>
-        Share
-      </Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Share {article?.title ?? "this article"}</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>Testing 123</ModalBody>
-
-          <ModalFooter>
-            <Button variantColor="blue" onClick={onClose}>
-              Close
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  );
-}
-
 export default function ArticlePage({ source, frontmatter, meta }) {
   const router = useRouter();
   const { slug } = router.query;
   const { data } = useQuery(GET_ARTICLE, { variables: { slug } });
   const [starArticle] = useMutation(STAR_ARTICLE, { variables: { slug } });
   const [unstarArticle] = useMutation(UNSTAR_ARTICLE, { variables: { slug } });
-  const [session, loading] = useSession();
+  const [session] = useSession();
   const content = hydrate(source, { components: MDXComponents });
   const starred = Boolean(
     data?.article?.stargazers.find((u) => u.id === session?.user.id)
@@ -336,7 +224,10 @@ export default function ArticlePage({ source, frontmatter, meta }) {
   const headerColor = useColorModeValue("gray.900", "gray.100");
   const { share, ShareModal } = useShare({
     title: frontmatter?.title,
-    url: window.location.href,
+    url:
+      typeof window !== "undefined"
+        ? window.location.href
+        : "https://uoftweb.com",
     text: `${frontmatter?.title} - ${frontmatter?.excerpt}\nRead more at: `,
   });
 
