@@ -2,10 +2,37 @@ import { Avatar, Box, Grid, Heading, Stack, Text } from "@chakra-ui/core";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import path from "path";
+import fs from "fs";
+import matter from "gray-matter";
+import readingTime from "reading-time";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { gql, useQuery } from "@apollo/client";
 import { ArticleCard } from "../../components/ArticleCard";
+
+const root = process.cwd();
+
+export async function getServerSideProps() {
+  const contentRoot = path.join(root, "content", "articles");
+  const articlesMetadata = Object.fromEntries(
+    fs.readdirSync(contentRoot).map((p) => {
+      const content = fs.readFileSync(path.join(contentRoot, p), "utf8");
+      const readingTimeStats = readingTime(content);
+      const slug = p.replace(/\.mdx/, "");
+      return [
+        slug,
+        {
+          slug: slug,
+          frontmatter: matter(content).data,
+          meta: { readingTimeStats },
+        },
+      ];
+    })
+  );
+
+  return { props: { articlesMetadata } };
+}
 
 const GET_USER_DETAILS = gql`
   query GetUserDetails($id: Int!) {
@@ -23,7 +50,7 @@ const GET_USER_DETAILS = gql`
   }
 `;
 
-export default function ProfilePage({ user }) {
+export default function ProfilePage({ user, articlesMetadata }) {
   const [session, loading] = useSession();
   const router = useRouter();
   const { uid } = router.query;
@@ -65,7 +92,9 @@ export default function ProfilePage({ user }) {
               {data?.user.starredArticles.map((a) => (
                 <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
                   <Box as="a">
-                    <ArticleCard article={a} />
+                    <ArticleCard
+                      article={{ ...articlesMetadata[a.slug], ...a }}
+                    />
                   </Box>
                 </NextLink>
               ))}

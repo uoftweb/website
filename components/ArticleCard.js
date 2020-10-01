@@ -40,7 +40,7 @@ export function ArticleCard({ article }) {
           lineHeight="tight"
           isTruncated
         >
-          {article.frontmatter?.title ?? article.slug}
+          {article.frontmatter?.title}
         </Box>
 
         <Box flex="1">{article.frontmatter?.excerpt}</Box>
@@ -48,7 +48,7 @@ export function ArticleCard({ article }) {
         <Box d="flex" mt="2" alignItems="center">
           <Icon name="star" color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            52 stars
+            {article?.stargazers?.length} stars
           </Box>
         </Box>
       </Box>

@@ -8,6 +8,7 @@ import readingTime from "reading-time";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { ArticleCard } from "../../components/ArticleCard";
+import { gql, useQuery } from "@apollo/client";
 
 const root = process.cwd();
 
@@ -26,7 +27,24 @@ export async function getStaticProps() {
   return { props: { articlesMetadata } };
 }
 
+const GET_ARTICLES = gql`
+  query GetArticles {
+    articles {
+      slug
+      stargazers {
+        id
+      }
+    }
+  }
+`;
+
 export default function ArticleListingPage({ articlesMetadata }) {
+  const { data } = useQuery(GET_ARTICLES);
+
+  const articleDynamicData = data
+    ? Object.fromEntries(data?.articles.map((a) => [a.slug, a]))
+    : {};
+
   return (
     <>
       <Head>
@@ -49,7 +67,9 @@ export default function ArticleListingPage({ articlesMetadata }) {
                 .map((a) => (
                   <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
                     <Box as="a">
-                      <ArticleCard article={a} />
+                      <ArticleCard
+                        article={{ ...a, ...articleDynamicData[a.slug] }}
+                      />
                     </Box>
                   </NextLink>
                 ))}
