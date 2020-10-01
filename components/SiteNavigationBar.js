@@ -58,7 +58,7 @@ export function SiteNavigationBar() {
     >
       <Flex align="center" justify="space-between" p={4}>
         {/* Logo */}
-        <Link as={NextLink} href="/">
+        <Link as={NextLink} href={session?.user ? "/dashboard" : "/"}>
           <a>
             <Box height={12} width={12}>
               <svg
@@ -167,7 +167,9 @@ export function SiteNavigationBar() {
                 <Button variant="link" onClick={signIn}>
                   Sign in
                 </Button>
-                <Button variantColor="green">Become a member</Button>
+                <Link as={NextLink} href="/membership">
+                  <Button variantColor="green">Become a member</Button>
+                </Link>
               </Stack>
             ))}
         </Stack>
