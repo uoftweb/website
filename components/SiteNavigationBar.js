@@ -180,8 +180,9 @@ export function SiteNavigationBar() {
                 fontSize="xl"
                 aria-label="Open GitHub repo"
                 icon={GithubIcon}
-                variant="ghost"
-                _hover={{ color: "white" }}
+                bg="transparent"
+                _hover={{ bg: "brand.300", color: "white" }}
+                _active={{ bg: "brand.200", color: "white" }}
               />
             </Link>
             <Link isExternal aria-label="Discord" href={siteConfig.discord.url}>
@@ -190,16 +191,18 @@ export function SiteNavigationBar() {
                 fontSize="xl"
                 aria-label="Open Discord server"
                 icon={DiscordIcon}
-                variant="ghost"
-                _hover={{ color: "white" }}
+                bg="transparent"
+                _hover={{ bg: "brand.300", color: "white" }}
+                _active={{ bg: "brand.200", color: "white" }}
               />
             </Link>
             <IconButton
               size="md"
               fontSize="xl"
               aria-label={`Switch to ${colorMode} mode`}
-              variant="ghost"
-              _hover={{ color: "white" }}
+              bg="transparent"
+              _hover={{ bg: "brand.300", color: "white" }}
+              _active={{ bg: "brand.200", color: "white" }}
               onClick={toggleColorMode}
               icon={colorModeIcon}
             />
@@ -208,8 +211,9 @@ export function SiteNavigationBar() {
               size="md"
               fontSize="2xl"
               aria-label={`Open navigation menu`}
-              variant="ghost"
-              _hover={{ color: "white" }}
+              bg="transparent"
+              _hover={{ bg: "brand.300", color: "white" }}
+              _active={{ bg: "brand.200", color: "white" }}
               onClick={onOpen}
               icon={MenuIcon}
             />
