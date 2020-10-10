@@ -54,6 +54,12 @@ const customTheme = {
     heading: "Inter, system-ui, sans-serif",
     mono: "'Fira Code', Menlo, monospace",
   },
+  radii: {
+    ...theme.radii,
+    xl: "1.0rem",
+    "2xl": "2.0rem",
+    "3xl": "3.0rem",
+  },
 };
 
 function App({ Component, pageProps }) {
