@@ -145,10 +145,10 @@ function HeroSection() {
               bgImage="linear-gradient(243.27deg, #E8F552 -0.15%, #1FF6E9 47.65%, #F68AF1 101.83%)"
               bgSize="100%"
               style={{
-                "-webkit-background-clip": "text",
-                "-webkit-text-fill-color": "transparent",
-                "-moz-background-clip": "text",
-                "-moz-text-fill-color": "transparent",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                MozBackgroundClip: "text",
+                MozTextFillColor: "transparent",
               }}
             >
               Web Dev Club
@@ -328,10 +328,10 @@ function WorkshopSection() {
                   bgImage="linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
                   bgSize="100%"
                   style={{
-                    "-webkit-background-clip": "text",
-                    "-webkit-text-fill-color": "transparent",
-                    "-moz-background-clip": "text",
-                    "-moz-text-fill-color": "transparent",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                    MozBackgroundClip: "text",
+                    MozTextFillColor: "transparent",
                   }}
                 >
                   6 Workshops
@@ -422,10 +422,10 @@ function ArticleCard({
               bgImage={bgImage}
               bgSize="100%"
               style={{
-                "-webkit-background-clip": "text",
-                "-webkit-text-fill-color": "transparent",
-                "-moz-background-clip": "text",
-                "-moz-text-fill-color": "transparent",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                MozBackgroundClip: "text",
+                MozTextFillColor: "transparent",
               }}
             >
               {stars} stars
