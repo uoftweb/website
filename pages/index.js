@@ -12,8 +12,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/core";
+import { signIn } from "next-auth/client";
+import NextLink from "next/link";
 
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
+import { siteConfig } from "../configs/site";
 import { useColorModeValue } from "../hooks/chakra";
 
 function Message({ name, text, accent = false, ...props }) {
@@ -206,7 +209,13 @@ function DiscordSection() {
             </Text>
           </Stack>
           <Stack isInline>
-            <Button size="lg" variant="unstyled">
+            <Button
+              as="a"
+              href={siteConfig.discord.url}
+              size="lg"
+              variant="link"
+              variantColor="brand"
+            >
               Go to Discord
             </Button>
           </Stack>
@@ -272,9 +281,11 @@ function WorkshopSection() {
             </Text>
           </Stack>
           <Stack isInline>
-            <Button size="lg" variant="unstyled">
-              Learn More
-            </Button>
+            <NextLink href="/workshops" passHref>
+              <Button as="a" size="lg" variant="link" variantColor="brand">
+                Learn More
+              </Button>
+            </NextLink>
           </Stack>
         </Stack>
 
@@ -344,7 +355,15 @@ function WorkshopSection() {
                   Next.js
                 </ListItem>
               </List>
-              <Button variant="solid" variantColor="brand">
+              <Button
+                onClick={() =>
+                  signIn(undefined, {
+                    callbackUrl: `${window.location.origin}/workshops`,
+                  })
+                }
+                variant="solid"
+                variantColor="brand"
+              >
                 Sign up now
               </Button>
             </Stack>
@@ -413,9 +432,11 @@ function ArticleCard({
             </Text>
           </Stack>
           <Text>{excerpt}</Text>
-          <Button as="a" href={href} variant="solid" variantColor="brand">
-            Read now
-          </Button>
+          <NextLink href={href} passHref>
+            <Button as="a" variant="solid" variantColor="brand">
+              Read now
+            </Button>
+          </NextLink>
         </Stack>
       </Box>
     </Box>
@@ -459,7 +480,10 @@ function ArticleSection() {
           </Code>
           <Text fontSize="sm" color="gray.500">
             Wondering what this means? Read our{" "}
-            <Link fontWeight="semibold">Bash Tutorial</Link> to learn more
+            <NextLink href="/articles/bash-tutorial">
+              <Link fontWeight="semibold">Bash Tutorial</Link>
+            </NextLink>{" "}
+            to learn more
           </Text>
         </Stack>
 
@@ -468,19 +492,23 @@ function ArticleSection() {
             title="Hoisting in Javascript"
             stars={5}
             excerpt="Let’s take a deep-dive into one of the lesser known “features” of JS that often trips up new web developers."
-            href="#"
+            href="/articles/hoisting-in-javascript"
             bgImage="linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
           />
           <ArticleCard
             title="Map of Web Dev"
             stars={134}
             excerpt="In this article, we take a look at the wide range of skills and technologies in the world of web development."
-            href="#"
+            href="/articles/map-of-web-dev"
             bgImage="linear-gradient(221.84deg, #E96B6B 2.35%, #EBCC2A 96.6%)"
           />
         </Stack>
 
-        <Button variant="ghost">Read More</Button>
+        <NextLink href="/articles" passHref>
+          <Button as="a" variant="ghost">
+            Read More
+          </Button>
+        </NextLink>
       </Stack>
     </Box>
   );
