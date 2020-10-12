@@ -1,32 +1,17 @@
 import Head from "next/head";
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/core";
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
 import NextLink from "next/link";
-import readingTime from "reading-time";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { ArticleCard } from "../../components/ArticleCard";
 import { gql, useQuery } from "@apollo/client";
 import { PageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
-
-const root = process.cwd();
+import { getArticles } from "../../lib/getArticles";
 
 export async function getStaticProps() {
-  const contentRoot = path.join(root, "content", "articles");
-  const articlesMetadata = fs.readdirSync(contentRoot).map((p) => {
-    const content = fs.readFileSync(path.join(contentRoot, p), "utf8");
-    const readingTimeStats = readingTime(content);
-    return {
-      slug: p.replace(/\.mdx/, ""),
-      content,
-      frontmatter: matter(content).data,
-      meta: { readingTimeStats },
-    };
-  });
-  return { props: { articlesMetadata } };
+  const articles = await getArticles();
+  return { props: { articles } };
 }
 
 const GET_ARTICLES = gql`
@@ -40,7 +25,7 @@ const GET_ARTICLES = gql`
   }
 `;
 
-export default function ArticleListingPage({ articlesMetadata }) {
+export default function ArticleListingPage({ articles }) {
   const { data } = useQuery(GET_ARTICLES);
 
   const articleDynamicData = data
@@ -66,7 +51,7 @@ export default function ArticleListingPage({ articlesMetadata }) {
               time. Have a read and let us know what you think
             </Text>
             <Grid templateColumns="1fr 1fr" gap={3} mt={5}>
-              {articlesMetadata
+              {articles
                 .filter((a) => a.frontmatter.published)
                 .map((a) => (
                   <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
