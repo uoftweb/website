@@ -12,28 +12,13 @@ import { gql, useQuery } from "@apollo/client";
 import { ArticleCard } from "../../components/ArticleCard";
 import { PageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
+import { getArticles } from "../../lib/articles";
 
 const root = process.cwd();
 
 export async function getServerSideProps() {
-  const contentRoot = path.join(root, "content", "articles");
-  const articlesMetadata = Object.fromEntries(
-    fs.readdirSync(contentRoot).map((p) => {
-      const content = fs.readFileSync(path.join(contentRoot, p), "utf8");
-      const readingTimeStats = readingTime(content);
-      const slug = p.replace(/\.mdx/, "");
-      return [
-        slug,
-        {
-          slug: slug,
-          frontmatter: matter(content).data,
-          meta: { readingTimeStats },
-        },
-      ];
-    })
-  );
-
-  return { props: { articlesMetadata } };
+  const articles = await getArticles();
+  return { props: { articles } };
 }
 
 const GET_USER_DETAILS = gql`
@@ -52,7 +37,7 @@ const GET_USER_DETAILS = gql`
   }
 `;
 
-export default function ProfilePage({ user, articlesMetadata }) {
+export default function ProfilePage({ user, articles }) {
   const [session, loading] = useSession();
   const router = useRouter();
   const { uid } = router.query;
@@ -94,15 +79,18 @@ export default function ProfilePage({ user, articlesMetadata }) {
             Starred Articles
           </Heading>
           <Grid templateColumns="1fr 1fr" gap={3}>
-            {data?.user.starredArticles.map((a) => (
-              <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
-                <Box as="a">
-                  <ArticleCard
-                    article={{ ...articlesMetadata[a.slug], ...a }}
-                  />
-                </Box>
-              </NextLink>
-            ))}
+            {data?.user.starredArticles.map((a) => {
+              const article = articles?.find(
+                (article) => article.slug === a.slug
+              );
+              return (
+                <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
+                  <Box as="a">
+                    <ArticleCard article={{ ...article, ...a }} />
+                  </Box>
+                </NextLink>
+              );
+            })}
           </Grid>
         </Container>
       </Box>
