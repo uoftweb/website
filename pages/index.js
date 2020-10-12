@@ -274,7 +274,7 @@ function WorkshopSection() {
           <Stack spacing={3}>
             <Box>
               <Badge variant="solid" variantColor="accent">
-                Coming Soon
+                Available Now
               </Badge>
             </Box>
             <Heading>Build new skills every month</Heading>
