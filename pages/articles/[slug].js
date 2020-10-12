@@ -6,31 +6,26 @@ import {
   ButtonGroup,
   Heading,
   Link,
-  List,
-  ListItem,
   Stack,
   Text,
 } from "@chakra-ui/core";
-import renderToString from "next-mdx-remote/render-to-string";
 import hydrate from "next-mdx-remote/hydrate";
-import slug from "remark-slug";
-import matter from "gray-matter";
-import fs from "fs";
-import path from "path";
 import NextLink from "next/link";
-import Highlight, { defaultProps } from "prism-react-renderer";
-import dracula from "prism-react-renderer/themes/dracula";
-import readingTime from "reading-time";
 import { subWeeks, isWithinInterval } from "date-fns";
 import Confetti from "react-dom-confetti";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
+import { gql, useMutation, useQuery } from "@apollo/client";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { useColorModeValue } from "hooks/chakra";
 import { siteConfig } from "configs/site";
-import { gql, useMutation, useQuery } from "@apollo/client";
 import { useShare } from "../../hooks/share";
+import {
+  getArticlePaths,
+  getArticles,
+  MDXComponents,
+} from "../../lib/getArticles";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -56,126 +51,20 @@ const confettiConfig = {
   colors: ["#a864fd", "#29cdff", "#78ff44", "#ff718d", "#fdff6a"],
 };
 
-const MDXComponents = {
-  h1: (props) => (
-    <Heading as="h2" size="lg" mb={3} mt={8}>
-      {props.children}
-    </Heading>
-  ),
-  h2: (props) => (
-    <Heading as="h3" size="md" mb={3} mt={8}>
-      {props.children}
-    </Heading>
-  ),
-  p: (props) => (
-    <Text as="p" lineHeight="tall" mb={3}>
-      {props.children}
-    </Text>
-  ),
-  strong: (props) => <Box as="strong" fontWeight="semibold" {...props} />,
-  a: (props) => (
-    <Link isExternal href={props.href} color="blue.500">
-      {props.children}
-    </Link>
-  ),
-  ul: (props) => (
-    <List
-      as="ul"
-      listStyleType="disc"
-      listStylePosition="outside"
-      px={5}
-      py={3}
-    >
-      {props.children}
-    </List>
-  ),
-  ol: (props) => (
-    <List
-      as="ol"
-      listStyleType="decimal"
-      listStylePosition="outside"
-      px={5}
-      py={3}
-    >
-      {props.children}
-    </List>
-  ),
-  li: (props) => (
-    <ListItem as="li" py={2} ml={3}>
-      {props.children}
-    </ListItem>
-  ),
-  inlineCode: (props) => (
-    <Box
-      as="code"
-      color={useColorModeValue("purple.500", "purple.200")}
-      bg={useColorModeValue("purple.50", "purple.900")}
-      borderRadius="md"
-      p={1}
-      {...props}
-    />
-  ),
-  pre: (props) => <div {...props} />,
-  code: ({ children, className }) => {
-    const code = children.trim();
-    const language = className?.replace(/language-/, "");
-    const theme = dracula;
-    return (
-      <Highlight
-        {...defaultProps}
-        code={code}
-        language={language}
-        theme={theme}
-      >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <Box
-            as="pre"
-            className={className}
-            style={{ ...style }}
-            p={3}
-            borderRadius="md"
-            overflowX="auto"
-            my={5}
-          >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </Box>
-        )}
-      </Highlight>
-    );
-  },
-};
-
-const root = process.cwd();
-
 export async function getStaticPaths() {
+  const articlePaths = await getArticlePaths();
+  const paths = articlePaths.map((p) => ({ params: { slug: p.slug } }));
   return {
     fallback: false,
-    paths: fs
-      .readdirSync(path.join(root, "content", "articles"))
-      .map((p) => ({ params: { slug: p.replace(/\.mdx/, "") } })),
+    paths,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const source = fs.readFileSync(
-    path.join(root, "content", "articles", `${params.slug}.mdx`),
-    "utf8"
-  );
-  const { data, content } = matter(source);
-  const mdxSource = await renderToString(content, {
-    components: MDXComponents,
-    scope: data,
-    mdxOptions: { remarkPlugins: [slug] },
-  });
-  const readingTimeStats = readingTime(content);
+  const articles = await getArticles();
+  const article = articles.find((a) => a.slug === params.slug);
   return {
-    props: { source: mdxSource, frontmatter: data, meta: { readingTimeStats } },
+    props: article,
   };
 }
 
@@ -216,7 +105,7 @@ const UNSTAR_ARTICLE = gql`
   }
 `;
 
-export default function ArticlePage({ source, frontmatter, meta }) {
+export default function ArticlePage({ date, source, frontmatter, meta }) {
   const router = useRouter();
   const { slug } = router.query;
   const { data } = useQuery(GET_ARTICLE, { variables: { slug } });
@@ -227,7 +116,7 @@ export default function ArticlePage({ source, frontmatter, meta }) {
   const starred = Boolean(
     data?.article?.stargazers.find((u) => u.id === session?.user.id)
   );
-  const creationDate = new Date(Date.parse(frontmatter.created_at));
+  const creationDate = new Date(Date.parse(date));
   const currentDate = new Date(Date.now());
   const lastWeekDate = subWeeks(currentDate, 1);
   const isNewArticle = isWithinInterval(creationDate, {
