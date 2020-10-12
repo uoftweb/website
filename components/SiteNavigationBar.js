@@ -74,12 +74,27 @@ const CloseIcon = (props) => (
 
 function SiteNavigationBarLink({ href, children, isExternal }) {
   const router = useRouter();
+
+  if (isExternal) {
+    return (
+      <Link
+        href={href}
+        isExternal={isExternal}
+        _hover={{ textDecoration: "none" }}
+      >
+        <Button variantColor="brand" isActive={href === router.asPath}>
+          {children}
+        </Button>
+      </Link>
+    );
+  }
+
   return (
-    <Link as={NextLink} href={href} isExternal>
-      <Button variantColor="brand" isActive={href === router.asPath}>
-        {children} {isExternal && <Icon name="external-link" mx="2px" />}
+    <NextLink href={href} passHref>
+      <Button as="a" variantColor="brand" isActive={href === router.asPath}>
+        {children}
       </Button>
-    </Link>
+    </NextLink>
   );
 }
 

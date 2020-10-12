@@ -25,7 +25,7 @@ import {
   getArticlePaths,
   getArticles,
   MDXComponents,
-} from "../../lib/getArticles";
+} from "../../lib/articles";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -64,7 +64,7 @@ export async function getStaticProps({ params }) {
   const articles = await getArticles();
   const article = articles.find((a) => a.slug === params.slug);
   return {
-    props: article,
+    props: { article },
   };
 }
 
@@ -105,7 +105,9 @@ const UNSTAR_ARTICLE = gql`
   }
 `;
 
-export default function ArticlePage({ date, source, frontmatter, meta }) {
+export default function ArticlePage({
+  article: { date, source, frontmatter, meta },
+}) {
   const router = useRouter();
   const { slug } = router.query;
   const { data } = useQuery(GET_ARTICLE, { variables: { slug } });

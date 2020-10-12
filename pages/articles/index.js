@@ -7,7 +7,7 @@ import { ArticleCard } from "../../components/ArticleCard";
 import { gql, useQuery } from "@apollo/client";
 import { PageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
-import { getArticles } from "../../lib/getArticles";
+import { getArticles } from "../../lib/articles";
 
 export async function getStaticProps() {
   const articles = await getArticles();
