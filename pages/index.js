@@ -36,7 +36,7 @@ function Message({ name, text, accent = false, ...props }) {
     >
       <Text
         as="h3"
-        color={accent ? "accent.300" : "brand.500"}
+        color={accent ? "accent.300" : "brand.300"}
         fontWeight="medium"
       >
         {name}
@@ -181,7 +181,7 @@ const DiscordIcon = (props) => (
 
 function DiscordSection() {
   const bg = useColorModeValue("accent.300", "brand.900");
-  const color = useColorModeValue("brand.600", "accent.400");
+  const color = useColorModeValue("brand.600", "brand.50");
 
   return (
     <Box as="section" py={16} bg={bg} color={color}>
@@ -251,8 +251,11 @@ function DiscordSection() {
 }
 
 function WorkshopSection() {
+  const bg = useColorModeValue("brand.50", "brand.600");
+  const color = useColorModeValue("brand.600", "brand.50");
+
   return (
-    <Box as="section" py={16} bg="brand.50" color="brand.600">
+    <Box as="section" py={16} bg={bg} color={color}>
       <Stack
         isInline
         spacing={{ base: 0, lg: 16 }}
@@ -276,8 +279,9 @@ function WorkshopSection() {
             </Box>
             <Heading>Build new skills every month</Heading>
             <Text fontSize="lg">
-              Learn from our <strong>talented instructors</strong> within the
-              community and level-up your web dev skills with us.
+              Attend our <strong>workshops</strong> and learn from our{" "}
+              <strong>talented instructors</strong> within the community and
+              level-up your web dev skills with us.
             </Text>
           </Stack>
           <Stack isInline>
@@ -444,10 +448,14 @@ function ArticleCard({
 }
 
 function ArticleSection() {
+  const bg = useColorModeValue("white", "brand.800");
+  const color = useColorModeValue("brand.600", "brand.50");
+  const codeBg = useColorModeValue("brand.800", "brand.900");
+
   return (
-    <Box as="section" py={32} bg="white" color="brand.600">
+    <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
       <Stack
-        spacing={{ base: 0, lg: 16 }}
+        spacing={{ base: 8, lg: 16 }}
         maxW="80rem"
         mx="auto"
         px={3}
@@ -464,21 +472,22 @@ function ArticleSection() {
 
         <Stack spacing={4} align="center">
           <Code
-            bg="brand.800"
+            bg={codeBg}
             color="brand.50"
-            fontSize="2xl"
+            fontSize={{ base: "sm", sm: "xl", md: "2xl" }}
             py={3}
             px={5}
             borderRadius="lg"
             fontWeight="medium"
             letterSpacing="tighter"
+            whiteSpace="nowrap"
           >
             <Text as="span" color="accent.400">
               $
             </Text>{" "}
             curl /articles | sort -k 2 | head -n 2
           </Code>
-          <Text fontSize="sm" color="gray.500">
+          <Text fontSize="sm" color="gray.500" textAlign="center">
             Wondering what this means? Read our{" "}
             <NextLink href="/articles/bash-tutorial">
               <Link fontWeight="semibold">Bash Tutorial</Link>
@@ -487,7 +496,7 @@ function ArticleSection() {
           </Text>
         </Stack>
 
-        <Stack isInline>
+        <Stack isInline flexWrap="wrap" justify="center">
           <ArticleCard
             title="Hoisting in Javascript"
             stars={5}
