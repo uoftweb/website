@@ -118,7 +118,10 @@ export function SiteNavigationBar() {
       >
         <Stack isInline align="center" spacing={8} shouldWrapChildren>
           {/* Logo */}
-          <Link as={NextLink} href={session?.user ? "/dashboard" : "/"}>
+          <Link
+            as={NextLink}
+            href={session?.user && features.dashboard ? "/dashboard" : "/"}
+          >
             <a>
               <Box height={12} width={12}>
                 <svg
