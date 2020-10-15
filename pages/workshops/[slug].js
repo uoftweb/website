@@ -10,8 +10,10 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/core";
+import { signIn, useSession } from "next-auth/client";
 import Head from "next/head";
 import NextLink from "next/link";
+import { useState } from "react";
 
 import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
@@ -35,6 +37,9 @@ export async function getStaticProps({ params }) {
 }
 
 export default function WorkshopPage({ workshop }) {
+  const [session] = useSession();
+  const [shouldPlay, setShouldPlay] = useState(false);
+
   const startDate = new Date(Date.parse(workshop.start));
   const endDate = new Date(Date.parse(workshop.end));
   const format = new Intl.DateTimeFormat("en-US", {
@@ -119,7 +124,15 @@ export default function WorkshopPage({ workshop }) {
             </Text>
           </Stack>
           <Stack isInline>
-            <Button variantColor="green">Watch Now</Button>
+            {session ? (
+              <Button variantColor="green" onClick={() => setShouldPlay(true)}>
+                Watch
+              </Button>
+            ) : (
+              <Button variantColor="green" onClick={signIn}>
+                Sign in to watch
+              </Button>
+            )}
             <Button variantColor="purple">Discuss on Discord</Button>
           </Stack>
         </Stack>
@@ -132,12 +145,39 @@ export default function WorkshopPage({ workshop }) {
             boxShadow="lg"
             bg="gray.900"
           >
-            <Box
-              as="iframe"
-              title={workshop?.title}
-              src={`https://www.youtube.com/embed/${workshop?.youtubeId}`}
-              allowFullScreen
-            />
+            {session ? (
+              <Box
+                as="iframe"
+                title={workshop?.title}
+                frameborder="0"
+                src={`https://www.youtube.com/embed/${
+                  workshop?.youtubeId
+                }?rel=0${shouldPlay ? "&autoplay=1" : ""}`}
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+              />
+            ) : (
+              <Box position="relative" zIndex="0">
+                <Box
+                  as="img"
+                  position="absolute"
+                  opacity="0.3"
+                  zIndex="-1"
+                  style={{ filter: "blur(10px)" }}
+                  transform="scale(1.1)"
+                  src={`https://img.youtube.com/vi/${workshop?.youtubeId}/maxresdefault.jpg`}
+                />
+                <Stack align="center" justify="center" size="full" spacing={4}>
+                  <Icon name="lock" size={16} />
+                  <Text>
+                    Sorry! This content is only available to registered members
+                  </Text>
+                  <Button variantColor="green" onClick={signIn}>
+                    Sign in to watch
+                  </Button>
+                </Stack>
+              </Box>
+            )}
           </AspectRatioBox>
         </Box>
       </Grid>
