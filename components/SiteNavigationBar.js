@@ -102,7 +102,7 @@ export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
   const colorModeIcon = useColorModeValue("moon", "sun");
-  const bg = useColorModeValue("brand.500", "brand.600");
+  const bg = useColorModeValue("brand.500", "brand.800");
   const mobileMenuBg = useColorModeValue("white", "gray.700");
   const { isOpen, onOpen, onClose } = useDisclosure();
 

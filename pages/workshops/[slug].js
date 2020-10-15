@@ -1,17 +1,22 @@
 import {
   AspectRatioBox,
   Box,
+  Button,
   Flex,
+  Grid,
   Heading,
   Icon,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/core";
 import Head from "next/head";
+import NextLink from "next/link";
 
+import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
-import { PageHeader } from "../../components/PageHeader";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
+import { useColorModeValue } from "../../hooks/chakra";
 import { getWorkshopPaths, getWorkshops } from "../../lib/workshops";
 
 export async function getStaticPaths() {
@@ -40,6 +45,11 @@ export default function WorkshopPage({ workshop }) {
     hour: "numeric",
     minute: "numeric",
   });
+  const bg = useColorModeValue("brand.600", "gray.700");
+  const secondBg = useColorModeValue("brand.700", "gray.800");
+  const cardBg = useColorModeValue("white", "gray.900");
+  const cardColor = useColorModeValue("gray.800", "gray.50");
+
   return (
     <>
       <Head>
@@ -48,11 +58,80 @@ export default function WorkshopPage({ workshop }) {
 
       <SiteNavigationBar />
 
-      <PageHeader title={workshop?.title} back="/workshops" />
-
-      {workshop?.youtubeId && (
-        <Box as="section" bg="black">
-          <AspectRatioBox maxW="6xl" ratio={16 / 9} mx="auto">
+      <Grid
+        as="section"
+        templateColumns={{
+          base: "1fr",
+          lg: "minmax(30ch, 60ch) minmax(500px, 1fr)",
+        }}
+        gap={16}
+        p={[4, 8, 16]}
+        bg={bg}
+        color="white"
+        alignItems="center"
+      >
+        <Stack spacing={6}>
+          <Box mb={4}>
+            <NextLink href="/workshops" passHref>
+              <Link>
+                <Icon name="arrow-back" />
+                Back
+              </Link>
+            </NextLink>
+          </Box>
+          <Stack isInline align="center" spacing={-10}>
+            <Box position="relative" size={16}>
+              <BlueBall
+                size={16}
+                position="absolute"
+                top={0}
+                left={0}
+                zIndex="1"
+              />
+              <BlueBall
+                size={6}
+                position="absolute"
+                bottom={-8}
+                right={-4}
+                zIndex="0"
+              />
+              <BlueBall
+                size={4}
+                position="absolute"
+                top={-1}
+                left={-1}
+                zIndex="2"
+              />
+            </Box>
+            <Heading as="h1" fontSize="3xl" zIndex="1" letterSpacing="tight">
+              {workshop?.title ?? "Untitled Workshop"}
+            </Heading>
+          </Stack>
+          <Stack spacing={3}>
+            <Flex mt="2" align="center">
+              <Icon name="calendar" color="teal.300" />
+              <Text as="span" ml={2} color="brand.100" fontSize="sm">
+                {format.formatRange(startDate, endDate)}
+              </Text>
+            </Flex>
+            <Text fontSize="lg" lineHeight="tall">
+              {workshop?.excerpt}
+            </Text>
+          </Stack>
+          <Stack isInline>
+            <Button variantColor="green">Watch Now</Button>
+            <Button variantColor="purple">Discuss on Discord</Button>
+          </Stack>
+        </Stack>
+        <Box width="100%">
+          <AspectRatioBox
+            ratio={16 / 9}
+            mx="auto"
+            overflow="hidden"
+            borderRadius="lg"
+            boxShadow="lg"
+            bg="gray.900"
+          >
             <Box
               as="iframe"
               title={workshop?.title}
@@ -61,19 +140,23 @@ export default function WorkshopPage({ workshop }) {
             />
           </AspectRatioBox>
         </Box>
-      )}
+      </Grid>
 
-      <Box as="section" py={16}>
+      <Box as="section" py={32} bg={secondBg} color="white">
         <Container>
-          <Stack spacing={3}>
-            <Heading as="h1">{workshop?.title ?? "Untitled Workshop"}</Heading>
-            <Flex mt="2" align="center">
-              <Icon name="calendar" color="teal.500" />
-              <Text as="span" ml={2} color="gray.600" fontSize="sm">
-                {format.formatRange(startDate, endDate)}
-              </Text>
-            </Flex>
-            <Text>{workshop?.excerpt}</Text>
+          <Stack spacing={8}>
+            <Heading as="h3" fontSize="2xl" letterSpacing="tight">
+              Show Notes
+            </Heading>
+            <Box
+              p={8}
+              bg={cardBg}
+              borderRadius="lg"
+              boxShadow="md"
+              color={cardColor}
+            >
+              <Text>{workshop?.shownotes ?? "Not available"}</Text>
+            </Box>
           </Stack>
         </Container>
       </Box>

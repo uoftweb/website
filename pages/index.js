@@ -15,6 +15,7 @@ import {
 import { signIn } from "next-auth/client";
 import NextLink from "next/link";
 
+import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
 import { useColorModeValue } from "../hooks/chakra";
@@ -45,50 +46,6 @@ function Message({ name, text, accent = false, ...props }) {
     </Stack>
   );
 }
-
-const Ball = ({ size = 24, blur = 0, ...props }) => (
-  <Box
-    position="absolute"
-    size={size}
-    style={{ filter: `blur(${blur}px)` }}
-    bgImage="radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%),
-linear-gradient(216.53deg, #739BEC 14.79%, #216BFF 29.44%, #020F53 85.11%)"
-    borderRadius="full"
-    {...props}
-  />
-);
-
-const BlueBall = (props) => {
-  const bgImage = useColorModeValue(
-    "radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(216.53deg, #739BEC 14.79%, #216BFF 29.44%, #020F53 85.11%)",
-    "radial-gradient(50% 50% at 50% 50%,rgba(33,107,255,0) 79.17%,rgb(171 199 255 / 11%) 100%), linear-gradient(216.53deg,#345aa6 14.79%,#113681 29.44%,#010624 85.11%)"
-  );
-  return <Ball bgImage={bgImage} {...props} />;
-};
-
-const GreenBall = (props) => {
-  const bgImage = useColorModeValue(
-    "radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(216.53deg, #D2FCE3 14.79%, #6BE99D 29.44%, #02451D 85.11%)",
-    "radial-gradient(50% 50% at 50% 50%,rgba(33,107,255,0) 79.17%,rgb(171 199 255 / 16%) 100%),linear-gradient(216.53deg,#087332 14.79%,#04662b 29.44%,#00200d 85.11%)"
-  );
-  return <Ball bgImage={bgImage} {...props} />;
-};
-
-const OrangeBall = (props) => {
-  const bgImage = useColorModeValue(
-    "radial-gradient(50% 50% at 50% 50%, rgba(255, 140, 33, 0) 79.17%, rgba(255, 231, 171, 0.26) 100%), linear-gradient(216.53deg, #DFBE2B 14.79%, #F49E5F 29.44%, #E06A66 85.11%)",
-    "radial-gradient(50% 50% at 50% 50%,rgba(255,140,33,0) 79.17%,rgba(255,231,171,0.26) 100%),linear-gradient(216.53deg,#8f770d 14.79%,#773708 29.44%,#490806 85.11%)"
-  );
-  return <Ball bgImage={bgImage} {...props} />;
-};
-
-const TealBall = (props) => {
-  const bgImage = useColorModeValue(
-    "radial-gradient(50% 50% at 50% 50%, rgba(33, 175, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(216.53deg, #AEE5FC 14.79%, #2AB1EB 29.44%, #013D57 85.11%)",
-    "radial-gradient(50% 50% at 50% 50%,rgba(33,175,255,0) 79.17%,rgba(171,199,255,0.26) 100%),linear-gradient(216.53deg,#237ba0 14.79%,#054d6c 29.44%,#011620 85.11%)"
-  );
-  return <Ball bgImage={bgImage} {...props} />;
-};
 
 function HeroSection() {
   const bgImage = useColorModeValue(
@@ -126,13 +83,55 @@ function HeroSection() {
             <Box as="img" src="/logo.svg" width="100%" />
 
             {/* Other balls */}
-            <GreenBall size={32} blur={4} right="-8%" top="-2%" />
-            <BlueBall size={48} blur={20} left="-70%" bottom={-16} />
-            <BlueBall size={10} blur={5} top="0%" left="-50%" />
-            <OrangeBall size={6} blur={5} bottom="-20%" right="0%" />
-            <BlueBall size={20} blur={1} top="50%" right="-50%" />
-            <TealBall size={5} blur={8} top="0%" right="-50%" />
-            <TealBall size={5} blur={5} bottom="-40%" left="-20%" />
+            <GreenBall
+              size={32}
+              blur={4}
+              position="absolute"
+              right="-8%"
+              top="-2%"
+            />
+            <BlueBall
+              size={48}
+              blur={20}
+              position="absolute"
+              left="-70%"
+              bottom={-16}
+            />
+            <BlueBall
+              size={10}
+              blur={5}
+              position="absolute"
+              top="0%"
+              left="-50%"
+            />
+            <OrangeBall
+              size={6}
+              blur={5}
+              position="absolute"
+              bottom="-20%"
+              right="0%"
+            />
+            <BlueBall
+              size={20}
+              blur={1}
+              position="absolute"
+              top="50%"
+              right="-50%"
+            />
+            <TealBall
+              size={5}
+              blur={8}
+              position="absolute"
+              top="0%"
+              right="-50%"
+            />
+            <TealBall
+              size={5}
+              blur={5}
+              position="absolute"
+              bottom="-40%"
+              left="-20%"
+            />
           </Flex>
           <Stack spacing={2} align="center">
             <Heading
