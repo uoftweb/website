@@ -29,7 +29,7 @@ export default function MembershipPage() {
             Here are the perks of becoming a member of the web development club
           </Text>
           <List listStyleType="disc">
-            <ListItem>Access to extra resources</ListItem>
+            <ListItem>Access to workshop recordings</ListItem>
             <ListItem>Right to vote in elections</ListItem>
           </List>
           <Flex>
