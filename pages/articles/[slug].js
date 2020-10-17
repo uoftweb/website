@@ -5,6 +5,7 @@ import {
   Button,
   ButtonGroup,
   Heading,
+  Icon,
   Link,
   Stack,
   Text,
@@ -148,11 +149,14 @@ export default function ArticlePage({
         <Box as="header" bg={headerBg} color={headerColor} py={16}>
           <Box maxW="xl" mx="auto" px={3} py={5}>
             <Stack spacing={4}>
-              <Text as="span" color="blue.500">
-                <Link as={NextLink} href="/articles">
-                  Back to Articles
-                </Link>
-              </Text>
+              <Box mb={4}>
+                <NextLink href="/articles" passHref>
+                  <Link>
+                    <Icon name="arrow-back" />
+                    Back
+                  </Link>
+                </NextLink>
+              </Box>
               <Heading>
                 {frontmatter?.title}{" "}
                 {isNewArticle && (

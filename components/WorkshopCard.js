@@ -27,6 +27,7 @@ export function WorkshopCard({ workshop }) {
       rounded="lg"
       overflow="hidden"
     >
+      <Box as="img" src={workshop?.thumbnail} />
       <Box p="6" d="flex" flexDir="column" height="100%">
         <Box d="flex" alignItems="baseline">
           {workshop?.youtubeId && (

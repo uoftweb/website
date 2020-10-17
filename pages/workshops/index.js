@@ -41,7 +41,7 @@ export default function WorkshopsPage({ workshops }) {
               >
                 {workshops.map((w) => (
                   <NextLink key={w.slug} href={`/workshops/${w.slug}`} passHref>
-                    <Box as="a">
+                    <Box as="a" maxW="md">
                       <WorkshopCard workshop={w} />
                     </Box>
                   </NextLink>

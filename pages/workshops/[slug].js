@@ -195,7 +195,9 @@ export default function WorkshopPage({ workshop }) {
               boxShadow="md"
               color={cardColor}
             >
-              <Text>{workshop?.shownotes ?? "Not available"}</Text>
+              {workshop?.shownotes
+                ? workshop?.shownotes?.split("\n").map((line) => <p>{line}</p>)
+                : "Not available"}
             </Box>
           </Stack>
         </Container>

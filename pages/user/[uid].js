@@ -2,10 +2,6 @@ import { Avatar, Box, Grid, Heading, Stack, Text } from "@chakra-ui/core";
 import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import path from "path";
-import fs from "fs";
-import matter from "gray-matter";
-import readingTime from "reading-time";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { gql, useQuery } from "@apollo/client";
@@ -13,8 +9,6 @@ import { ArticleCard } from "../../components/ArticleCard";
 import { PageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
 import { getArticles } from "../../lib/articles";
-
-const root = process.cwd();
 
 export async function getServerSideProps() {
   const articles = await getArticles();
