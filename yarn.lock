@@ -1736,27 +1736,51 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@prisma/cli@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "@prisma/cli@npm:2.8.0"
-  bin:
-    prisma: build/index.js
-    prisma2: build/index.js
-  checksum: 1c88dcad8f35fcd1c6d03db536431024e544134916f29ab6cbd2f92a047399df5739d3e074dedcb38c13a54902a4e3de161b5582f7319cf258cdfb1cef767d14
+"@prisma/bar@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@prisma/bar@npm:0.0.1"
+  checksum: eb9d47dbacce9db22a6a76f02095ad063a57406cfcd060ed6718f600ffa805460893fc8a70ea4ab76f28dfbbd629c2f86757dc8b039f6b21ab3987747523921f
   languageName: node
   linkType: hard
 
-"@prisma/client@npm:^2.7.1":
-  version: 2.7.1
-  resolution: "@prisma/client@npm:2.7.1"
+"@prisma/cli@npm:^2.12.1":
+  version: 2.12.1
+  resolution: "@prisma/cli@npm:2.12.1"
   dependencies:
-    pkg-up: ^3.1.0
+    "@prisma/bar": ^0.0.1
+    "@prisma/engines": 2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58
+  bin:
+    prisma: build/index.js
+    prisma2: build/index.js
+  checksum: 565bb7a44e251f1339dd8cad1e5c80a3bf9ab432d71e04cc856dfb33094f5c3c2d793df97d9b7b7fa8db711eb097090144ea11f308ef5bddb52b88d01405b1a3
+  languageName: node
+  linkType: hard
+
+"@prisma/client@npm:^2.12.1":
+  version: 2.12.1
+  resolution: "@prisma/client@npm:2.12.1"
+  dependencies:
+    "@prisma/engines-version": 2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58
   peerDependencies:
     "@prisma/cli": "*"
   peerDependenciesMeta:
     "@prisma/cli":
       optional: true
-  checksum: cf84d81da3a29bc74cd60ee8b7151c1fd5bce84faa28e4052bebf885a8ba4722ebeb7259317d42285ffe31f24b3add856fcfd6e89419d2bd078ad712f00d2928
+  checksum: 911903166a3ccd42d34f4af6efe346a2951b1fe88843cd9e4d20c0f11b6382cba434dd21d9367cc651e063af98e0024b749e3454b4fa1629ea6862e33af6c0f2
+  languageName: node
+  linkType: hard
+
+"@prisma/engines-version@npm:2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58":
+  version: 2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58
+  resolution: "@prisma/engines-version@npm:2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58"
+  checksum: 41f0d2d3a0127c0fcd06fcd5b6ebdef351a0a261eebedef895cd367c182ae4e9e9e3c9b961ca2eb295f585be8ea9506f4e9ad1a11002acce8f62178b17a6ab10
+  languageName: node
+  linkType: hard
+
+"@prisma/engines@npm:2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58":
+  version: 2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58
+  resolution: "@prisma/engines@npm:2.12.0-18.cf0680a1bfe8d5e743dc659cc7f08009f9587d58"
+  checksum: 8eb661a5d15fa3852e754708990b4180343008010f1d0e8408b287eab42c0dd93d282b13791004c6b39c671fcb000a4c19513433850f74db9580d6584d42896c
   languageName: node
   linkType: hard
 
@@ -7915,15 +7939,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"pkg-up@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "pkg-up@npm:3.1.0"
-  dependencies:
-    find-up: ^3.0.0
-  checksum: df82763250b5283c175918f9410f9651afc1750f951249b31c7c49a6918d9faf13a9ef11e9355cbb0d4d5039a5c9d4c7162755b3e6c26235d2e3baea086e4a54
-  languageName: node
-  linkType: hard
-
 "platform@npm:1.3.3":
   version: 1.3.3
   resolution: "platform@npm:1.3.3"
@@ -10544,8 +10559,8 @@ typescript@^4.0.3:
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
     "@nexus/schema": ^0.16.0
-    "@prisma/cli": ^2.8.0
-    "@prisma/client": ^2.7.1
+    "@prisma/cli": ^2.12.1
+    "@prisma/client": ^2.12.1
     "@types/next-auth": ^3.1.10
     "@types/react": ^16.9.49
     apollo-server-micro: ^2.18.1
