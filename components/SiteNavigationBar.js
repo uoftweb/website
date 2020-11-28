@@ -252,9 +252,9 @@ export function SiteNavigationBar() {
                     color="white"
                     whiteSpace="nowrap"
                   >
-                    <Link as={NextLink} href={`/user/${session?.user?.id}`}>
-                      {session?.user?.name}
-                    </Link>
+                    {/* <Link as={NextLink} href={`/user/${session?.user?.id}`}> */}
+                    {session?.user?.name}
+                    {/* </Link> */}
                   </Text>
                 </Text>
                 <Button variantColor="green" onClick={signOut}>
