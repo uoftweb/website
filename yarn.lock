@@ -8504,10 +8504,10 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"reading-time@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "reading-time@npm:1.2.0"
-  checksum: 411ff81920c1c6841bd2542276a4ed5c529d2b0ab182cedf072eb768f1ac4acd3c50b6adc9572ac9540e6109bb9e5a004a553b510b15a70748f87047d2788ccf
+"reading-time@npm:^1.2.1":
+  version: 1.2.1
+  resolution: "reading-time@npm:1.2.1"
+  checksum: 736bbc7f2680c199af75e9f5a5fd2003473496794a23171f8387c1362532b59a9d3d39715705b3c22a3f546f51bfcbbc5ff9c501186e15cbd5bc005fbd98f212
   languageName: node
   linkType: hard
 
@@ -10579,7 +10579,7 @@ typescript@^4.0.3:
     react: ^17.0.1
     react-dom: ^17.0.1
     react-dom-confetti: ^0.2.0
-    reading-time: ^1.2.0
+    reading-time: ^1.2.1
     remark-slug: ^6.0.0
     typescript: ^4.0.3
     yaml: ^1.10.0
