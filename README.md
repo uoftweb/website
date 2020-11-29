@@ -1,10 +1,21 @@
-# Website
+# UofT Web Dev Club Website
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is the source code repository for the UofT Web Development Club. The website is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Prerequisites
+
+1. [Node.js 12](https://nodejs.org/en/)
+1. [Yarn 2](https://yarnpkg.com/)
 
 ## Getting Started
 
-First, run the development server:
+First install dependencies:
+
+```bash
+yarn install
+```
+
+Then, run the development server:
 
 ```bash
 yarn dev
@@ -23,8 +34,6 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+The website is auto-deployed to the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) on commits to master. Any PRs you open will also be automatically deployed for testing.
