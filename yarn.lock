@@ -1717,15 +1717,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nexus/schema@npm:^0.16.0":
-  version: 0.16.0
-  resolution: "@nexus/schema@npm:0.16.0"
+"@nexus/schema@npm:^0.19.2":
+  version: 0.19.2
+  resolution: "@nexus/schema@npm:0.19.2"
   dependencies:
-    iterall: ^1.2.2
-    tslib: ^1.9.3
+    iterall: ^1.3.0
+    tslib: ^2.0.3
   peerDependencies:
     graphql: ^15.3.0
-  checksum: 0085c8ed42f833d52d5a3fc24a701bfe4858953ee5f72ccf80f95cfb7835382ce8da26296e075cd1cfe4e72723c6ee63f02e44e14eceb80a2700c8a7d7638a43
+  checksum: bd989516138440c670699d84ef422182073e1b81e750a0b6873f74175897b9a63a32046befe99e2b848bac2cbdd16dae290a252865c235f54f234abf380f5771
   languageName: node
   linkType: hard
 
@@ -5324,13 +5324,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-jetpack@npm:^2.4.0":
-  version: 2.4.0
-  resolution: "fs-jetpack@npm:2.4.0"
+"fs-jetpack@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "fs-jetpack@npm:4.1.0"
   dependencies:
     minimatch: ^3.0.2
     rimraf: ^2.6.3
-  checksum: e95ec8b7572053269ff379a34c62c9153bf00807f6edb3246057f9bcf21ac008807919e387c509d703c75eca4d83a277a396e03867964ee18d4d4e5f6e5b6cf6
+  checksum: 36131cf1ce899b49871d819c1318e26ce46514a4a30b709a4bb145e7a4e77c5b39e2218aaa4451c7e9d1ebd24214e309fe4cc9316e48238f5f372c49fcd3b11a
   languageName: node
   linkType: hard
 
@@ -6403,7 +6403,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"iterall@npm:^1.1.3, iterall@npm:^1.2.1, iterall@npm:^1.2.2":
+"iterall@npm:^1.1.3, iterall@npm:^1.2.1, iterall@npm:^1.3.0":
   version: 1.3.0
   resolution: "iterall@npm:1.3.0"
   checksum: 25ae2d07cf97fc35d43fa7af814839689416b83d3ade0fec97a62c58b7b9fad5ff89dd0ede99f2d67cae2697ffa6987f0ab10876f40ae6466e802609a05b1006
@@ -6782,7 +6782,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.11, lodash@npm:^4.17.13, lodash@npm:^4.17.19":
+"lodash@npm:^4.17.11, lodash@npm:^4.17.13, lodash@npm:^4.17.19, lodash@npm:^4.17.20":
   version: 4.17.20
   resolution: "lodash@npm:4.17.20"
   checksum: c62101d2500c383b5f174a7e9e6fe8098149ddd6e9ccfa85f36d4789446195f5c4afd3cfba433026bcaf3da271256566b04a2bf2618e5a39f6e67f8c12030cb6
@@ -7347,20 +7347,21 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"nexus-plugin-prisma@npm:^0.20.0":
-  version: 0.20.0
-  resolution: "nexus-plugin-prisma@npm:0.20.0"
+"nexus-plugin-prisma@npm:^0.25.0":
+  version: 0.25.0
+  resolution: "nexus-plugin-prisma@npm:0.25.0"
   dependencies:
     camelcase: ^6.0.0
-    fs-jetpack: ^2.4.0
-    lodash: ^4.17.19
+    fs-jetpack: ^4.0.0
+    lodash: ^4.17.20
     outdent: ^0.7.1
     pluralize: ^8.0.0
+    semver: ^7.3.2
   peerDependencies:
-    "@nexus/schema": ^0.15.0
-    "@prisma/client": 2.7.0
-    graphql: 14.6.0
-  checksum: d4f3691923144bbcf35c73f18ab04d020310928384b5e8f7762ba59370e6c2ad3abc4cc40806f9ccbb76c92b4a90f9f61ffecddddf379d63e256b515c2b922f7
+    "@nexus/schema": 0.19.x
+    "@prisma/client": 2.12.x
+    graphql: ^15.3.0
+  checksum: 6ffee75b23a0ce0959ed5daf07be3afd74f0ebffc23d0ad8716e91c38ce42a354c322410f90824b56570d51c8995e95deced2d606c0f1b6c50bd33729cfd39cc
   languageName: node
   linkType: hard
 
@@ -9960,6 +9961,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"tslib@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "tslib@npm:2.0.3"
+  checksum: 447bfca5deaa157806c3f77eaba74d05dd0b38b014e47ce79d98b5c77ce7d91b00a687ba13ca1b5a74d35ca1098ac7a072c0a97fad06f0266612f2a03a6c8e8f
+  languageName: node
+  linkType: hard
+
 "tty-browserify@npm:0.0.0":
   version: 0.0.0
   resolution: "tty-browserify@npm:0.0.0"
@@ -10558,7 +10566,7 @@ typescript@^4.0.3:
     "@chakra-ui/core": ^0.8.0
     "@emotion/core": ^10.0.35
     "@emotion/styled": ^10.0.27
-    "@nexus/schema": ^0.16.0
+    "@nexus/schema": ^0.19.2
     "@prisma/cli": ^2.12.1
     "@prisma/client": ^2.12.1
     "@types/next-auth": ^3.1.10
@@ -10572,7 +10580,7 @@ typescript@^4.0.3:
     next: ^10.0.3
     next-auth: ^3.1.0
     next-mdx-remote: ^1.0.0
-    nexus-plugin-prisma: ^0.20.0
+    nexus-plugin-prisma: ^0.25.0
     nprogress: ^0.2.0
     prism-react-renderer: ^1.1.1
     prop-types: ^15.7.2
