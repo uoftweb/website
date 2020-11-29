@@ -1,8 +1,8 @@
 import { ApolloServer } from "apollo-server-micro";
 import {
-  booleanArg,
   makeSchema,
   mutationType,
+  nonNull,
   objectType,
   queryType,
   stringArg,
@@ -63,10 +63,11 @@ const Mutation = mutationType({
       type: "Article",
       description: "Star the given article for the current user",
       args: {
-        slug: stringArg({
-          required: true,
-          description: "The slug of the article to star",
-        }),
+        slug: nonNull(
+          stringArg({
+            description: "The slug of the article to star",
+          })
+        ),
       },
       async resolve(_root, args, ctx) {
         const { id } = ctx?.session?.user;
@@ -97,10 +98,11 @@ const Mutation = mutationType({
       type: "Article",
       description: "Remove star for the given article for the current user",
       args: {
-        slug: stringArg({
-          required: true,
-          description: "The slug of the article to unstar",
-        }),
+        slug: nonNull(
+          stringArg({
+            description: "The slug of the article to unstar",
+          })
+        ),
       },
       async resolve(_root, args, ctx) {
         const { id } = ctx?.session?.user;

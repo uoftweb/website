@@ -52,8 +52,14 @@ type User {
 }
 
 input UserCreateManyWithoutStarredArticlesInput {
-  connect: [UserWhereUniqueInput]
-  create: [UserCreateWithoutStarredArticlesInput]
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutstarredArticlesInput!]
+  create: [UserCreateWithoutStarredArticlesInput!]
+}
+
+input UserCreateOrConnectWithoutstarredArticlesInput {
+  create: UserCreateWithoutStarredArticlesInput!
+  where: UserWhereUniqueInput!
 }
 
 input UserCreateWithoutStarredArticlesInput {
