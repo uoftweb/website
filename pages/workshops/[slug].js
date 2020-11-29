@@ -116,7 +116,7 @@ export default function WorkshopPage({ workshop }) {
             <Flex mt="2" align="center">
               <Icon name="calendar" color="teal.300" />
               <Text as="span" ml={2} color="brand.100" fontSize="sm">
-                {format.formatRange(startDate, endDate)}
+                {format.format(startDate)} - {format.format(endDate)}
               </Text>
             </Flex>
             <Text fontSize="lg" lineHeight="tall">

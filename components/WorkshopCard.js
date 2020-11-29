@@ -28,7 +28,7 @@ export function WorkshopCard({ workshop }) {
       overflow="hidden"
     >
       <Box as="img" src={workshop?.thumbnail} />
-      <Box p="6" d="flex" flexDir="column" height="100%">
+      <Box p="6" d="flex" flexDir="column">
         <Box d="flex" alignItems="baseline">
           {workshop?.youtubeId && (
             <Badge variantColor="purple" mr="2">
@@ -61,7 +61,7 @@ export function WorkshopCard({ workshop }) {
         <Box d="flex" mt="2" alignItems="center">
           <Icon name="calendar" color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            {format.formatRange(startDate, endDate)}
+            {format.format(startDate)} - {format.format(endDate)}
           </Box>
         </Box>
       </Box>
