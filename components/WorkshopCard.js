@@ -1,5 +1,6 @@
-import { Badge, Box, Icon } from "@chakra-ui/react";
-import { subWeeks, isWithinInterval } from "date-fns";
+import { CalendarIcon } from "@chakra-ui/icons";
+import { Badge, Box } from "@chakra-ui/react";
+import { subWeeks } from "date-fns";
 
 export function WorkshopCard({ workshop }) {
   const startDate = new Date(Date.parse(workshop.start));
@@ -59,7 +60,7 @@ export function WorkshopCard({ workshop }) {
         <Box flex="1">{workshop?.excerpt}</Box>
 
         <Box d="flex" mt="2" alignItems="center">
-          <Icon name="calendar" color="teal.500" />
+          <CalendarIcon color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
             {format.format(startDate)} - {format.format(endDate)}
           </Box>

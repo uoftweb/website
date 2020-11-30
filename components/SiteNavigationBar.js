@@ -1,3 +1,4 @@
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -101,7 +102,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorModeValue("moon", "sun");
+  const ColorModeIcon = useColorModeValue(MoonIcon, SunIcon);
   const bg = useColorModeValue("brand.500", "brand.800");
   const mobileMenuBg = useColorModeValue("white", "gray.700");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -197,7 +198,7 @@ export function SiteNavigationBar() {
                 size="md"
                 fontSize="xl"
                 aria-label="Open GitHub repo"
-                icon={GithubIcon}
+                icon={<GithubIcon />}
                 bg="transparent"
                 _hover={{ bg: "brand.300", color: "white" }}
                 _active={{ bg: "brand.200", color: "white" }}
@@ -208,7 +209,7 @@ export function SiteNavigationBar() {
                 size="md"
                 fontSize="xl"
                 aria-label="Open Discord server"
-                icon={DiscordIcon}
+                icon={<DiscordIcon />}
                 bg="transparent"
                 _hover={{ bg: "brand.300", color: "white" }}
                 _active={{ bg: "brand.200", color: "white" }}
@@ -222,7 +223,7 @@ export function SiteNavigationBar() {
               _hover={{ bg: "brand.300", color: "white" }}
               _active={{ bg: "brand.200", color: "white" }}
               onClick={toggleColorMode}
-              icon={colorModeIcon}
+              icon={<ColorModeIcon />}
             />
             <IconButton
               display={{ base: "inline", lg: "none" }}
@@ -233,7 +234,7 @@ export function SiteNavigationBar() {
               _hover={{ bg: "brand.300", color: "white" }}
               _active={{ bg: "brand.200", color: "white" }}
               onClick={onOpen}
-              icon={MenuIcon}
+              icon={<MenuIcon />}
             />
           </Stack>
           {features.accounts &&
@@ -298,7 +299,7 @@ export function SiteNavigationBar() {
               aria-label={`Open navigation menu`}
               variant="ghost"
               onClick={onClose}
-              icon={CloseIcon}
+              icon={<CloseIcon />}
             />
 
             <Stack

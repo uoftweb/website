@@ -1,3 +1,4 @@
+import { StarIcon } from "@chakra-ui/icons";
 import { Badge, Box, Icon } from "@chakra-ui/react";
 import { subWeeks, isWithinInterval } from "date-fns";
 
@@ -50,7 +51,7 @@ export function ArticleCard({ article }) {
         <Box flex="1">{article.frontmatter?.excerpt}</Box>
 
         <Box d="flex" mt="2" alignItems="center">
-          <Icon name="star" color="teal.500" />
+          <StarIcon color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
             {article?.stargazers?.length ?? "0"} stars
           </Box>

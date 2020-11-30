@@ -5,7 +5,6 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Icon,
   Link,
   Stack,
   Text,
@@ -17,6 +16,7 @@ import Confetti from "react-dom-confetti";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { useColorModeValue } from "hooks/chakra";
@@ -152,7 +152,7 @@ export default function ArticlePage({
               <Box mb={4}>
                 <NextLink href="/articles" passHref>
                   <Link>
-                    <Icon name="arrow-back" />
+                    <ArrowBackIcon />
                     Back
                   </Link>
                 </NextLink>
@@ -177,7 +177,7 @@ export default function ArticlePage({
               <ButtonGroup spacing={4} size="sm">
                 {session ? (
                   <Button
-                    leftIcon="star"
+                    leftIcon={<StarIcon />}
                     colorScheme="purple"
                     variant={starred ? "solid" : "outline"}
                     onClick={() => (starred ? unstarArticle() : starArticle())}
@@ -187,7 +187,7 @@ export default function ArticlePage({
                   </Button>
                 ) : (
                   <Button
-                    leftIcon="star"
+                    leftIcon={<StarIcon />}
                     colorScheme="purple"
                     variant="outline"
                     onClick={() => signIn()}
@@ -217,13 +217,17 @@ export default function ArticlePage({
               <Button
                 as="a"
                 href={siteConfig.discord.url}
-                leftIcon={DiscordIcon}
+                leftIcon={<DiscordIcon />}
                 colorScheme="purple"
                 variant="solid"
               >
                 Discuss this article on Discord
               </Button>
-              <Button leftIcon="arrow-up" variant="solid" onClick={scrollToTop}>
+              <Button
+                leftIcon={<ArrowUpIcon />}
+                variant="solid"
+                onClick={scrollToTop}
+              >
                 Back to Top
               </Button>
             </ButtonGroup>

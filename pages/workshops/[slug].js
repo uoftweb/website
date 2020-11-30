@@ -1,3 +1,4 @@
+import { ArrowBackIcon, CalendarIcon, LockIcon } from "@chakra-ui/icons";
 import {
   AspectRatio,
   Box,
@@ -79,7 +80,7 @@ export default function WorkshopPage({ workshop }) {
           <Box mb={4}>
             <NextLink href="/workshops" passHref>
               <Link>
-                <Icon name="arrow-back" />
+                <ArrowBackIcon />
                 Back
               </Link>
             </NextLink>
@@ -114,7 +115,7 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
           <Stack spacing={3}>
             <Flex mt="2" align="center">
-              <Icon name="calendar" color="teal.300" />
+              <CalendarIcon color="teal.300" />
               <Text as="span" ml={2} color="brand.100" fontSize="sm">
                 {format.format(startDate)} - {format.format(endDate)}
               </Text>
@@ -174,7 +175,7 @@ export default function WorkshopPage({ workshop }) {
                   h="full"
                   spacing={4}
                 >
-                  <Icon name="lock" size={16} />
+                  <LockIcon size={16} />
                   <Text>
                     Sorry! This content is only available to registered members
                   </Text>
@@ -202,7 +203,9 @@ export default function WorkshopPage({ workshop }) {
               color={cardColor}
             >
               {workshop?.shownotes
-                ? workshop?.shownotes?.split("\n").map((line) => <p>{line}</p>)
+                ? workshop?.shownotes
+                    ?.split("\n")
+                    .map((line, i) => <p key={i}>{line}</p>)
                 : "Not available"}
             </Box>
           </Stack>

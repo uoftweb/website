@@ -20,7 +20,7 @@ export function PageHeader({ title, back }) {
         <Box mb={4}>
           <NextLink href={back} passHref>
             <Link>
-              <Icon name="arrow-back" />
+              <ArrowBackIcon />
               Back
             </Link>
           </NextLink>

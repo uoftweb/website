@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
   Badge,
   Box,
@@ -354,15 +355,15 @@ function WorkshopSection() {
               </Text>
               <List as="ul" color="white" pl={4}>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   React
                 </ListItem>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   Fullstack Fundamentals
                 </ListItem>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   Next.js
                 </ListItem>
               </List>
