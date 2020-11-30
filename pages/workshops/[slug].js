@@ -1,5 +1,5 @@
 import {
-  AspectRatioBox,
+  AspectRatio,
   Box,
   Button,
   Flex,
@@ -137,7 +137,7 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
         </Stack>
         <Box width="100%">
-          <AspectRatioBox
+          <AspectRatio
             ratio={16 / 9}
             mx="auto"
             overflow="hidden"
@@ -184,7 +184,7 @@ export default function WorkshopPage({ workshop }) {
                 </Stack>
               </Box>
             )}
-          </AspectRatioBox>
+          </AspectRatio>
         </Box>
       </Grid>
 
