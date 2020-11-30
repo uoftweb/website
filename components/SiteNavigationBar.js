@@ -9,7 +9,7 @@ import {
   Text,
   useColorMode,
   useDisclosure,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { features } from "configs/features";
 import { siteConfig } from "configs/site";
 import { useColorModeValue } from "hooks/chakra";

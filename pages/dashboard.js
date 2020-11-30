@@ -1,4 +1,4 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/core";
+import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 
 import { Container } from "../components/Container";
 import { PageHeader } from "../components/PageHeader";

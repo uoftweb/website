@@ -1,4 +1,4 @@
-import { Badge, Box, Icon } from "@chakra-ui/core";
+import { Badge, Box, Icon } from "@chakra-ui/react";
 import { subWeeks, isWithinInterval } from "date-fns";
 
 export function ArticleCard({ article }) {

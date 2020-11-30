@@ -9,7 +9,7 @@ import {
   Link,
   Stack,
   Text,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/client";
 import Head from "next/head";
 import NextLink from "next/link";

@@ -13,7 +13,7 @@ import {
   Text,
   useClipboard,
   useDisclosure,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 export function useShare({ title, url, text }) {

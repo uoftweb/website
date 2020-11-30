@@ -1,4 +1,4 @@
-import { useColorMode } from "@chakra-ui/core";
+import { useColorMode } from "@chakra-ui/react";
 
 export function useColorModeValue(light, dark) {
   const { colorMode } = useColorMode();

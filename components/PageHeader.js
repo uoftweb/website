@@ -1,4 +1,4 @@
-import { Box, Heading, Icon, Link, Stack } from "@chakra-ui/core";
+import { Box, Heading, Icon, Link, Stack } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import { useColorModeValue } from "hooks/chakra";

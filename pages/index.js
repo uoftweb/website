@@ -12,7 +12,7 @@ import {
   ListItem,
   Stack,
   Text,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import NextLink from "next/link";
 

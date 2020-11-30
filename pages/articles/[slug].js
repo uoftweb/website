@@ -9,7 +9,7 @@ import {
   Link,
   Stack,
   Text,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";
 import { subWeeks, isWithinInterval } from "date-fns";
