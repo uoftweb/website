@@ -10,6 +10,7 @@ import {
   Link,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/client";
 import Head from "next/head";
@@ -19,7 +20,6 @@ import { useState } from "react";
 import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { useColorModeValue } from "../../hooks/chakra";
 import { getWorkshopPaths, getWorkshops } from "../../lib/workshops";
 
 export async function getStaticPaths() {

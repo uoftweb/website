@@ -1,6 +1,4 @@
-import { Box } from "@chakra-ui/react";
-
-import { useColorModeValue } from "../hooks/chakra";
+import { Box, useColorModeValue } from "@chakra-ui/react";
 
 export function Ball({ size = 24, blur = 0, ...props }) {
   return (

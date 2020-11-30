@@ -8,6 +8,7 @@ import {
   Link,
   Stack,
   Text,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";
@@ -19,7 +20,6 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { useColorModeValue } from "hooks/chakra";
 import { siteConfig } from "configs/site";
 import { useShare } from "../../hooks/share";
 import {

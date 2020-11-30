@@ -3,17 +3,16 @@ import {
   Box,
   Button,
   Heading,
-  Icon,
   IconButton,
   Link,
   Stack,
   Text,
   useColorMode,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { features } from "configs/features";
 import { siteConfig } from "configs/site";
-import { useColorModeValue } from "hooks/chakra";
 import { signIn, signOut, useSession } from "next-auth/client";
 import NextLink from "next/link";
 import { useRouter } from "next/router";

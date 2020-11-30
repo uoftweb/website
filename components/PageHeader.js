@@ -1,7 +1,6 @@
-import { Box, Heading, Icon, Link, Stack } from "@chakra-ui/react";
+import { Box, Heading, Link, Stack, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-import { useColorModeValue } from "hooks/chakra";
 import { BlueBall } from "./Ball";
 
 export function PageHeader({ title, back }) {
