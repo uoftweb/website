@@ -1,3 +1,4 @@
+import { gql, useQuery } from "@apollo/client";
 import {
   Badge,
   Box,
@@ -19,6 +20,12 @@ import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
 import { useColorModeValue } from "../hooks/chakra";
+import { getArticles } from "../lib/articles";
+
+export async function getStaticProps() {
+  const articles = await getArticles();
+  return { props: { articles } };
+}
 
 function Message({ name, text, accent = false, ...props }) {
   const bg = useColorModeValue("white", "gray.800");
@@ -446,10 +453,29 @@ function ArticleCard({
   );
 }
 
-function ArticleSection() {
+const GET_ARTICLES = gql`
+  query GetArticles {
+    articles {
+      slug
+      stargazers {
+        id
+      }
+    }
+  }
+`;
+
+function ArticleSection({ articles }) {
   const bg = useColorModeValue("white", "brand.800");
   const color = useColorModeValue("brand.600", "brand.50");
   const codeBg = useColorModeValue("brand.800", "brand.900");
+
+  const { data } = useQuery(GET_ARTICLES);
+
+  const articleDynamicData = data
+    ? Object.fromEntries(data?.articles.map((a) => [a.slug, a]))
+    : {};
+
+  const featuredArticles = articles.slice(0, 2);
 
   return (
     <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
@@ -496,20 +522,20 @@ function ArticleSection() {
         </Stack>
 
         <Stack isInline flexWrap="wrap" justify="center">
-          <ArticleCard
-            title="Hoisting in Javascript"
-            stars={5}
-            excerpt="Let’s take a deep-dive into one of the lesser known “features” of JS that often trips up new web developers."
-            href="/articles/hoisting-in-javascript"
-            bgImage="linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
-          />
-          <ArticleCard
-            title="Map of Web Dev"
-            stars={134}
-            excerpt="In this article, we take a look at the wide range of skills and technologies in the world of web development."
-            href="/articles/map-of-web-dev"
-            bgImage="linear-gradient(221.84deg, #E96B6B 2.35%, #EBCC2A 96.6%)"
-          />
+          {featuredArticles?.map((article, index) => (
+            <ArticleCard
+              key={article.slug}
+              title={article.frontmatter.title}
+              stars={articleDynamicData[article.slug]?.stargazers.length}
+              excerpt={article.frontmatter.excerpt}
+              href={`/articles/${article.slug}`}
+              bgImage={
+                index % 2 === 0
+                  ? "linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
+                  : "linear-gradient(221.84deg, #E96B6B 2.35%, #EBCC2A 96.6%)"
+              }
+            />
+          ))}
         </Stack>
 
         <NextLink href="/articles" passHref>
@@ -522,13 +548,13 @@ function ArticleSection() {
   );
 }
 
-export default function HomePage() {
+export default function HomePage({ articles }) {
   return (
     <>
       <SiteNavigationBar />
       <HeroSection />
       <WorkshopSection />
-      <ArticleSection />
+      <ArticleSection articles={articles} />
       <DiscordSection />
     </>
   );
