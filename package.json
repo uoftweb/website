@@ -29,6 +29,7 @@
     "next": "^10.0.3",
     "next-auth": "^3.1.0",
     "next-mdx-remote": "^1.0.0",
+    "next-seo": "^4.17.0",
     "nexus-plugin-prisma": "^0.25.0",
     "nprogress": "^0.2.0",
     "prism-react-renderer": "^1.1.1",

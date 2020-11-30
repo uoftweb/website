@@ -16,6 +16,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
+import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
 import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
@@ -553,6 +554,8 @@ function ArticleSection({ articles }) {
 export default function HomePage({ articles }) {
   return (
     <>
+      <NextSeo title="Home" />
+
       <SiteNavigationBar />
       <HeroSection />
       <WorkshopSection />

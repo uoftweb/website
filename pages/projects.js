@@ -1,5 +1,5 @@
 import { Box, Heading, Stack, Text } from "@chakra-ui/react";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 import { Container } from "../components/Container";
 import { PageHeader } from "../components/PageHeader";
@@ -8,9 +8,7 @@ import { SiteNavigationBar } from "../components/SiteNavigationBar";
 export default function ProjectsPage() {
   return (
     <>
-      <Head>
-        <title>Projects | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title="Projects" />
 
       <SiteNavigationBar />
 

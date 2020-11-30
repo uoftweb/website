@@ -13,7 +13,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/client";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 import { useState } from "react";
 
@@ -58,9 +58,7 @@ export default function WorkshopPage({ workshop }) {
 
   return (
     <>
-      <Head>
-        <title>{workshop?.title} | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title={workshop?.title} description={workshop?.excerpt} />
 
       <SiteNavigationBar />
 

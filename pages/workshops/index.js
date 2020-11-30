@@ -1,5 +1,5 @@
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
 import { Container } from "../../components/Container";
@@ -16,9 +16,7 @@ export async function getStaticProps() {
 export default function WorkshopsPage({ workshops }) {
   return (
     <>
-      <Head>
-        <title>Workshops | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title="Workshops" />
 
       <SiteNavigationBar />
 

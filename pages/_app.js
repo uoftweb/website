@@ -10,6 +10,8 @@ import { ApolloProvider } from "@apollo/client";
 
 import { useApollo } from "../lib/apolloClient";
 import { theme } from "../theme";
+import { DefaultSeo } from "next-seo";
+import { siteConfig } from "../configs/site";
 
 NProgress.configure({ showSpinner: false, parent: "#site-header" });
 
@@ -21,6 +23,17 @@ function App({ Component, pageProps }) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   return (
     <>
+      <DefaultSeo
+        titleTemplate={siteConfig.titleTemplate}
+        description={siteConfig.description}
+        openGraph={{
+          type: "website",
+          locale: "en_US",
+          url: siteConfig.url,
+          site_name: siteConfig.siteName,
+          images: siteConfig.images
+        }}
+      />
       <Head>
         <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
@@ -43,7 +56,6 @@ function App({ Component, pageProps }) {
         />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <title>UofT Web Development Club</title>
       </Head>
       <ApolloProvider client={apolloClient}>
         <AuthProvider session={pageProps.session}>

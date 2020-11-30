@@ -9,16 +9,14 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
 export default function MembershipPage() {
   return (
     <>
-      <Head>
-        <title>Membership | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title="Membership" />
 
       <SiteNavigationBar />
 

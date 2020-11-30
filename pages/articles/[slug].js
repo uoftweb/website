@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
   Badge,
   Box,
@@ -18,6 +17,7 @@ import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
+import { NextSeo } from "next-seo";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { siteConfig } from "configs/site";
@@ -139,9 +139,7 @@ export default function ArticlePage({
 
   return (
     <>
-      <Head>
-        <title>{frontmatter?.title} | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title={frontmatter?.title} description={frontmatter?.excerpt} />
 
       <SiteNavigationBar />
 

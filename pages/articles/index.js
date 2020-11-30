@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { gql, useQuery } from "@apollo/client";
@@ -8,6 +7,7 @@ import { ArticleCard } from "../../components/ArticleCard";
 import { LargePageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
 import { getArticles } from "../../lib/articles";
+import { NextSeo } from "next-seo";
 
 export async function getStaticProps() {
   const articles = await getArticles();
@@ -34,9 +34,7 @@ export default function ArticleListingPage({ articles }) {
 
   return (
     <>
-      <Head>
-        <title>Articles | UofT Web Development Club</title>
-      </Head>
+      <NextSeo title="Articles" />
 
       <SiteNavigationBar />
 
