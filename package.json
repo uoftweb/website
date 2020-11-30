@@ -22,6 +22,7 @@
     "apollo-server-micro": "^2.18.1",
     "date-fns": "^2.16.1",
     "emotion-theming": "^10.0.27",
+    "framer-motion": "^2.9.4",
     "graphql": "^15.3.0",
     "gray-matter": "^4.0.2",
     "next": "^10.0.3",

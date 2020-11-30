@@ -1501,7 +1501,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/is-prop-valid@npm:0.8.8, @emotion/is-prop-valid@npm:^0.8.1":
+"@emotion/is-prop-valid@npm:0.8.8, @emotion/is-prop-valid@npm:^0.8.1, @emotion/is-prop-valid@npm:^0.8.2":
   version: 0.8.8
   resolution: "@emotion/is-prop-valid@npm:0.8.8"
   dependencies:
@@ -5300,6 +5300,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"framer-motion@npm:^2.9.4":
+  version: 2.9.4
+  resolution: "framer-motion@npm:2.9.4"
+  dependencies:
+    "@emotion/is-prop-valid": ^0.8.2
+    framesync: ^4.1.0
+    hey-listen: ^1.0.8
+    popmotion: 9.0.0-rc.20
+    style-value-types: ^3.1.9
+    tslib: ^1.10.0
+  peerDependencies:
+    react: ^16.8
+    react-dom: ^16.8
+  dependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+  checksum: 881506fc35b66b7f55aab957982e93cfe8d0e803f833c2af946722aaabd35f54ff37b0247489d85c709b8c7c59e74f2f49e79dc3866691734bf82fab2d1672ef
+  languageName: node
+  linkType: hard
+
+"framesync@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "framesync@npm:4.1.0"
+  dependencies:
+    hey-listen: ^1.0.5
+  checksum: b2a2a06e28a4323848fd48f7c36b4bc01c203a282ec351955d931d440befdbe88dd29e6bb13b36f064e8b62986daeb6be59609ee5ab55114f711677755d5210e
+  languageName: node
+  linkType: hard
+
 "from2@npm:^2.1.0":
   version: 2.3.0
   resolution: "from2@npm:2.3.0"
@@ -5808,6 +5837,13 @@ fsevents@~2.1.2:
   bin:
     he: bin/he
   checksum: 212122003c20c8c17ac0c83a419b4c8e835411ff6ab9195d053ea6e4a0597cc005b5b8eabcbd57b0b0c0fe676f0049e09315845fff4e051198845491cbba260e
+  languageName: node
+  linkType: hard
+
+"hey-listen@npm:^1.0.5, hey-listen@npm:^1.0.8":
+  version: 1.0.8
+  resolution: "hey-listen@npm:1.0.8"
+  checksum: b9a3ed8d4851735d221a8c2ecf06fba598b0240d18e7ad46780e00af1d62471a40c65d5c6ec48b004fc86d96056cf7e3599d3ef8ee77a31df3cb9f4ce69721ce
   languageName: node
   linkType: hard
 
@@ -7963,6 +7999,18 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"popmotion@npm:9.0.0-rc.20":
+  version: 9.0.0-rc.20
+  resolution: "popmotion@npm:9.0.0-rc.20"
+  dependencies:
+    framesync: ^4.1.0
+    hey-listen: ^1.0.8
+    style-value-types: ^3.1.9
+    tslib: ^1.10.0
+  checksum: 06839ddc16eb995bc5327aee5cd624d09db9d19effe1abb7078adc5c417965adea580bc73ff5bd512a6949a97fb98c4e3b1e9fda9dd8bc1df96cb0e4f0680c3b
+  languageName: node
+  linkType: hard
+
 "popper.js@npm:^1.15.0":
   version: 1.16.1
   resolution: "popper.js@npm:1.16.1"
@@ -9540,6 +9588,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"style-value-types@npm:^3.1.9":
+  version: 3.1.9
+  resolution: "style-value-types@npm:3.1.9"
+  dependencies:
+    hey-listen: ^1.0.8
+    tslib: ^1.10.0
+  checksum: d49e6447576690fc6d8337c554c4d4b26b765e62bf91975494069db1320166e146fa255f1c6c0a7580e085db3dd42c43a2983405345eece57a1ffb1c6c3e39e0
+  languageName: node
+  linkType: hard
+
 "styled-jsx@npm:3.3.2":
   version: 3.3.2
   resolution: "styled-jsx@npm:3.3.2"
@@ -10575,6 +10633,7 @@ typescript@^4.0.3:
     date-fns: ^2.16.1
     dotenv: ^8.2.0
     emotion-theming: ^10.0.27
+    framer-motion: ^2.9.4
     graphql: ^15.3.0
     gray-matter: ^4.0.2
     next: ^10.0.3
