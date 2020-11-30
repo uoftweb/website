@@ -1,3 +1,5 @@
+import "focus-visible/dist/focus-visible";
+
 import { ChakraProvider, theme } from "@chakra-ui/react";
 import { Provider as AuthProvider } from "next-auth/client";
 import Head from "next/head";
