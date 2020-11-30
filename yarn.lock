@@ -4768,20 +4768,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"emotion-theming@npm:^10.0.27":
-  version: 10.0.27
-  resolution: "emotion-theming@npm:10.0.27"
-  dependencies:
-    "@babel/runtime": ^7.5.5
-    "@emotion/weak-memoize": 0.2.5
-    hoist-non-react-statics: ^3.3.0
-  peerDependencies:
-    "@emotion/core": ^10.0.27
-    react: ">=16.3.0"
-  checksum: da47722975067f1e31f9f789b79ca91bdd3c79c5edd07d016f22e10fb2b3a7c0f69b8225abd0c05251e9c534b6f98580d4bd3ace3dfbbb4ce553230aec2a4e84
-  languageName: node
-  linkType: hard
-
 "end-of-stream@npm:^1.0.0, end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4"
@@ -5872,7 +5858,7 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"hoist-non-react-statics@npm:^3.3.0, hoist-non-react-statics@npm:^3.3.2":
+"hoist-non-react-statics@npm:^3.3.2":
   version: 3.3.2
   resolution: "hoist-non-react-statics@npm:3.3.2"
   dependencies:
@@ -10632,7 +10618,6 @@ typescript@^4.0.3:
     apollo-server-micro: ^2.18.1
     date-fns: ^2.16.1
     dotenv: ^8.2.0
-    emotion-theming: ^10.0.27
     framer-motion: ^2.9.4
     graphql: ^15.3.0
     gray-matter: ^4.0.2
