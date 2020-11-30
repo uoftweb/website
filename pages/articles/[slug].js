@@ -213,7 +213,7 @@ export default function ArticlePage({
 
         <Box as="footer" py={8}>
           <Box maxW="xl" mx="auto" px={3}>
-            <ButtonGroup>
+            <Stack direction={{ base: "column", md: "row" }} spacing={4}>
               <Button
                 as="a"
                 href={siteConfig.discord.url}
@@ -230,7 +230,7 @@ export default function ArticlePage({
               >
                 Back to Top
               </Button>
-            </ButtonGroup>
+            </Stack>
           </Box>
         </Box>
       </Box>
