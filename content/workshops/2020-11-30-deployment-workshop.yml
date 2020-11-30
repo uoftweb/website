@@ -1,12 +1,23 @@
 title: Deployment Workshop
 thumbnail: "/images/thumbnails/deployment-workshop.png"
-# youtubeId: QhBnZ6NPOY0
+youtubeId: nAR9nrqBSEo
 excerpt: |
   How does a website go from localhost to publicly available on the internet? 
   What do I need to host my own website? Find out the answers to these questions 
-  and more by coming to our deployment workshop!
+  and more in this workshop!
 shownotes: |
-  Some notes and links from workshop
+  Pre-workshop instructions:
+  1. Create a GitHub account if you don’t have one already
+  2. Fork this https://github.com/uoftweb/w2-deployment-demo - further instructions are available if you scroll down
+  3. Create a Netlify account that is connected to your GitHub account.
+
+  Relevant Links:
+  - https://github.com/uoftweb/w2-deployment-demo
+  - https://www.netlify.com/
+  - https://docs.github.com/en/free-pro-team@latest/github/working-with-github-pages
+
+  Feedback Survey
+  - https://docs.google.com/forms/d/e/1FAIpQLScDMKLB4JS2xLjKLrAzb8Ftl_yjBJmLaPvG19f2a4jfshWF_w/viewform
 link: https://www.eventbrite.ca/e/deployment-workshop-tickets-130630616691?aff=link
 start: "2020-11-30T17:00:00.707Z"
 end: "2020-11-30T18:00:00.707Z"
