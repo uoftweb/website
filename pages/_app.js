@@ -1,9 +1,4 @@
-import {
-  ThemeProvider,
-  CSSReset,
-  ColorModeProvider,
-  theme,
-} from "@chakra-ui/core";
+import { ChakraProvider, theme } from "@chakra-ui/react";
 import { Provider as AuthProvider } from "next-auth/client";
 import Head from "next/head";
 import Router from "next/router";
@@ -92,12 +87,9 @@ function App({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={apolloClient}>
         <AuthProvider session={pageProps.session}>
-          <ThemeProvider theme={customTheme}>
-            <ColorModeProvider>
-              <CSSReset />
-              <Component {...pageProps} />
-            </ColorModeProvider>
-          </ThemeProvider>
+          <ChakraProvider theme={customTheme}>
+            <Component {...pageProps} />
+          </ChakraProvider>
         </AuthProvider>
       </ApolloProvider>
     </>
