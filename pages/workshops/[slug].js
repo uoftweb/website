@@ -158,7 +158,7 @@ export default function WorkshopPage({ workshop }) {
                 allow="autoplay; encrypted-media"
               />
             ) : (
-              <Box position="relative" zIndex="0">
+              <Box zIndex="0">
                 <Box
                   as="img"
                   position="absolute"
