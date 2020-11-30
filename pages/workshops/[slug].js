@@ -85,7 +85,7 @@ export default function WorkshopPage({ workshop }) {
             </NextLink>
           </Box>
           <Stack isInline align="center" spacing={-10}>
-            <Box position="relative" size={16}>
+            <Box position="relative" w={16} h={16}>
               <BlueBall
                 size={16}
                 position="absolute"
@@ -167,7 +167,13 @@ export default function WorkshopPage({ workshop }) {
                   transform="scale(1.1)"
                   src={`https://img.youtube.com/vi/${workshop?.youtubeId}/maxresdefault.jpg`}
                 />
-                <Stack align="center" justify="center" size="full" spacing={4}>
+                <Stack
+                  align="center"
+                  justify="center"
+                  w="full"
+                  h="full"
+                  spacing={4}
+                >
                   <Icon name="lock" size={16} />
                   <Text>
                     Sorry! This content is only available to registered members

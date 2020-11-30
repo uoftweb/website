@@ -81,7 +81,8 @@ function HeroSection() {
           <Flex
             align="center"
             justify="center"
-            size={["sm", "md", "lg", "lg"]}
+            w={["sm", "md", "lg", "lg"]}
+            h={["sm", "md", "lg", "lg"]}
             bgImage={ballBgImage}
             borderRadius="full"
             position="relative"

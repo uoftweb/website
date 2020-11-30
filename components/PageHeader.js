@@ -27,7 +27,7 @@ export function PageHeader({ title, back }) {
         </Box>
       )}
       <Stack isInline align="center" spacing={-10}>
-        <Box position="relative" size={16}>
+        <Box position="relative" w={16} h={16}>
           <BlueBall size={16} position="absolute" top={0} left={0} zIndex="1" />
           <BlueBall
             size={6}

@@ -5,7 +5,8 @@ import { useColorModeValue } from "../hooks/chakra";
 export function Ball({ size = 24, blur = 0, ...props }) {
   return (
     <Box
-      size={size}
+      w={size}
+      h={size}
       style={{ filter: `blur(${blur}px)` }}
       bgImage="radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%),
   linear-gradient(216.53deg, #739BEC 14.79%, #216BFF 29.44%, #020F53 85.11%)"
