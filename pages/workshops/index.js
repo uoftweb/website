@@ -4,6 +4,7 @@ import NextLink from "next/link";
 
 import { Container } from "../../components/Container";
 import { PageHeader } from "../../components/PageHeader";
+import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { WorkshopCard } from "../../components/WorkshopCard";
 import { getWorkshops } from "../../lib/workshops";
@@ -49,6 +50,8 @@ export default function WorkshopsPage({ workshops }) {
           </Stack>
         </Container>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

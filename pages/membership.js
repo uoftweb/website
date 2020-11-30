@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import { NextSeo } from "next-seo";
+import { SiteFooter } from "../components/SiteFooter";
 
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
@@ -37,6 +38,8 @@ export default function MembershipPage() {
           </Flex>
         </Stack>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

@@ -8,6 +8,7 @@ import { LargePageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
 import { getArticles } from "../../lib/articles";
 import { NextSeo } from "next-seo";
+import { SiteFooter } from "../../components/SiteFooter";
 
 export async function getStaticProps() {
   const articles = await getArticles();
@@ -40,7 +41,7 @@ export default function ArticleListingPage({ articles }) {
 
       <LargePageHeader title="Articles" />
 
-      <Box as="section" py={16}>
+      <Box as="section" py={16} minH="80vh">
         <Container>
           <Stack spacing={8}>
             <Text fontSize="xl">
@@ -76,6 +77,8 @@ export default function ArticleListingPage({ articles }) {
           </Stack>
         </Container>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

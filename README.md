@@ -36,4 +36,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deployment on Vercel
 
-The website is auto-deployed to the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) on commits to master. Any PRs you open will also be automatically deployed for testing.
+The website is auto-deployed to the [Vercel Platform](https://vercel.com?utm_source=[project-name]&utm_campaign=oss) on commits to master. Any PRs you open will also be automatically deployed for testing.
+
+[![Vercel logo](./public/images/powered-by-vercel.svg)](https://vercel.com?utm_source=[project-name]&utm_campaign=oss)

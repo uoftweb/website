@@ -2,6 +2,7 @@ import { Box, Heading, Stack, Text } from "@chakra-ui/react";
 
 import { Container } from "../components/Container";
 import { PageHeader } from "../components/PageHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
 export default function DashboardPage() {
@@ -19,6 +20,8 @@ export default function DashboardPage() {
           </Stack>
         </Container>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

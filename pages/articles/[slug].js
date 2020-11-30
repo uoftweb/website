@@ -27,6 +27,7 @@ import {
   getArticles,
   MDXComponents,
 } from "../../lib/articles";
+import { SiteFooter } from "../../components/SiteFooter";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -143,7 +144,7 @@ export default function ArticlePage({
 
       <SiteNavigationBar />
 
-      <Box as="article">
+      <Box as="article" minH="100vh">
         <Box as="header" bg={headerBg} color={headerColor} py={16}>
           <Box maxW="xl" mx="auto" px={3} py={5}>
             <Stack spacing={4}>
@@ -232,6 +233,8 @@ export default function ArticlePage({
           </Box>
         </Box>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

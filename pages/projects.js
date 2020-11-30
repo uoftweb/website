@@ -3,6 +3,7 @@ import { NextSeo } from "next-seo";
 
 import { Container } from "../components/Container";
 import { PageHeader } from "../components/PageHeader";
+import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
 export default function ProjectsPage() {
@@ -24,6 +25,8 @@ export default function ProjectsPage() {
           </Stack>
         </Container>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }

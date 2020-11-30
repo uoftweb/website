@@ -20,6 +20,7 @@ import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
 import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
+import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
 import { getArticles } from "../lib/articles";
@@ -557,10 +558,13 @@ export default function HomePage({ articles }) {
       <NextSeo title="Home" />
 
       <SiteNavigationBar />
+      
       <HeroSection />
       <WorkshopSection />
       <ArticleSection articles={articles} />
       <DiscordSection />
+
+      <SiteFooter />
     </>
   );
 }

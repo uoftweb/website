@@ -19,6 +19,7 @@ import { useState } from "react";
 
 import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
+import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { getWorkshopPaths, getWorkshops } from "../../lib/workshops";
 
@@ -209,6 +210,8 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
         </Container>
       </Box>
+
+      <SiteFooter />
     </>
   );
 }
