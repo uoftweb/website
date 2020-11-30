@@ -13,7 +13,7 @@ import {
   Text,
   useClipboard,
   useDisclosure,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { useState } from "react";
 
 export function useShare({ title, url, text }) {
@@ -51,7 +51,7 @@ export function useShare({ title, url, text }) {
               </Text>
               <Flex>
                 <Input value={value} isReadOnly placeholder="Welcome" />
-                <Button variantColor="blue" onClick={onCopy} ml={2}>
+                <Button colorScheme="blue" onClick={onCopy} ml={2}>
                   {hasCopied ? "Copied" : "Copy"}
                 </Button>
               </Flex>

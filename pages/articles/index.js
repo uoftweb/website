@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/core";
+import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { gql, useQuery } from "@apollo/client";
 

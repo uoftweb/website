@@ -5,11 +5,11 @@ import {
   Button,
   ButtonGroup,
   Heading,
-  Icon,
   Link,
   Stack,
   Text,
-} from "@chakra-ui/core";
+  useColorModeValue,
+} from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";
 import { subWeeks, isWithinInterval } from "date-fns";
@@ -17,9 +17,9 @@ import Confetti from "react-dom-confetti";
 import { signIn, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
+import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { useColorModeValue } from "hooks/chakra";
 import { siteConfig } from "configs/site";
 import { useShare } from "../../hooks/share";
 import {
@@ -152,7 +152,7 @@ export default function ArticlePage({
               <Box mb={4}>
                 <NextLink href="/articles" passHref>
                   <Link>
-                    <Icon name="arrow-back" />
+                    <ArrowBackIcon />
                     Back
                   </Link>
                 </NextLink>
@@ -160,7 +160,7 @@ export default function ArticlePage({
               <Heading>
                 {frontmatter?.title}{" "}
                 {isNewArticle && (
-                  <Badge ml="1" variantColor="green">
+                  <Badge ml="1" colorScheme="green">
                     New
                   </Badge>
                 )}
@@ -177,8 +177,8 @@ export default function ArticlePage({
               <ButtonGroup spacing={4} size="sm">
                 {session ? (
                   <Button
-                    leftIcon="star"
-                    variantColor="purple"
+                    leftIcon={<StarIcon />}
+                    colorScheme="purple"
                     variant={starred ? "solid" : "outline"}
                     onClick={() => (starred ? unstarArticle() : starArticle())}
                   >
@@ -187,8 +187,8 @@ export default function ArticlePage({
                   </Button>
                 ) : (
                   <Button
-                    leftIcon="star"
-                    variantColor="purple"
+                    leftIcon={<StarIcon />}
+                    colorScheme="purple"
                     variant="outline"
                     onClick={() => signIn()}
                   >
@@ -196,7 +196,7 @@ export default function ArticlePage({
                   </Button>
                 )}
 
-                <Button variantColor="blue" variant="ghost" onClick={share}>
+                <Button colorScheme="blue" variant="ghost" onClick={share}>
                   Share
                 </Button>
                 <ShareModal />
@@ -217,13 +217,17 @@ export default function ArticlePage({
               <Button
                 as="a"
                 href={siteConfig.discord.url}
-                leftIcon={DiscordIcon}
-                variantColor="purple"
+                leftIcon={<DiscordIcon />}
+                colorScheme="purple"
                 variant="solid"
               >
                 Discuss this article on Discord
               </Button>
-              <Button leftIcon="arrow-up" variant="solid" onClick={scrollToTop}>
+              <Button
+                leftIcon={<ArrowUpIcon />}
+                variant="solid"
+                onClick={scrollToTop}
+              >
                 Back to Top
               </Button>
             </ButtonGroup>

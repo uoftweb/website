@@ -1,5 +1,6 @@
+import { ArrowBackIcon, CalendarIcon, LockIcon } from "@chakra-ui/icons";
 import {
-  AspectRatioBox,
+  AspectRatio,
   Box,
   Button,
   Flex,
@@ -9,7 +10,8 @@ import {
   Link,
   Stack,
   Text,
-} from "@chakra-ui/core";
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { signIn, useSession } from "next-auth/client";
 import Head from "next/head";
 import NextLink from "next/link";
@@ -18,7 +20,6 @@ import { useState } from "react";
 import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { useColorModeValue } from "../../hooks/chakra";
 import { getWorkshopPaths, getWorkshops } from "../../lib/workshops";
 
 export async function getStaticPaths() {
@@ -79,13 +80,13 @@ export default function WorkshopPage({ workshop }) {
           <Box mb={4}>
             <NextLink href="/workshops" passHref>
               <Link>
-                <Icon name="arrow-back" />
+                <ArrowBackIcon />
                 Back
               </Link>
             </NextLink>
           </Box>
           <Stack isInline align="center" spacing={-10}>
-            <Box position="relative" size={16}>
+            <Box position="relative" w={16} h={16}>
               <BlueBall
                 size={16}
                 position="absolute"
@@ -114,7 +115,7 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
           <Stack spacing={3}>
             <Flex mt="2" align="center">
-              <Icon name="calendar" color="teal.300" />
+              <CalendarIcon color="teal.300" />
               <Text as="span" ml={2} color="brand.100" fontSize="sm">
                 {format.format(startDate)} - {format.format(endDate)}
               </Text>
@@ -125,19 +126,19 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
           <Stack isInline>
             {session ? (
-              <Button variantColor="green" onClick={() => setShouldPlay(true)}>
+              <Button colorScheme="green" onClick={() => setShouldPlay(true)}>
                 Watch
               </Button>
             ) : (
-              <Button variantColor="green" onClick={signIn}>
+              <Button colorScheme="green" onClick={signIn}>
                 Sign in to watch
               </Button>
             )}
-            <Button variantColor="purple">Discuss on Discord</Button>
+            <Button colorScheme="purple">Discuss on Discord</Button>
           </Stack>
         </Stack>
         <Box width="100%">
-          <AspectRatioBox
+          <AspectRatio
             ratio={16 / 9}
             mx="auto"
             overflow="hidden"
@@ -157,7 +158,7 @@ export default function WorkshopPage({ workshop }) {
                 allow="autoplay; encrypted-media"
               />
             ) : (
-              <Box position="relative" zIndex="0">
+              <Box zIndex="0">
                 <Box
                   as="img"
                   position="absolute"
@@ -167,18 +168,24 @@ export default function WorkshopPage({ workshop }) {
                   transform="scale(1.1)"
                   src={`https://img.youtube.com/vi/${workshop?.youtubeId}/maxresdefault.jpg`}
                 />
-                <Stack align="center" justify="center" size="full" spacing={4}>
-                  <Icon name="lock" size={16} />
+                <Stack
+                  align="center"
+                  justify="center"
+                  w="full"
+                  h="full"
+                  spacing={4}
+                >
+                  <LockIcon size={16} />
                   <Text>
                     Sorry! This content is only available to registered members
                   </Text>
-                  <Button variantColor="green" onClick={signIn}>
+                  <Button colorScheme="green" onClick={signIn}>
                     Sign in to watch
                   </Button>
                 </Stack>
               </Box>
             )}
-          </AspectRatioBox>
+          </AspectRatio>
         </Box>
       </Grid>
 
@@ -196,7 +203,9 @@ export default function WorkshopPage({ workshop }) {
               color={cardColor}
             >
               {workshop?.shownotes
-                ? workshop?.shownotes?.split("\n").map((line) => <p>{line}</p>)
+                ? workshop?.shownotes
+                    ?.split("\n")
+                    .map((line, i) => <p key={i}>{line}</p>)
                 : "Not available"}
             </Box>
           </Stack>

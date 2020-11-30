@@ -1,7 +1,6 @@
-import { Box, Heading, Icon, Link, Stack } from "@chakra-ui/core";
+import { Box, Heading, Link, Stack, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-import { useColorModeValue } from "hooks/chakra";
 import { BlueBall } from "./Ball";
 
 export function PageHeader({ title, back }) {
@@ -20,14 +19,14 @@ export function PageHeader({ title, back }) {
         <Box mb={4}>
           <NextLink href={back} passHref>
             <Link>
-              <Icon name="arrow-back" />
+              <ArrowBackIcon />
               Back
             </Link>
           </NextLink>
         </Box>
       )}
       <Stack isInline align="center" spacing={-10}>
-        <Box position="relative" size={16}>
+        <Box position="relative" w={16} h={16}>
           <BlueBall size={16} position="absolute" top={0} left={0} zIndex="1" />
           <BlueBall
             size={6}

@@ -1,4 +1,5 @@
 import { gql, useQuery } from "@apollo/client";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
   Badge,
   Box,
@@ -12,14 +13,14 @@ import {
   ListItem,
   Stack,
   Text,
-} from "@chakra-ui/core";
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import NextLink from "next/link";
 
 import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
-import { useColorModeValue } from "../hooks/chakra";
 import { getArticles } from "../lib/articles";
 
 export async function getStaticProps() {
@@ -81,7 +82,8 @@ function HeroSection() {
           <Flex
             align="center"
             justify="center"
-            size={["sm", "md", "lg", "lg"]}
+            w={["sm", "md", "lg", "lg"]}
+            h={["sm", "md", "lg", "lg"]}
             bgImage={ballBgImage}
             borderRadius="full"
             position="relative"
@@ -220,7 +222,7 @@ function DiscordSection() {
               href={siteConfig.discord.url}
               size="lg"
               variant="link"
-              variantColor="brand"
+              colorScheme="brand"
             >
               Go to Discord
             </Button>
@@ -279,7 +281,7 @@ function WorkshopSection() {
         >
           <Stack spacing={3}>
             <Box>
-              <Badge variant="solid" variantColor="accent">
+              <Badge variant="solid" colorScheme="accent">
                 Available Now
               </Badge>
             </Box>
@@ -292,7 +294,7 @@ function WorkshopSection() {
           </Stack>
           <Stack isInline>
             <NextLink href="/workshops" passHref>
-              <Button as="a" size="lg" variant="link" variantColor="brand">
+              <Button as="a" size="lg" variant="link" colorScheme="brand">
                 Learn More
               </Button>
             </NextLink>
@@ -353,15 +355,15 @@ function WorkshopSection() {
               </Text>
               <List as="ul" color="white" pl={4}>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   React
                 </ListItem>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   Fullstack Fundamentals
                 </ListItem>
                 <ListItem>
-                  <ListIcon icon="check-circle" color="accent.400" size={4} />
+                  <ListIcon as={CheckCircleIcon} color="accent.400" size={4} />
                   Next.js
                 </ListItem>
               </List>
@@ -372,7 +374,7 @@ function WorkshopSection() {
                   })
                 }
                 variant="solid"
-                variantColor="brand"
+                colorScheme="brand"
               >
                 Sign up now
               </Button>
@@ -443,7 +445,7 @@ function ArticleCard({
           </Stack>
           <Text>{excerpt}</Text>
           <NextLink href={href} passHref>
-            <Button as="a" variant="solid" variantColor="brand">
+            <Button as="a" variant="solid" colorScheme="brand">
               Read now
             </Button>
           </NextLink>

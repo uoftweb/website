@@ -1,18 +1,18 @@
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Heading,
-  Icon,
   IconButton,
   Link,
   Stack,
   Text,
   useColorMode,
+  useColorModeValue,
   useDisclosure,
-} from "@chakra-ui/core";
+} from "@chakra-ui/react";
 import { features } from "configs/features";
 import { siteConfig } from "configs/site";
-import { useColorModeValue } from "hooks/chakra";
 import { signIn, signOut, useSession } from "next-auth/client";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
@@ -82,7 +82,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
         isExternal={isExternal}
         _hover={{ textDecoration: "none" }}
       >
-        <Button variantColor="brand" isActive={href === router.asPath}>
+        <Button colorScheme="brand" isActive={href === router.asPath}>
           {children}
         </Button>
       </Link>
@@ -91,7 +91,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 
   return (
     <NextLink href={href} passHref>
-      <Button as="a" variantColor="brand" isActive={href === router.asPath}>
+      <Button as="a" colorScheme="brand" isActive={href === router.asPath}>
         {children}
       </Button>
     </NextLink>
@@ -101,7 +101,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 export function SiteNavigationBar() {
   const [session, loading] = useSession();
   const { colorMode, toggleColorMode } = useColorMode();
-  const colorModeIcon = useColorModeValue("moon", "sun");
+  const ColorModeIcon = useColorModeValue(MoonIcon, SunIcon);
   const bg = useColorModeValue("brand.500", "brand.800");
   const mobileMenuBg = useColorModeValue("white", "gray.700");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -197,7 +197,7 @@ export function SiteNavigationBar() {
                 size="md"
                 fontSize="xl"
                 aria-label="Open GitHub repo"
-                icon={GithubIcon}
+                icon={<GithubIcon />}
                 bg="transparent"
                 _hover={{ bg: "brand.300", color: "white" }}
                 _active={{ bg: "brand.200", color: "white" }}
@@ -208,7 +208,7 @@ export function SiteNavigationBar() {
                 size="md"
                 fontSize="xl"
                 aria-label="Open Discord server"
-                icon={DiscordIcon}
+                icon={<DiscordIcon />}
                 bg="transparent"
                 _hover={{ bg: "brand.300", color: "white" }}
                 _active={{ bg: "brand.200", color: "white" }}
@@ -222,7 +222,7 @@ export function SiteNavigationBar() {
               _hover={{ bg: "brand.300", color: "white" }}
               _active={{ bg: "brand.200", color: "white" }}
               onClick={toggleColorMode}
-              icon={colorModeIcon}
+              icon={<ColorModeIcon />}
             />
             <IconButton
               display={{ base: "inline", lg: "none" }}
@@ -233,7 +233,7 @@ export function SiteNavigationBar() {
               _hover={{ bg: "brand.300", color: "white" }}
               _active={{ bg: "brand.200", color: "white" }}
               onClick={onOpen}
-              icon={MenuIcon}
+              icon={<MenuIcon />}
             />
           </Stack>
           {features.accounts &&
@@ -257,7 +257,7 @@ export function SiteNavigationBar() {
                     {/* </Link> */}
                   </Text>
                 </Text>
-                <Button variantColor="green" onClick={signOut}>
+                <Button colorScheme="green" onClick={signOut}>
                   Sign out
                 </Button>
               </Stack>
@@ -267,11 +267,11 @@ export function SiteNavigationBar() {
                 spacing={6}
                 display={{ base: "none", lg: "flex" }}
               >
-                <Button variantColor="brand" onClick={signIn}>
+                <Button colorScheme="brand" onClick={signIn}>
                   Sign in
                 </Button>
                 <Link as={NextLink} href="/membership">
-                  <Button variantColor="green">Become a member</Button>
+                  <Button colorScheme="green">Become a member</Button>
                 </Link>
               </Stack>
             ))}
@@ -298,7 +298,7 @@ export function SiteNavigationBar() {
               aria-label={`Open navigation menu`}
               variant="ghost"
               onClick={onClose}
-              icon={CloseIcon}
+              icon={<CloseIcon />}
             />
 
             <Stack
@@ -346,7 +346,7 @@ export function SiteNavigationBar() {
                         </Link>
                       </Text>
                     </Text>
-                    <Button variantColor="green" onClick={signOut}>
+                    <Button colorScheme="green" onClick={signOut}>
                       Sign out
                     </Button>
                   </Stack>
@@ -354,7 +354,7 @@ export function SiteNavigationBar() {
                   <Stack isInline spacing={3}>
                     <Button onClick={signIn}>Sign in</Button>
                     <Link as={NextLink} href="/membership">
-                      <Button variantColor="green">Become a member</Button>
+                      <Button colorScheme="green">Become a member</Button>
                     </Link>
                   </Stack>
                 ))}
