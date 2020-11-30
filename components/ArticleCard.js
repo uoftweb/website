@@ -22,7 +22,7 @@ export function ArticleCard({ article }) {
       <Box p="6" d="flex" flexDir="column" height="100%">
         <Box d="flex" alignItems="baseline">
           {isNewArticle && (
-            <Badge variantColor="green" mr="2">
+            <Badge colorScheme="green" mr="2">
               New
             </Badge>
           )}

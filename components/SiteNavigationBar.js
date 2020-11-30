@@ -82,7 +82,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
         isExternal={isExternal}
         _hover={{ textDecoration: "none" }}
       >
-        <Button variantColor="brand" isActive={href === router.asPath}>
+        <Button colorScheme="brand" isActive={href === router.asPath}>
           {children}
         </Button>
       </Link>
@@ -91,7 +91,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 
   return (
     <NextLink href={href} passHref>
-      <Button as="a" variantColor="brand" isActive={href === router.asPath}>
+      <Button as="a" colorScheme="brand" isActive={href === router.asPath}>
         {children}
       </Button>
     </NextLink>
@@ -257,7 +257,7 @@ export function SiteNavigationBar() {
                     {/* </Link> */}
                   </Text>
                 </Text>
-                <Button variantColor="green" onClick={signOut}>
+                <Button colorScheme="green" onClick={signOut}>
                   Sign out
                 </Button>
               </Stack>
@@ -267,11 +267,11 @@ export function SiteNavigationBar() {
                 spacing={6}
                 display={{ base: "none", lg: "flex" }}
               >
-                <Button variantColor="brand" onClick={signIn}>
+                <Button colorScheme="brand" onClick={signIn}>
                   Sign in
                 </Button>
                 <Link as={NextLink} href="/membership">
-                  <Button variantColor="green">Become a member</Button>
+                  <Button colorScheme="green">Become a member</Button>
                 </Link>
               </Stack>
             ))}
@@ -346,7 +346,7 @@ export function SiteNavigationBar() {
                         </Link>
                       </Text>
                     </Text>
-                    <Button variantColor="green" onClick={signOut}>
+                    <Button colorScheme="green" onClick={signOut}>
                       Sign out
                     </Button>
                   </Stack>
@@ -354,7 +354,7 @@ export function SiteNavigationBar() {
                   <Stack isInline spacing={3}>
                     <Button onClick={signIn}>Sign in</Button>
                     <Link as={NextLink} href="/membership">
-                      <Button variantColor="green">Become a member</Button>
+                      <Button colorScheme="green">Become a member</Button>
                     </Link>
                   </Stack>
                 ))}

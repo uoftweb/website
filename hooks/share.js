@@ -51,7 +51,7 @@ export function useShare({ title, url, text }) {
               </Text>
               <Flex>
                 <Input value={value} isReadOnly placeholder="Welcome" />
-                <Button variantColor="blue" onClick={onCopy} ml={2}>
+                <Button colorScheme="blue" onClick={onCopy} ml={2}>
                   {hasCopied ? "Copied" : "Copy"}
                 </Button>
               </Flex>

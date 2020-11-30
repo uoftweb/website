@@ -160,7 +160,7 @@ export default function ArticlePage({
               <Heading>
                 {frontmatter?.title}{" "}
                 {isNewArticle && (
-                  <Badge ml="1" variantColor="green">
+                  <Badge ml="1" colorScheme="green">
                     New
                   </Badge>
                 )}
@@ -178,7 +178,7 @@ export default function ArticlePage({
                 {session ? (
                   <Button
                     leftIcon="star"
-                    variantColor="purple"
+                    colorScheme="purple"
                     variant={starred ? "solid" : "outline"}
                     onClick={() => (starred ? unstarArticle() : starArticle())}
                   >
@@ -188,7 +188,7 @@ export default function ArticlePage({
                 ) : (
                   <Button
                     leftIcon="star"
-                    variantColor="purple"
+                    colorScheme="purple"
                     variant="outline"
                     onClick={() => signIn()}
                   >
@@ -196,7 +196,7 @@ export default function ArticlePage({
                   </Button>
                 )}
 
-                <Button variantColor="blue" variant="ghost" onClick={share}>
+                <Button colorScheme="blue" variant="ghost" onClick={share}>
                   Share
                 </Button>
                 <ShareModal />
@@ -218,7 +218,7 @@ export default function ArticlePage({
                 as="a"
                 href={siteConfig.discord.url}
                 leftIcon={DiscordIcon}
-                variantColor="purple"
+                colorScheme="purple"
                 variant="solid"
               >
                 Discuss this article on Discord

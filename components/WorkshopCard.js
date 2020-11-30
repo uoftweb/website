@@ -31,7 +31,7 @@ export function WorkshopCard({ workshop }) {
       <Box p="6" d="flex" flexDir="column">
         <Box d="flex" alignItems="baseline">
           {workshop?.youtubeId && (
-            <Badge variantColor="purple" mr="2">
+            <Badge colorScheme="purple" mr="2">
               Recorded
             </Badge>
           )}

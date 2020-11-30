@@ -33,7 +33,7 @@ export default function MembershipPage() {
             <ListItem>Right to vote in elections</ListItem>
           </List>
           <Flex>
-            <Button variantColor="green" size="lg" onClick={signIn}>
+            <Button colorScheme="green" size="lg" onClick={signIn}>
               Sign me up
             </Button>
           </Flex>

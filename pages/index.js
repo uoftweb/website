@@ -220,7 +220,7 @@ function DiscordSection() {
               href={siteConfig.discord.url}
               size="lg"
               variant="link"
-              variantColor="brand"
+              colorScheme="brand"
             >
               Go to Discord
             </Button>
@@ -279,7 +279,7 @@ function WorkshopSection() {
         >
           <Stack spacing={3}>
             <Box>
-              <Badge variant="solid" variantColor="accent">
+              <Badge variant="solid" colorScheme="accent">
                 Available Now
               </Badge>
             </Box>
@@ -292,7 +292,7 @@ function WorkshopSection() {
           </Stack>
           <Stack isInline>
             <NextLink href="/workshops" passHref>
-              <Button as="a" size="lg" variant="link" variantColor="brand">
+              <Button as="a" size="lg" variant="link" colorScheme="brand">
                 Learn More
               </Button>
             </NextLink>
@@ -372,7 +372,7 @@ function WorkshopSection() {
                   })
                 }
                 variant="solid"
-                variantColor="brand"
+                colorScheme="brand"
               >
                 Sign up now
               </Button>
@@ -443,7 +443,7 @@ function ArticleCard({
           </Stack>
           <Text>{excerpt}</Text>
           <NextLink href={href} passHref>
-            <Button as="a" variant="solid" variantColor="brand">
+            <Button as="a" variant="solid" colorScheme="brand">
               Read now
             </Button>
           </NextLink>

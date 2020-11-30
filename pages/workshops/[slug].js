@@ -125,15 +125,15 @@ export default function WorkshopPage({ workshop }) {
           </Stack>
           <Stack isInline>
             {session ? (
-              <Button variantColor="green" onClick={() => setShouldPlay(true)}>
+              <Button colorScheme="green" onClick={() => setShouldPlay(true)}>
                 Watch
               </Button>
             ) : (
-              <Button variantColor="green" onClick={signIn}>
+              <Button colorScheme="green" onClick={signIn}>
                 Sign in to watch
               </Button>
             )}
-            <Button variantColor="purple">Discuss on Discord</Button>
+            <Button colorScheme="purple">Discuss on Discord</Button>
           </Stack>
         </Stack>
         <Box width="100%">
@@ -172,7 +172,7 @@ export default function WorkshopPage({ workshop }) {
                   <Text>
                     Sorry! This content is only available to registered members
                   </Text>
-                  <Button variantColor="green" onClick={signIn}>
+                  <Button colorScheme="green" onClick={signIn}>
                     Sign in to watch
                   </Button>
                 </Stack>
