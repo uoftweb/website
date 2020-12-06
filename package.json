@@ -46,6 +46,6 @@
     "@types/next-auth": "^3.1.10",
     "@types/react": "^16.9.49",
     "dotenv": "^8.2.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.1.2"
   }
 }
