@@ -20,7 +20,7 @@
     "@emotion/styled": "^11.0.0",
     "@nexus/schema": "^0.19.2",
     "@prisma/client": "^2.12.1",
-    "apollo-server-micro": "^2.18.1",
+    "apollo-server-micro": "^2.19.0",
     "date-fns": "^2.16.1",
     "focus-visible": "^5.2.0",
     "framer-motion": "^2.9.4",
