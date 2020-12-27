@@ -10315,6 +10315,13 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"get-youtube-id@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "get-youtube-id@npm:1.0.1"
+  checksum: 705f99e1d51084ba3106eb9ab8d84ed33bad01719cb11775643b54f5a0ebe15c9546736d3a7f9df7436e37f3d69f61cf55c789a79bbdd70fa406ed2889d32e93
+  languageName: node
+  linkType: hard
+
 "getpass@npm:^0.1.1":
   version: 0.1.7
   resolution: "getpass@npm:0.1.7"
@@ -19814,6 +19821,7 @@ typescript@^4.0.3:
     dotenv: ^8.2.0
     focus-visible: ^5.2.0
     framer-motion: ^2.9.4
+    get-youtube-id: ^1.0.1
     graphql: ^15.3.0
     gray-matter: ^4.0.2
     next: ^10.0.3

@@ -12,6 +12,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
+import getYouTubeID from "get-youtube-id";
 import { signIn, useSession } from "next-auth/client";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
@@ -21,11 +22,23 @@ import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { getWorkshopPaths, getWorkshops } from "../../lib/workshops";
+import { getSanityContent } from "../../lib/getSanityContent";
 
 export async function getStaticPaths() {
-  const workshopPaths = await getWorkshopPaths();
-  const paths = workshopPaths.map((p) => ({ params: { slug: p.slug } }));
+  const data = await getSanityContent({
+    query: `
+      query AllWorkshops {
+        allWorkshop {
+          slug {
+            current
+          }
+        }
+      }
+    `,
+  });
+  const paths = data.allWorkshop.map((w) => ({
+    params: { slug: w.slug.current },
+  }));
   return {
     fallback: false,
     paths,
@@ -33,10 +46,40 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const workshops = await getWorkshops();
-  const workshop = workshops.find((w) => w.slug === params.slug);
+  const data = await getSanityContent({
+    query: `
+      query WorkshopBySlug($slug: String!) {
+        allWorkshop(where: { slug: { current: {eq: $slug }}}) {
+          title
+          excerpt
+          start
+          end
+          youtubeVideo {
+            url
+          }
+          shownotes
+        }
+      }
+    `,
+    variables: {
+      slug: params.slug,
+    },
+  });
+  const workshop = {
+    ...data.allWorkshop[0],
+    youtubeVideoUrl: data.allWorkshop[0].youtubeVideo.url,
+  };
   return { props: { workshop } };
 }
+
+const format = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+});
 
 export default function WorkshopPage({ workshop }) {
   const [session] = useSession();
@@ -44,14 +87,8 @@ export default function WorkshopPage({ workshop }) {
 
   const startDate = new Date(Date.parse(workshop.start));
   const endDate = new Date(Date.parse(workshop.end));
-  const format = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  });
+  const youtubeId = getYouTubeID(workshop?.youtubeVideoUrl);
+
   const bg = useColorModeValue("brand.600", "gray.700");
   const secondBg = useColorModeValue("brand.700", "gray.800");
   const cardBg = useColorModeValue("white", "gray.900");
@@ -150,9 +187,9 @@ export default function WorkshopPage({ workshop }) {
                 as="iframe"
                 title={workshop?.title}
                 frameborder="0"
-                src={`https://www.youtube.com/embed/${
-                  workshop?.youtubeId
-                }?rel=0${shouldPlay ? "&autoplay=1" : ""}`}
+                src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
+                  shouldPlay ? "&autoplay=1" : ""
+                }`}
                 allowFullScreen
                 allow="autoplay; encrypted-media"
               />
