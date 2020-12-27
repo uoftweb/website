@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "sanity:start": "yarn workspace uoftwebcom start",
     "prisma:generate": "yarn prisma generate",
     "prisma:instrospect": "yarn prisma instrospect",
     "prisma:migrate": "yarn prisma migrate save --experimental",
