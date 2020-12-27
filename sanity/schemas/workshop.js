@@ -7,11 +7,13 @@ export default {
       name: "title",
       title: "Title",
       type: "string",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
       title: "Slug",
       type: "slug",
+      validation: (Rule) => Rule.required(),
       options: {
         source: "title",
         maxLength: 96,
@@ -37,11 +39,13 @@ export default {
       name: "start",
       title: "Starts at",
       type: "datetime",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "end",
       title: "Ends at",
       type: "datetime",
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "youtubeVideo",

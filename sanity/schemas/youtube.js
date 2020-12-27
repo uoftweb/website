@@ -13,6 +13,7 @@ export default {
       name: "url",
       type: "url",
       title: "URL",
+      validation: (Rule) => Rule.required(),
     },
   ],
   preview: {
