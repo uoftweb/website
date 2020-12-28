@@ -7,10 +7,38 @@ import { PageHeader } from "../../components/PageHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { WorkshopCard } from "../../components/WorkshopCard";
-import { getWorkshops } from "../../lib/workshops";
+import { getSanityContent } from "../../lib/getSanityContent";
 
 export async function getStaticProps() {
-  const workshops = await getWorkshops();
+  const data = await getSanityContent({
+    query: `
+      query AllWorkshops {
+        allWorkshop(sort: { start: ASC }) {
+          title
+          slug {
+            current
+          }
+          excerpt
+          start
+          end
+          mainImage {
+            asset {
+              url
+            }
+          }
+          youtubeVideo {
+            url
+          }
+        }
+      }
+    `,
+  });
+  const workshops = data.allWorkshop.map((w) => ({
+    ...w,
+    slug: w.slug.current,
+    thumbnail: w.mainImage.asset.url,
+    youtubeVideoUrl: w.youtubeVideo.url,
+  }));
   return { props: { workshops } };
 }
 

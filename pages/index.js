@@ -23,10 +23,27 @@ import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
-import { getArticles } from "../lib/articles";
+import { getSanityContent } from "../lib/getSanityContent";
 
 export async function getStaticProps() {
-  const articles = await getArticles();
+  const data = await getSanityContent({
+    query: `
+      query AllPublishedArticles {
+        allArticle(
+          where: { publishedAt: { gt: "0000-01-01T00:00:00.000Z" } }
+          sort: { publishedAt: ASC }
+        ) {
+          title
+          slug {
+            current
+          }
+          excerpt
+          publishedAt
+        }
+      }    
+    `,
+  });
+  const articles = data.allArticle.map((a) => ({ ...a, slug: a.slug.current }));
   return { props: { articles } };
 }
 
@@ -529,9 +546,9 @@ function ArticleSection({ articles }) {
           {featuredArticles?.map((article, index) => (
             <ArticleCard
               key={article.slug}
-              title={article.frontmatter.title}
+              title={article.title}
               stars={articleDynamicData[article.slug]?.stargazers.length}
-              excerpt={article.frontmatter.excerpt}
+              excerpt={article.excerpt}
               href={`/articles/${article.slug}`}
               bgImage={
                 index % 2 === 0
@@ -558,7 +575,7 @@ export default function HomePage({ articles }) {
       <NextSeo title="Home" />
 
       <SiteNavigationBar />
-      
+
       <HeroSection />
       <WorkshopSection />
       <ArticleSection articles={articles} />

@@ -18,16 +18,16 @@ import { useRouter } from "next/router";
 import { gql, useMutation, useQuery } from "@apollo/client";
 import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
 import { NextSeo } from "next-seo";
+import readingTime from "reading-time";
+import RemarkSlugPlugin from "remark-slug";
+import renderToString from "next-mdx-remote/render-to-string";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { siteConfig } from "configs/site";
 import { useShare } from "../../hooks/share";
-import {
-  getArticlePaths,
-  getArticles,
-  MDXComponents,
-} from "../../lib/articles";
+import { MDXComponents } from "../../lib/articles";
 import { SiteFooter } from "../../components/SiteFooter";
+import { getSanityContent } from "../../lib/getSanityContent";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
@@ -54,8 +54,23 @@ const confettiConfig = {
 };
 
 export async function getStaticPaths() {
-  const articlePaths = await getArticlePaths();
-  const paths = articlePaths.map((p) => ({ params: { slug: p.slug } }));
+  const data = await getSanityContent({
+    query: `
+      query AllPublishedArticles {
+        allArticle(
+          where: { publishedAt: { gt: "0000-01-01T00:00:00.000Z" } }
+          sort: { publishedAt: ASC }
+        ) {
+          slug {
+            current
+          }
+        }
+      }
+    `,
+  });
+  const paths = data.allArticle.map((a) => ({
+    params: { slug: a.slug.current },
+  }));
   return {
     fallback: false,
     paths,
@@ -63,8 +78,39 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const articles = await getArticles();
-  const article = articles.find((a) => a.slug === params.slug);
+  const data = await getSanityContent({
+    query: `
+      query ArticleBySlug($slug: String!) {
+        allArticle(where: { slug: { current: {eq: $slug }}}) {
+          title
+          excerpt
+          publishedAt
+          slug {
+            current
+          }
+          author {
+            name
+          }
+          body
+        }
+      }
+    `,
+    variables: {
+      slug: params.slug,
+    },
+  });
+  const _article = data.allArticle[0];
+  const mdxSource = await renderToString(_article.body, {
+    components: MDXComponents,
+    mdxOptions: { remarkPlugins: [RemarkSlugPlugin] },
+  });
+  const article = {
+    ..._article,
+    slug: _article.slug.current,
+    author: _article.author.name,
+    source: mdxSource,
+    readingTimeStats: readingTime(_article.body),
+  };
   return {
     props: { article },
   };
@@ -108,7 +154,7 @@ const UNSTAR_ARTICLE = gql`
 `;
 
 export default function ArticlePage({
-  article: { date, source, frontmatter, meta },
+  article: { publishedAt, source, author, title, excerpt, readingTimeStats },
 }) {
   const router = useRouter();
   const { slug } = router.query;
@@ -120,7 +166,7 @@ export default function ArticlePage({
   const starred = Boolean(
     data?.article?.stargazers.find((u) => u.id === session?.user.id)
   );
-  const creationDate = new Date(Date.parse(date));
+  const creationDate = new Date(Date.parse(publishedAt));
   const currentDate = new Date(Date.now());
   const lastWeekDate = subWeeks(currentDate, 1);
   const isNewArticle = isWithinInterval(creationDate, {
@@ -130,17 +176,17 @@ export default function ArticlePage({
   const headerBg = useColorModeValue("gray.50", "gray.900");
   const headerColor = useColorModeValue("gray.900", "gray.100");
   const { share, ShareModal } = useShare({
-    title: frontmatter?.title,
+    title,
     url:
       typeof window !== "undefined"
         ? window.location.href
         : "https://uoftweb.com",
-    text: `${frontmatter?.title} - ${frontmatter?.excerpt}\nRead more at: `,
+    text: `${title} - ${excerpt}\nRead more at: `,
   });
 
   return (
     <>
-      <NextSeo title={frontmatter?.title} description={frontmatter?.excerpt} />
+      <NextSeo title={title} description={excerpt} />
 
       <SiteNavigationBar />
 
@@ -157,7 +203,7 @@ export default function ArticlePage({
                 </NextLink>
               </Box>
               <Heading>
-                {frontmatter?.title}{" "}
+                {title}{" "}
                 {isNewArticle && (
                   <Badge ml="1" colorScheme="green">
                     New
@@ -167,11 +213,10 @@ export default function ArticlePage({
               <Text>
                 Written by{" "}
                 <Text as="span" fontWeight="bold">
-                  {frontmatter.author}
+                  {author}
                 </Text>{" "}
-                on {creationDate.toDateString()} &bull;{" "}
-                {meta.readingTimeStats.text} &bull;{" "}
-                {data?.article?.stargazers.length ?? "0"} stars
+                on {creationDate.toDateString()} &bull; {readingTimeStats.text}{" "}
+                &bull; {data?.article?.stargazers.length ?? "0"} stars
               </Text>
               <ButtonGroup spacing={4} size="sm">
                 {session ? (

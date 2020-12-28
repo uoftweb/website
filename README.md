@@ -2,6 +2,10 @@
 
 This is the source code repository for the UofT Web Development Club. The website is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Links
+
+- [Sanity CMS](https://uoftweb.sanity.studio/)
+
 ## Prerequisites
 
 1. [Node.js 12](https://nodejs.org/en/)

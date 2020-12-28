@@ -1,23 +1,18 @@
 import { CalendarIcon } from "@chakra-ui/icons";
 import { Badge, Box } from "@chakra-ui/react";
-import { subWeeks } from "date-fns";
+
+const format = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+});
 
 export function WorkshopCard({ workshop }) {
   const startDate = new Date(Date.parse(workshop.start));
   const endDate = new Date(Date.parse(workshop.end));
-
-  const creationDate = new Date(Date.parse(workshop.start));
-  const currentDate = new Date(Date.now());
-  const lastWeekDate = subWeeks(currentDate, 1);
-
-  const format = new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-  });
 
   return (
     <Box
@@ -31,7 +26,7 @@ export function WorkshopCard({ workshop }) {
       <Box as="img" src={workshop?.thumbnail} />
       <Box p="6" d="flex" flexDir="column">
         <Box d="flex" alignItems="baseline">
-          {workshop?.youtubeId && (
+          {workshop?.youtubeVideoUrl && (
             <Badge colorScheme="purple" mr="2">
               Recorded
             </Badge>
