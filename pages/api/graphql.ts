@@ -45,7 +45,7 @@ const Query = queryType({
       type: "User",
       async resolve(_root, _args, ctx) {
         const { id } = ctx?.session?.user;
-        const user = await ctx.prisma.user.findOne({
+        const user = await ctx.prisma.user.findUnique({
           where: {
             id,
           },
