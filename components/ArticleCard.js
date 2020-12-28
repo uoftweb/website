@@ -3,7 +3,7 @@ import { Badge, Box, Icon } from "@chakra-ui/react";
 import { subWeeks, isWithinInterval } from "date-fns";
 
 export function ArticleCard({ article }) {
-  const creationDate = new Date(Date.parse(article.date));
+  const creationDate = new Date(Date.parse(article.publishedAt));
   const currentDate = new Date(Date.now());
   const lastWeekDate = subWeeks(currentDate, 1);
   const isNewArticle = isWithinInterval(creationDate, {
@@ -45,10 +45,10 @@ export function ArticleCard({ article }) {
           lineHeight="tight"
           isTruncated
         >
-          {article.frontmatter?.title}
+          {article.title}
         </Box>
 
-        <Box flex="1">{article.frontmatter?.excerpt}</Box>
+        <Box flex="1">{article.excerpt}</Box>
 
         <Box d="flex" mt="2" alignItems="center">
           <StarIcon color="teal.500" />

@@ -1,17 +1,34 @@
 import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { gql, useQuery } from "@apollo/client";
+import { NextSeo } from "next-seo";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { ArticleCard } from "../../components/ArticleCard";
 import { LargePageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
-import { getArticles } from "../../lib/articles";
-import { NextSeo } from "next-seo";
 import { SiteFooter } from "../../components/SiteFooter";
+import { getSanityContent } from "../../lib/getSanityContent";
 
 export async function getStaticProps() {
-  const articles = await getArticles();
+  const data = await getSanityContent({
+    query: `
+      query AllPublishedArticles {
+        allArticle(
+          where: { publishedAt: { gt: "0000-01-01T00:00:00.000Z" } }
+          sort: { publishedAt: ASC }
+        ) {
+          title
+          slug {
+            current
+          }
+          excerpt
+          publishedAt
+        }
+      }    
+    `,
+  });
+  const articles = data.allArticle.map((a) => ({ ...a, slug: a.slug.current }));
   return { props: { articles } };
 }
 
@@ -57,21 +74,15 @@ export default function ArticleListingPage({ articles }) {
                 gap={3}
                 mt={5}
               >
-                {articles
-                  .filter((a) => a.frontmatter.published)
-                  .map((a) => (
-                    <NextLink
-                      key={a.slug}
-                      href={`/articles/${a.slug}`}
-                      passHref
-                    >
-                      <Box as="a">
-                        <ArticleCard
-                          article={{ ...a, ...articleDynamicData[a.slug] }}
-                        />
-                      </Box>
-                    </NextLink>
-                  ))}
+                {articles.map((a) => (
+                  <NextLink key={a.slug} href={`/articles/${a.slug}`} passHref>
+                    <Box as="a">
+                      <ArticleCard
+                        article={{ ...a, ...articleDynamicData[a.slug] }}
+                      />
+                    </Box>
+                  </NextLink>
+                ))}
               </Grid>
             </Box>
           </Stack>
