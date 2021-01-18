@@ -4,7 +4,6 @@ import {
   Button,
   Center,
   Heading,
-  HStack,
   Stack,
   Text,
   useColorModeValue,
@@ -13,7 +12,6 @@ import { NextSeo } from "next-seo";
 import { BlueBall, GlowingTealBall } from "../components/Ball";
 
 import { Container } from "../components/Container";
-import { PageHeader } from "../components/PageHeader";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 
