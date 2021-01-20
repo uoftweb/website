@@ -12,9 +12,9 @@ import {
   ListItem,
   Icon,
 } from "@chakra-ui/react";
-import { CheckCircleIcon } from "@chakra-ui/icons";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
+import { motion } from "framer-motion";
 
 import { Container } from "../components/Container";
 import { SiteFooter } from "../components/SiteFooter";
@@ -24,8 +24,8 @@ import { SiteNavigationBar } from "../components/SiteNavigationBar";
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
     <linearGradient x1="0" y1="0" x2="100%" y2="100%" id="gradient">
-      <stop stop-color="#6BE99D" offset="0" />
-      <stop stop-color="#2AB1EB" offset="100%" />
+      <stop stopColor="#6BE99D" offset="0" />
+      <stop stopColor="#2AB1EB" offset="100%" />
     </linearGradient>
     <circle fill="url(#gradient)" cx="36" cy="36" r="20" />
   </Icon>
@@ -54,7 +54,7 @@ function ProjectPageHeader() {
           spacing="32px"
           align={{ base: "center", lg: "flex-start" }}
           textAlign={{ base: "center", lg: "left" }}
-          maxW={{ base: "full", lg: "sm" }}
+          maxW={{ base: "full", lg: "md" }}
         >
           <Stack spacing="16px" align={{ base: "center", lg: "flex-start" }}>
             <Badge variant="solid" colorScheme="accent">
@@ -148,6 +148,7 @@ function ProjectPageHeader() {
 }
 
 function MentorSection() {
+  const delayTransition = 0.2;
   const bg = useColorModeValue("brand.50", "brand.600");
   const color = useColorModeValue("brand.600", "brand.50");
   return (
@@ -164,28 +165,55 @@ function MentorSection() {
         <Box maxW="md" p={8} display={{ base: "none", lg: "block" }}>
           <Box position="relative" w="100%">
             <Box
+              as={motion.div}
+              initial={{ opacity: 0, y: -100 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { delay: delayTransition },
+              }}
+              style={{ rotate: "8deg" }}
               position="absolute"
               top={0}
               left={0}
               w="100%"
               h="100%"
-              transform="rotateZ(8deg)"
               borderRadius="2xl"
               boxShadow="lg"
               bg="gray.100"
             />
             <Box
+              as={motion.div}
+              initial={{ opacity: 0, y: -100 }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                transition: { delay: delayTransition * 2 },
+              }}
+              style={{ rotate: "-6deg" }}
               position="absolute"
               top={0}
               left={0}
               w="100%"
               h="100%"
-              transform="rotateZ(-6deg)"
               borderRadius="2xl"
               boxShadow="lg"
               bg="gray.100"
             />
             <Stack
+              as={motion.div}
+              drag
+              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+              initial={{ opacity: 0, y: -100 }}
+              animate={{
+                opacity: 1,
+                scale: 1,
+                y: 0,
+                transition: { delay: delayTransition * 3 },
+              }}
+              style={{ rotate: "-3deg", scale: 1 }}
+              whileHover={{ rotate: "0deg" }}
+              whileTap={{ scale: 0.97 }}
               position="relative"
               bg="white"
               color="brand.600"
@@ -196,9 +224,13 @@ function MentorSection() {
               w="100%"
               overflow="hidden"
               minW="sm"
-              transform="rotateZ(-3deg)"
             >
-              <Box as="img" src="https://picsum.photos/300/200" />
+              <Box
+                as="img"
+                src="https://picsum.photos/300/200"
+                userSelect="none"
+                pointerEvents="none"
+              />
               <Stack p={8} spacing={6}>
                 <Heading
                   as="h3"
