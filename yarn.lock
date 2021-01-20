@@ -9957,26 +9957,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^2.9.4":
-  version: 2.9.4
-  resolution: "framer-motion@npm:2.9.4"
-  dependencies:
-    "@emotion/is-prop-valid": ^0.8.2
-    framesync: ^4.1.0
-    hey-listen: ^1.0.8
-    popmotion: 9.0.0-rc.20
-    style-value-types: ^3.1.9
-    tslib: ^1.10.0
-  peerDependencies:
-    react: ^16.8
-    react-dom: ^16.8
-  dependenciesMeta:
-    "@emotion/is-prop-valid":
-      optional: true
-  checksum: 881506fc35b66b7f55aab957982e93cfe8d0e803f833c2af946722aaabd35f54ff37b0247489d85c709b8c7c59e74f2f49e79dc3866691734bf82fab2d1672ef
-  languageName: node
-  linkType: hard
-
 "framer-motion@npm:^2.9.5":
   version: 2.9.5
   resolution: "framer-motion@npm:2.9.5"
@@ -9994,6 +9974,33 @@ __metadata:
     "@emotion/is-prop-valid":
       optional: true
   checksum: fbeee68c8e075401c700132add34cfe963c6a85e8e78f33968aa851d5980fbbcef97586c0d1c8972438e27fa044724735a6f1ffb3328a2cfa44ff217ba8f71da
+  languageName: node
+  linkType: hard
+
+"framer-motion@npm:^3.2.1":
+  version: 3.2.1
+  resolution: "framer-motion@npm:3.2.1"
+  dependencies:
+    "@emotion/is-prop-valid": ^0.8.2
+    framesync: ^5.0.0
+    hey-listen: ^1.0.8
+    popmotion: ^9.1.0
+    style-value-types: ^4.0.1
+    tslib: ^1.10.0
+  peerDependencies:
+    react: ">=16.8"
+    react-dom: ">=16.8"
+  dependenciesMeta:
+    "@emotion/is-prop-valid":
+      optional: true
+  checksum: 6a21a6502edc589938fda78238144648d3ae9197d2fc8455f7ed825c85cbe85f641ef1cf5e2371dadb3017331c1abef8737c81587cb055f01b2f99b71025c98b
+  languageName: node
+  linkType: hard
+
+"framesync@npm:5.0.0, framesync@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "framesync@npm:5.0.0"
+  checksum: 3ae984748abe03710b4a60f35534c572ffd206f773a58c5d61da56397f4656ff8de7bc41be7eb83a3eb961dd24e95f379147818dec1aefda4c005d50a45681d9
   languageName: node
   linkType: hard
 
@@ -14581,6 +14588,18 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"popmotion@npm:^9.1.0":
+  version: 9.1.0
+  resolution: "popmotion@npm:9.1.0"
+  dependencies:
+    framesync: 5.0.0
+    hey-listen: ^1.0.8
+    style-value-types: ^4.0.1
+    tslib: ^1.10.0
+  checksum: a8f0018217d85e0e0e0bbc82a224dad2494ae5a73b5b06208298fee0ea035d742e2707a6f41051d2f3662099cddf526a1425d8452c073df748c9dd77bb97f3d2
+  languageName: node
+  linkType: hard
+
 "popper-max-size-modifier@npm:^0.2.0":
   version: 0.2.0
   resolution: "popper-max-size-modifier@npm:0.2.0"
@@ -18120,6 +18139,16 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"style-value-types@npm:^4.0.1":
+  version: 4.0.1
+  resolution: "style-value-types@npm:4.0.1"
+  dependencies:
+    hey-listen: ^1.0.8
+    tslib: ^1.10.0
+  checksum: ea10874c76075a65058edbf59299bbdcd86512d0a206c9e444f0234f0dab0b801cdfa19cb6984cc7c18b4fd93147811f32b39edb8192129922ce8bc2019e8327
+  languageName: node
+  linkType: hard
+
 "styled-components@npm:^5.0.0, styled-components@npm:^5.2.1":
   version: 5.2.1
   resolution: "styled-components@npm:5.2.1"
@@ -19791,7 +19820,7 @@ typescript@^4.0.3:
     date-fns: ^2.16.1
     dotenv: ^8.2.0
     focus-visible: ^5.2.0
-    framer-motion: ^2.9.4
+    framer-motion: ^3.2.1
     get-youtube-id: ^1.0.1
     graphql: ^15.3.0
     next: ^10.0.3
