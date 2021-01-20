@@ -7,13 +7,29 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  List,
+  ListIcon,
+  ListItem,
+  Icon,
 } from "@chakra-ui/react";
+import { CheckCircleIcon } from "@chakra-ui/icons";
 import { NextSeo } from "next-seo";
-import { BlueBall, GlowingTealBall } from "../components/Ball";
+import NextLink from "next/link";
 
 import { Container } from "../components/Container";
 import { SiteFooter } from "../components/SiteFooter";
+import { BlueBall, GlowingTealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
+
+const CircleIcon = (props) => (
+  <Icon viewBox="0 0 72 72" {...props}>
+    <linearGradient x1="0" y1="0" x2="100%" y2="100%" id="gradient">
+      <stop stop-color="#6BE99D" offset="0" />
+      <stop stop-color="#2AB1EB" offset="100%" />
+    </linearGradient>
+    <circle fill="url(#gradient)" cx="36" cy="36" r="20" />
+  </Icon>
+);
 
 function ProjectPageHeader() {
   const bg = useColorModeValue("brand.600", "brand.900");
@@ -131,6 +147,113 @@ function ProjectPageHeader() {
   );
 }
 
+function MentorSection() {
+  const bg = useColorModeValue("brand.50", "brand.600");
+  const color = useColorModeValue("brand.600", "brand.50");
+  return (
+    <Box as="section" py={16} bg={bg} color={color}>
+      <Stack
+        isInline
+        spacing={{ base: 0, lg: 16 }}
+        maxW="80rem"
+        mx="auto"
+        px={3}
+        align="center"
+        justify={{ base: "center", lg: "flex-start" }}
+      >
+        <Box maxW="md" p={8} display={{ base: "none", lg: "block" }}>
+          <Box position="relative" w="100%">
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              w="100%"
+              h="100%"
+              transform="rotateZ(8deg)"
+              borderRadius="2xl"
+              boxShadow="lg"
+              bg="gray.100"
+            />
+            <Box
+              position="absolute"
+              top={0}
+              left={0}
+              w="100%"
+              h="100%"
+              transform="rotateZ(-6deg)"
+              borderRadius="2xl"
+              boxShadow="lg"
+              bg="gray.100"
+            />
+            <Stack
+              position="relative"
+              bg="white"
+              color="brand.600"
+              borderRadius="2xl"
+              boxShadow="lg"
+              fontSize="xl"
+              letterSpacing="tight"
+              w="100%"
+              overflow="hidden"
+              minW="sm"
+              transform="rotateZ(-3deg)"
+            >
+              <Box as="img" src="https://picsum.photos/300/200" />
+              <Stack p={8} spacing={6}>
+                <Heading
+                  as="h3"
+                  fontWeight="semibold"
+                  fontSize="3xl"
+                  lineHeight="none"
+                >
+                  Umar Ahmed
+                </Heading>
+                <List as="ul" pl={6} spacing={2}>
+                  <ListItem>
+                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
+                    React
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
+                    Fullstack Fundamentals
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
+                    Next.js
+                  </ListItem>
+                </List>
+              </Stack>
+            </Stack>
+          </Box>
+        </Box>
+
+        <Stack
+          spacing={6}
+          maxW="2xl"
+          align={{ base: "center", lg: "flex-start" }}
+          textAlign={{ base: "center", lg: "left" }}
+        >
+          <Stack spacing={3}>
+            <Heading>Get one-on-one help from our team</Heading>
+            <Text fontSize="lg">
+              With help from our amazingly talented <strong>staff</strong> and{" "}
+              <strong>network of mentors</strong>, we’ll help you jump through
+              the various hoops of product development.
+            </Text>
+          </Stack>
+          <Stack isInline>
+            <NextLink href="/workshops" passHref>
+              <Button as="a" size="lg" variant="link" colorScheme="brand">
+                Meet the Team
+              </Button>
+            </NextLink>
+          </Stack>
+        </Stack>
+      </Stack>
+    </Box>
+  );
+}
+
 export default function ProjectsPage() {
   return (
     <>
@@ -139,6 +262,8 @@ export default function ProjectsPage() {
       <SiteNavigationBar />
 
       <ProjectPageHeader />
+
+      <MentorSection />
 
       <Box as="section" py={16}>
         <Container>
