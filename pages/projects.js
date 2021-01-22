@@ -20,7 +20,7 @@ import { Container } from "../components/Container";
 import { SiteFooter } from "../components/SiteFooter";
 import { BlueBall, GlowingTealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
-import { useEffect, useState } from "react";
+import { ProjectsTimeline } from "../components/ProjectsTimeline";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -305,6 +305,30 @@ function MentorSection() {
   );
 }
 
+function TimelineSection() {
+  const bg = useColorModeValue("white", "brand.800");
+  const color = useColorModeValue("brand.600", "brand.50");
+
+  return (
+    <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
+      <Stack
+        spacing={{ base: 8, lg: 16 }}
+        maxW="80rem"
+        mx="auto"
+        px={3}
+        align="center"
+        justify={{ base: "center", lg: "flex-start" }}
+      >
+        <Heading>From idea to MVP in three months</Heading>
+
+        <Box w="full" overflowX="auto">
+          <ProjectsTimeline />
+        </Box>
+      </Stack>
+    </Box>
+  );
+}
+
 export default function ProjectsPage() {
   return (
     <>
@@ -316,16 +340,7 @@ export default function ProjectsPage() {
 
       <MentorSection />
 
-      <Box as="section" py={16}>
-        <Container>
-          <Stack spacing={3}>
-            <Heading>Projects</Heading>
-            <Text>
-              Work on a cool project for 16 weeks and showcase your talents.
-            </Text>
-          </Stack>
-        </Container>
-      </Box>
+      <TimelineSection />
 
       <SiteFooter />
     </>
