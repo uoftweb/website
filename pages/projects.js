@@ -20,6 +20,7 @@ import { Container } from "../components/Container";
 import { SiteFooter } from "../components/SiteFooter";
 import { BlueBall, GlowingTealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
+import { useEffect, useState } from "react";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -147,14 +148,105 @@ function ProjectPageHeader() {
   );
 }
 
+function MentorCard({ src, name, skills }) {
+  return (
+    <Stack
+      bg="white"
+      color="brand.600"
+      borderRadius="2xl"
+      boxShadow="lg"
+      fontSize="xl"
+      letterSpacing="tight"
+      w="100%"
+      h="100%"
+      overflow="hidden"
+      minW="sm"
+    >
+      <Box as="img" src={src} userSelect="none" pointerEvents="none" />
+      <Stack p={8} spacing={6}>
+        <Heading as="h3" fontWeight="semibold" fontSize="3xl" lineHeight="none">
+          {name}
+        </Heading>
+        <List as="ul" pl={6} spacing={2}>
+          {skills.map((skill) => (
+            <ListItem key={skill}>
+              <ListIcon as={CircleIcon} boxSize={4} mb={1} />
+              {skill}
+            </ListItem>
+          ))}
+        </List>
+      </Stack>
+    </Stack>
+  );
+}
+
+function MentorCardList({ mentors }) {
+  return (
+    <Box position="relative" w="100%">
+      {mentors.map(({ thumbnailUrl, name, skills }, i) => (
+        <Box
+          key={name}
+          as={motion.div}
+          drag
+          dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+          variants={{
+            initial: { opacity: 0, y: -100 },
+            animate: {
+              opacity: 1,
+              y: 0,
+              transition: {
+                type: "keyframes",
+                ease: "easeInOut",
+              },
+            },
+          }}
+          style={{
+            rotate: `${i % 2 === 0 ? "-" : ""}${3 * i}deg`,
+            scale: 1,
+          }}
+          whileHover={{ rotate: "0deg" }}
+          whileTap={{ scale: 0.97 }}
+          position={i > 0 ? "absolute" : "relative"}
+          top={0}
+          left={0}
+          zIndex={i}
+        >
+          <MentorCard src={thumbnailUrl} name={name} skills={skills} />
+        </Box>
+      ))}
+    </Box>
+  );
+}
+
+const textVariants = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+  },
+};
+
 function MentorSection() {
-  const delayTransition = 0.2;
   const bg = useColorModeValue("brand.50", "brand.600");
   const color = useColorModeValue("brand.600", "brand.50");
+
   return (
     <Box as="section" py={16} bg={bg} color={color}>
       <Stack
-        isInline
+        as={motion.div}
+        variants={{
+          initial: {},
+          animate: {
+            transition: {
+              when: "afterChildren",
+              staggerChildren: 0.3,
+            },
+          },
+        }}
+        initial="initial"
+        animate="animate"
+        direction="row"
         spacing={{ base: 0, lg: 16 }}
         maxW="80rem"
         mx="auto"
@@ -163,103 +255,30 @@ function MentorSection() {
         justify={{ base: "center", lg: "flex-start" }}
       >
         <Box maxW="md" p={8} display={{ base: "none", lg: "block" }}>
-          <Box position="relative" w="100%">
-            <Box
-              as={motion.div}
-              initial={{ opacity: 0, y: -100 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { delay: delayTransition },
-              }}
-              style={{ rotate: "8deg" }}
-              position="absolute"
-              top={0}
-              left={0}
-              w="100%"
-              h="100%"
-              borderRadius="2xl"
-              boxShadow="lg"
-              bg="gray.100"
-            />
-            <Box
-              as={motion.div}
-              initial={{ opacity: 0, y: -100 }}
-              animate={{
-                opacity: 1,
-                y: 0,
-                transition: { delay: delayTransition * 2 },
-              }}
-              style={{ rotate: "-6deg" }}
-              position="absolute"
-              top={0}
-              left={0}
-              w="100%"
-              h="100%"
-              borderRadius="2xl"
-              boxShadow="lg"
-              bg="gray.100"
-            />
-            <Stack
-              as={motion.div}
-              drag
-              dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-              initial={{ opacity: 0, y: -100 }}
-              animate={{
-                opacity: 1,
-                scale: 1,
-                y: 0,
-                transition: { delay: delayTransition * 3 },
-              }}
-              style={{ rotate: "-3deg", scale: 1 }}
-              whileHover={{ rotate: "0deg" }}
-              whileTap={{ scale: 0.97 }}
-              position="relative"
-              bg="white"
-              color="brand.600"
-              borderRadius="2xl"
-              boxShadow="lg"
-              fontSize="xl"
-              letterSpacing="tight"
-              w="100%"
-              overflow="hidden"
-              minW="sm"
-            >
-              <Box
-                as="img"
-                src="https://picsum.photos/300/200"
-                userSelect="none"
-                pointerEvents="none"
-              />
-              <Stack p={8} spacing={6}>
-                <Heading
-                  as="h3"
-                  fontWeight="semibold"
-                  fontSize="3xl"
-                  lineHeight="none"
-                >
-                  Umar Ahmed
-                </Heading>
-                <List as="ul" pl={6} spacing={2}>
-                  <ListItem>
-                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
-                    React
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
-                    Fullstack Fundamentals
-                  </ListItem>
-                  <ListItem>
-                    <ListIcon as={CircleIcon} boxSize={4} mb={1} />
-                    Next.js
-                  </ListItem>
-                </List>
-              </Stack>
-            </Stack>
-          </Box>
+          <MentorCardList
+            mentors={[
+              {
+                name: "Umar Ahmed",
+                thumbnailUrl: "https://picsum.photos/seed/1123/300/200",
+                skills: ["React", "Next.js", "CSS"],
+              },
+              {
+                name: "Umar Ahmed",
+                thumbnailUrl: "https://picsum.photos/seed/1152423//300/200",
+                skills: ["React", "Next.js", "CSS"],
+              },
+              {
+                name: "Umar Ahmed",
+                thumbnailUrl: "https://picsum.photos/seed/112233//300/200",
+                skills: ["React", "Next.js", "CSS"],
+              },
+            ]}
+          />
         </Box>
 
         <Stack
+          as={motion.div}
+          variants={textVariants}
           spacing={6}
           maxW="2xl"
           align={{ base: "center", lg: "flex-start" }}
