@@ -22,6 +22,7 @@ import { BlueBall, GlowingTealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { ProjectsTimeline } from "../components/ProjectsTimeline";
 import { features } from "../configs/features";
+import { getSanityContent, urlFor } from "../lib/sanityUtil";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -231,7 +232,43 @@ const textVariants = {
   },
 };
 
-function MentorSection() {
+export async function getStaticProps() {
+  const data = await getSanityContent({
+    query: `
+      query MentorSkills {
+        allMentor {
+          name
+          skills
+          image {
+            asset {
+              _id
+              url
+            }
+            crop {
+              top
+              left
+              bottom
+              right
+            }
+            hotspot {
+              x
+              y
+              height
+              width
+            }
+          }
+        }
+      }
+    `,
+  });
+  const mentorsData = data.allMentor.map((m) => ({
+    ...m,
+    thumbnailUrl: urlFor(m.image).url(),
+  }));
+  return { props: { mentors: mentorsData } };
+}
+
+function MentorSection({ mentors }) {
   const bg = useColorModeValue("brand.50", "brand.600");
   const color = useColorModeValue("brand.600", "brand.50");
 
@@ -259,25 +296,7 @@ function MentorSection() {
         justify={{ base: "center", lg: "flex-start" }}
       >
         <Box maxW="md" p={8} display={{ base: "none", lg: "block" }}>
-          <MentorCardList
-            mentors={[
-              {
-                name: "Umar Ahmed",
-                thumbnailUrl: "https://picsum.photos/seed/1123/300/200",
-                skills: ["React", "Next.js", "CSS"],
-              },
-              {
-                name: "Umar Ahmed",
-                thumbnailUrl: "https://picsum.photos/seed/1152423//300/200",
-                skills: ["React", "Next.js", "CSS"],
-              },
-              {
-                name: "Umar Ahmed",
-                thumbnailUrl: "https://picsum.photos/seed/112233//300/200",
-                skills: ["React", "Next.js", "CSS"],
-              },
-            ]}
-          />
+          {mentors && <MentorCardList mentors={mentors} />}
         </Box>
 
         <Stack
@@ -335,7 +354,7 @@ function TimelineSection() {
   );
 }
 
-export default function ProjectsPage() {
+export default function ProjectsPage({ mentors }) {
   return (
     <>
       <NextSeo title="Projects" />
@@ -344,7 +363,7 @@ export default function ProjectsPage() {
 
       <ProjectPageHeader />
 
-      <MentorSection />
+      <MentorSection mentors={mentors} />
 
       <TimelineSection />
 

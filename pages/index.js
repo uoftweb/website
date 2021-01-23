@@ -23,7 +23,7 @@ import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
-import { getSanityContent } from "../lib/getSanityContent";
+import { getSanityContent } from "../lib/sanityUtil";
 
 export async function getStaticProps() {
   const data = await getSanityContent({
