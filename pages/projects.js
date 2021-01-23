@@ -21,6 +21,7 @@ import { SiteFooter } from "../components/SiteFooter";
 import { BlueBall, GlowingTealBall } from "../components/Ball";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { ProjectsTimeline } from "../components/ProjectsTimeline";
+import { features } from "../configs/features";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -85,6 +86,9 @@ function ProjectPageHeader() {
               variant="solid"
               color="brand.600"
               width={{ base: "full", lg: "unset" }}
+              href="/projects/apply"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Apply Now
             </Button>
@@ -292,13 +296,15 @@ function MentorSection() {
               the various hoops of product development.
             </Text>
           </Stack>
-          <Stack isInline>
-            <NextLink href="/workshops" passHref>
-              <Button as="a" size="lg" variant="link" colorScheme="brand">
-                Meet the Team
-              </Button>
-            </NextLink>
-          </Stack>
+          {features.mentors && (
+            <Stack isInline>
+              <NextLink href="/workshops" passHref>
+                <Button as="a" size="lg" variant="link" colorScheme="brand">
+                  Meet the Team
+                </Button>
+              </NextLink>
+            </Stack>
+          )}
         </Stack>
       </Stack>
     </Box>
