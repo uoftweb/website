@@ -3,7 +3,6 @@ import { motion } from "framer-motion";
 export function ProjectsTimeline() {
   return (
     <svg
-      width="1194"
       height="222"
       viewBox="0 0 1194 222"
       fill="none"

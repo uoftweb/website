@@ -39,7 +39,7 @@ function ProjectPageHeader() {
   return (
     <Box
       as="header"
-      pt={16}
+      pt={28}
       pb={24}
       bg={bg}
       backgroundImage="linear-gradient(0deg, #041050, #041050)"
@@ -344,9 +344,9 @@ function TimelineSection() {
         align="center"
         justify={{ base: "center", lg: "flex-start" }}
       >
-        <Heading>From idea to MVP in three months</Heading>
+        <Heading textAlign="center">From idea to MVP in three months</Heading>
 
-        <Box w="full" overflowX="auto">
+        <Box w="full" overflowX="auto" marginX="auto" p={8}>
           <ProjectsTimeline />
         </Box>
       </Stack>
