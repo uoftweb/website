@@ -22,7 +22,7 @@ import { BlueBall } from "../../components/Ball";
 import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { getSanityContent } from "../../lib/getSanityContent";
+import { getSanityContent } from "../../lib/sanityUtil";
 
 export async function getStaticPaths() {
   const data = await getSanityContent({

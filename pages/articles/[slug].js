@@ -27,7 +27,7 @@ import { siteConfig } from "configs/site";
 import { useShare } from "../../hooks/share";
 import { MDXComponents } from "../../lib/articles";
 import { SiteFooter } from "../../components/SiteFooter";
-import { getSanityContent } from "../../lib/getSanityContent";
+import { getSanityContent } from "../../lib/sanityUtil";
 
 const DiscordIcon = (props) => (
   <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
