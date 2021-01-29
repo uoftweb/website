@@ -95,7 +95,7 @@ function ProjectPageHeader() {
             </Button>
 
             <Text color="brand.300" fontSize="xs">
-              Applications close <strong>January 25th</strong> and will be
+              Applications close <strong>January 30th</strong> and will be
               considered on a rolling basis
             </Text>
           </Stack>
