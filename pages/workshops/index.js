@@ -7,7 +7,7 @@ import { PageHeader } from "../../components/PageHeader";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { WorkshopCard } from "../../components/WorkshopCard";
-import { getSanityContent } from "../../lib/getSanityContent";
+import { getSanityContent } from "../../lib/sanityUtil";
 
 export async function getStaticProps() {
   const data = await getSanityContent({

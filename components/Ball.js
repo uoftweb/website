@@ -45,3 +45,16 @@ export function TealBall(props) {
   );
   return <Ball bgImage={bgImage} {...props} />;
 }
+
+export function GlowingTealBall(props) {
+  const bgImage =
+    "radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(225deg, #C6FFDD 0%, #62CF8E 100%);";
+  return (
+    <Ball
+      bgImage={bgImage}
+      boxShadow={"0 0 12px #6BE99D"}
+      style={{ mixBlendMode: "screen" }}
+      {...props}
+    />
+  );
+}

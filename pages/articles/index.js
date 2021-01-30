@@ -8,7 +8,7 @@ import { ArticleCard } from "../../components/ArticleCard";
 import { LargePageHeader } from "../../components/PageHeader";
 import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
-import { getSanityContent } from "../../lib/getSanityContent";
+import { getSanityContent } from "../../lib/sanityUtil";
 
 export async function getStaticProps() {
   const data = await getSanityContent({

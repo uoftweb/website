@@ -1,6 +1,7 @@
 export const features = {
   accounts: true,
   workshops: true,
-  projects: false,
+  projects: true,
   dashboard: false,
+  mentors: false,
 };
