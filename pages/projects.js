@@ -60,8 +60,8 @@ function ProjectPageHeader() {
           maxW={{ base: "full", lg: "md" }}
         >
           <Stack spacing="16px" align={{ base: "center", lg: "flex-start" }}>
-            <Badge variant="solid" colorScheme="accent">
-              Now Accepting Applications
+            <Badge variant="solid" colorScheme="yellow">
+              Applications Closed
             </Badge>
 
             <Heading
@@ -90,6 +90,7 @@ function ProjectPageHeader() {
               href="/projects/apply"
               target="_blank"
               rel="noopener noreferrer"
+              isDisabled
             >
               Apply Now
             </Button>
