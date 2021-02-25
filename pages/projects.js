@@ -5,12 +5,15 @@ import {
   Center,
   Heading,
   Stack,
+  HStack,
   Text,
   useColorModeValue,
   List,
   ListIcon,
   ListItem,
   Icon,
+  Grid,
+  Divider,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
@@ -23,6 +26,7 @@ import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { ProjectsTimeline } from "../components/ProjectsTimeline";
 import { features } from "../configs/features";
 import { getSanityContent, urlFor } from "../lib/sanityUtil";
+import GithubIcon from "../components/GithubIcon";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -355,6 +359,115 @@ function TimelineSection() {
   );
 }
 
+function ProjectCard({ name, description, highlight, githubRepo }) {
+  const maxChar = 100;
+  return (
+    <Stack
+      bg="white"
+      borderRadius="2xl"
+      boxShadow="lg"
+      letterSpacing="tight"
+      p={8}
+      spacing={6}
+    >
+      <HStack justify="space-between">
+        <Heading
+          as="h3"
+          color="brand.800"
+          fontWeight="semibold"
+          fontSize="3xl"
+          lineHeight="none"
+        >
+          {name}
+        </Heading>
+        {githubRepo && (
+          <a href={githubRepo} target="_blank" rel="noopener noreferrer">
+            <GithubIcon color="black" boxSize={12} />
+          </a>
+        )}
+      </HStack>
+      <Text
+        color="gray.700"
+        as="p"
+        flex="1"
+        fontSize="md"
+        fontWeight="medium"
+        maxH={24}
+        overflow="hidden"
+        position="relative"
+        _after={{
+          content: '""',
+          position: "absolute",
+          display: "block",
+          bottom: 0,
+          left: 0,
+          width: "full",
+          height: 12,
+          bgGradient: "linear(to-b, whiteAlpha.50, whiteAlpha.900)",
+        }}
+      >
+        {description}
+      </Text>
+      <Text color="brand.500" fontWeight="semibold">
+        {highlight}
+      </Text>
+    </Stack>
+  );
+}
+
+function CurrentProjects() {
+  const bg = useColorModeValue("brand.50", "brand.800");
+  const color = useColorModeValue("brand.600", "brand.50");
+
+  return (
+    <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
+      <Stack
+        spacing={{ base: 8, lg: 16 }}
+        maxW="80rem"
+        mx="auto"
+        px={3}
+        justify={{ base: "center", lg: "flex-start" }}
+      >
+        <Heading>Current Projects</Heading>
+
+        <Divider />
+
+        <Box w="full" overflowX="auto" marginX="auto" py={4}>
+          <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={12}>
+            <ProjectCard name="Team A" description="join us"></ProjectCard>
+            <ProjectCard
+              name="Team A"
+              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
+              highlight="Looking for Developers"
+            ></ProjectCard>
+
+            <ProjectCard
+              name="Team A"
+              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
+              highlight="Team Full"
+            ></ProjectCard>
+            <ProjectCard
+              name="Team A"
+              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
+              highlight="Team: 3/4"
+            ></ProjectCard>
+            <ProjectCard
+              name="Team A"
+              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
+              highlight="Hiring now!"
+            ></ProjectCard>
+            <ProjectCard
+              name="Team A"
+              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
+              highlight="Hiring now!"
+            ></ProjectCard>
+          </Grid>
+        </Box>
+      </Stack>
+    </Box>
+  );
+}
+
 export default function ProjectsPage({ mentors }) {
   return (
     <>
@@ -367,6 +480,8 @@ export default function ProjectsPage({ mentors }) {
       <MentorSection mentors={mentors} />
 
       <TimelineSection />
+
+      <CurrentProjects />
 
       <SiteFooter />
     </>
