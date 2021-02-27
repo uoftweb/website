@@ -360,7 +360,6 @@ function TimelineSection() {
 }
 
 function ProjectCard({ name, description, highlight, githubRepo }) {
-  const maxChar = 100;
   return (
     <Stack
       bg="white"
@@ -434,33 +433,38 @@ function CurrentProjects() {
 
         <Box w="full" overflowX="auto" marginX="auto" py={4}>
           <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={12}>
-            <ProjectCard name="Team A" description="join us"></ProjectCard>
+            <ProjectCard name="Team A" description="join us" />
             <ProjectCard
               name="Team A"
               description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
               highlight="Looking for Developers"
-            ></ProjectCard>
+              githubRepo="#"
+            />
 
             <ProjectCard
               name="Team A"
               description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
               highlight="Team Full"
-            ></ProjectCard>
+              githubRepo="#"
+            />
             <ProjectCard
               name="Team A"
               description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
               highlight="Team: 3/4"
-            ></ProjectCard>
+              githubRepo="#"
+            />
             <ProjectCard
               name="Team A"
               description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
               highlight="Hiring now!"
-            ></ProjectCard>
+              githubRepo="#"
+            />
             <ProjectCard
               name="Team A"
               description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
               highlight="Hiring now!"
-            ></ProjectCard>
+              githubRepo="#"
+            />
           </Grid>
         </Box>
       </Stack>

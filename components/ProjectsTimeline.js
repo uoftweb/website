@@ -4,9 +4,10 @@ export function ProjectsTimeline() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
+      width="1194"
       height="222"
-      viewBox="0 0 1194 222"
       fill="none"
+      viewBox="0 0 1194 222"
     >
       <path
         fill="#384EC0"
@@ -20,7 +21,6 @@ export function ProjectsTimeline() {
       ></path>
       <path
         stroke="#D6E0F3"
-        strokeDasharray="10 20"
         strokeLinecap="round"
         strokeWidth="5"
         d="M267.5 30.548L370.5 30.548"
@@ -57,7 +57,12 @@ export function ProjectsTimeline() {
         <circle cx="43" cy="30.048" r="22" fill="url(#paint0_linear)"></circle>
         <circle cx="43" cy="30.048" r="22" fill="url(#paint1_radial)"></circle>
       </g>
+      <g filter="url(#filter1_d)">
+        <circle cx="227" cy="30.048" r="22" fill="url(#paint2_linear)"></circle>
+        <circle cx="227" cy="30.048" r="22" fill="url(#paint3_radial)"></circle>
+      </g>
       <motion.g
+        filter="url(#filter2_d)"
         initial={{ scale: 0.85 }}
         animate={{ scale: 1.1 }}
         transition={{
@@ -66,21 +71,10 @@ export function ProjectsTimeline() {
           duration: 1,
           ease: "linear",
         }}
-        filter="url(#filter1_d)"
       >
-        <circle cx="227" cy="30.048" r="22" fill="url(#paint2_linear)"></circle>
-        <circle cx="227" cy="30.048" r="22" fill="url(#paint3_radial)"></circle>
+        <circle cx="411" cy="30.048" r="22" fill="url(#paint4_linear)"></circle>
+        <circle cx="411" cy="30.048" r="22" fill="url(#paint5_radial)"></circle>
       </motion.g>
-      <circle
-        cx="411"
-        cy="30.048"
-        r="22"
-        stroke="#D6E0F3"
-        strokeDasharray="4 14"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="5"
-      ></circle>
       <circle
         cx="595"
         cy="30.048"
@@ -185,6 +179,33 @@ export function ProjectsTimeline() {
             result="shape"
           ></feBlend>
         </filter>
+        <filter
+          id="filter2_d"
+          width="60"
+          height="60"
+          x="381"
+          y="0.048"
+          colorInterpolationFilters="sRGB"
+          filterUnits="userSpaceOnUse"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          ></feColorMatrix>
+          <feOffset></feOffset>
+          <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+          <feColorMatrix values="0 0 0 0 0.129412 0 0 0 0 0.419608 0 0 0 0 1 0 0 0 1 0"></feColorMatrix>
+          <feBlend
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow"
+          ></feBlend>
+          <feBlend
+            in="SourceGraphic"
+            in2="effect1_dropShadow"
+            result="shape"
+          ></feBlend>
+        </filter>
         <linearGradient
           id="paint0_linear"
           x1="56.588"
@@ -226,6 +247,29 @@ export function ProjectsTimeline() {
           cy="0"
           r="1"
           gradientTransform="matrix(0 22 -22 0 227 30.048)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
+          <stop offset="1" stopColor="#ABC7FF" stopOpacity="0.26"></stop>
+        </radialGradient>
+        <linearGradient
+          id="paint4_linear"
+          x1="424.588"
+          x2="398.827"
+          y1="13.143"
+          y2="47.923"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#739BEC"></stop>
+          <stop offset="0.208" stopColor="#216BFF"></stop>
+          <stop offset="1" stopColor="#020F53"></stop>
+        </linearGradient>
+        <radialGradient
+          id="paint5_radial"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientTransform="matrix(0 22 -22 0 411 30.048)"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
