@@ -19,14 +19,14 @@ import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 import { motion } from "framer-motion";
 
-import { Container } from "../components/Container";
-import { SiteFooter } from "../components/SiteFooter";
-import { BlueBall, GlowingTealBall } from "../components/Ball";
-import { SiteNavigationBar } from "../components/SiteNavigationBar";
-import { ProjectsTimeline } from "../components/ProjectsTimeline";
-import { features } from "../configs/features";
-import { getSanityContent, urlFor } from "../lib/sanityUtil";
-import GithubIcon from "../components/GithubIcon";
+import { Container } from "../../components/Container";
+import { SiteFooter } from "../../components/SiteFooter";
+import { BlueBall, GlowingTealBall } from "../../components/Ball";
+import { SiteNavigationBar } from "../../components/SiteNavigationBar";
+import { ProjectsTimeline } from "../../components/ProjectsTimeline";
+import { features } from "../../configs/features";
+import { getSanityContent, urlFor } from "../../lib/sanityUtil";
+import GithubIcon from "../../components/GithubIcon";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
