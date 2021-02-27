@@ -1,8 +1,5 @@
 import {
-  Badge,
   Box,
-  Button,
-  ButtonGroup,
   Heading,
   HStack,
   Link,
@@ -12,109 +9,76 @@ import {
 } from "@chakra-ui/react";
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";
-import { subWeeks, isWithinInterval } from "date-fns";
-import Confetti from "react-dom-confetti";
-import { signIn, useSession } from "next-auth/client";
-import { useRouter } from "next/router";
-import { gql, useMutation, useQuery } from "@apollo/client";
-import { ArrowBackIcon, ArrowUpIcon, StarIcon } from "@chakra-ui/icons";
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { NextSeo } from "next-seo";
-import readingTime from "reading-time";
 import RemarkSlugPlugin from "remark-slug";
 import renderToString from "next-mdx-remote/render-to-string";
 
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { siteConfig } from "configs/site";
-import { useShare } from "../../hooks/share";
 import { MDXComponents } from "../../lib/articles";
 import { SiteFooter } from "../../components/SiteFooter";
 import { getSanityContent } from "../../lib/sanityUtil";
 import GithubIcon from "../../components/GithubIcon";
 
-// export async function getStaticPaths() {
-//   const data = await getSanityContent({
-//     query: `
-//       query AllPublishedArticles {
-//         allArticle(
-//           where: { publishedAt: { gt: "0000-01-01T00:00:00.000Z" } }
-//           sort: { publishedAt: ASC }
-//         ) {
-//           slug {
-//             current
-//           }
-//         }
-//       }
-//     `,
-//   });
-//   const paths = data.allArticle.map((a) => ({
-//     params: { slug: a.slug.current },
-//   }));
-//   return {
-//     fallback: false,
-//     paths,
-//   };
-// }
+export async function getStaticPaths() {
+  const data = await getSanityContent({
+    query: `
+      query AllProjects {
+        allProject {
+          slug {
+            current
+          }
+        }
+      }
+    `,
+  });
+  const paths = data.allProject.map((a) => ({
+    params: { slug: a.slug.current },
+  }));
+  return {
+    fallback: false,
+    paths,
+  };
+}
 
-// export async function getStaticProps({ params }) {
-//   const data = await getSanityContent({
-//     query: `
-//       query ArticleBySlug($slug: String!) {
-//         allArticle(where: { slug: { current: {eq: $slug }}}) {
-//           title
-//           excerpt
-//           publishedAt
-//           slug {
-//             current
-//           }
-//           author {
-//             name
-//           }
-//           body
-//         }
-//       }
-//     `,
-//     variables: {
-//       slug: params.slug,
-//     },
-//   });
-//   const _article = data.allArticle[0];
-//   const mdxSource = await renderToString(_article.body, {
-//     components: MDXComponents,
-//     mdxOptions: { remarkPlugins: [RemarkSlugPlugin] },
-//   });
-//   const article = {
-//     ..._article,
-//     slug: _article.slug.current,
-//     author: _article.author.name,
-//     source: mdxSource,
-//     readingTimeStats: readingTime(_article.body),
-//   };
-//   return {
-//     props: { article },
-//   };
-// }
+export async function getStaticProps({ params }) {
+  const data = await getSanityContent({
+    query: `
+      query ProjectBySlug($slug: String!) {
+        allProject(where: { slug: { current: {eq: $slug }}}) {
+          name
+          excerpt
+          githubUrl
+          slug {
+            current
+          }
+          body
+        }
+      }
+    `,
+    variables: {
+      slug: params.slug,
+    },
+  });
+  const _project = data.allProject[0];
+  const mdxSource = await renderToString(_project.body, {
+    components: MDXComponents,
+    mdxOptions: { remarkPlugins: [RemarkSlugPlugin] },
+  });
+  const project = {
+    ..._project,
+    slug: _project.slug.current,
+    source: mdxSource,
+  };
+  return {
+    props: { project },
+  };
+}
 
-// const GET_ARTICLE = gql`
-//   query GetArticle($slug: String) {
-//     article(where: { slug: $slug }) {
-//       slug
-//       stargazers {
-//         id
-//       }
-//     }
-//   }
-// `;
-
-export default function ProjectDetailsPage() {
-  const router = useRouter();
-  const { slug } = router.query;
-  // const { data } = useQuery(GET_ARTICLE, { variables: { slug } });
-  const [session] = useSession();
-  // const content = hydrate(source, { components: MDXComponents });
-  const title = "Project Name"
-  const excerpt = "BLAH"
-  const content = "TODO: replace me"
-  const githubRepo = "#"
+export default function ProjectDetailsPage({
+  project: { name: title, githubUrl, excerpt, source },
+}) {
+  const content = hydrate(source, { components: MDXComponents });
   const headerBg = useColorModeValue("gray.50", "gray.900");
   const headerColor = useColorModeValue("gray.900", "gray.100");
 
@@ -129,25 +93,23 @@ export default function ProjectDetailsPage() {
           <Box maxW="xl" mx="auto" px={3} py={5}>
             <Stack spacing={4}>
               <Box mb={2}>
-                <NextLink href="/articles" passHref>
+                <NextLink href="/projects" passHref>
                   <Link>
                     <ArrowBackIcon />
                     Back
                   </Link>
                 </NextLink>
               </Box>
-              <Heading>
-                {title}
-              </Heading>
+              <Heading>{title}</Heading>
               <HStack spacing={6}>
-              {githubRepo && (
-                <a href={githubRepo} target="_blank" rel="noopener noreferrer">
-                  <GithubIcon color="black" boxSize={8} />
-                </a>
-              )}
-              <Text as="span" fontWeight="bold">
-                {["React", "Django", "Ruby on Rails"].join(" • ")}
-              </Text>
+                {githubUrl && (
+                  <a href={githubUrl} target="_blank" rel="noopener noreferrer">
+                    <GithubIcon color="black" boxSize={8} />
+                  </a>
+                )}
+                <Text as="span" fontWeight="bold">
+                  {["React", "Django", "Ruby on Rails"].join(" • ")}
+                </Text>
               </HStack>
             </Stack>
           </Box>

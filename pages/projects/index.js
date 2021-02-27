@@ -27,6 +27,7 @@ import { ProjectsTimeline } from "../../components/ProjectsTimeline";
 import { features } from "../../configs/features";
 import { getSanityContent, urlFor } from "../../lib/sanityUtil";
 import GithubIcon from "../../components/GithubIcon";
+import Link from "next/link";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -238,7 +239,26 @@ const textVariants = {
 };
 
 export async function getStaticProps() {
-  const data = await getSanityContent({
+  const projectsData = await getSanityContent({
+    query: `
+      query AllProjects {
+        allProject {
+          name
+          excerpt
+          highlight
+          slug {
+            current
+          }
+        }
+      }
+    `,
+  });
+  const projects = projectsData.allProject.map((p) => ({
+    ...p,
+    slug: p.slug.current,
+  }));
+
+  const mentorsData = await getSanityContent({
     query: `
       query MentorSkills {
         allMentor {
@@ -266,11 +286,11 @@ export async function getStaticProps() {
       }
     `,
   });
-  const mentorsData = data.allMentor.map((m) => ({
+  const mentors = mentorsData.allMentor.map((m) => ({
     ...m,
     thumbnailUrl: urlFor(m.image).url(),
   }));
-  return { props: { mentors: mentorsData } };
+  return { props: { mentors, projects } };
 }
 
 function MentorSection({ mentors }) {
@@ -359,7 +379,7 @@ function TimelineSection() {
   );
 }
 
-function ProjectCard({ name, description, highlight, githubRepo }) {
+function ProjectCard({ name, excerpt, highlight }) {
   return (
     <Stack
       bg="white"
@@ -368,29 +388,24 @@ function ProjectCard({ name, description, highlight, githubRepo }) {
       letterSpacing="tight"
       p={8}
       spacing={6}
+      maxW="md"
     >
-      <HStack justify="space-between">
-        <Heading
-          as="h3"
-          color="brand.800"
-          fontWeight="semibold"
-          fontSize="3xl"
-          lineHeight="none"
-        >
-          {name}
-        </Heading>
-        {githubRepo && (
-          <a href={githubRepo} target="_blank" rel="noopener noreferrer">
-            <GithubIcon color="black" boxSize={12} />
-          </a>
-        )}
-      </HStack>
+      <Heading
+        as="h3"
+        color="brand.800"
+        fontWeight="semibold"
+        fontSize="3xl"
+        lineHeight="none"
+      >
+        {name}
+      </Heading>
       <Text
         color="gray.700"
         as="p"
         flex="1"
         fontSize="md"
         fontWeight="medium"
+        minH={12}
         maxH={24}
         overflow="hidden"
         position="relative"
@@ -405,7 +420,7 @@ function ProjectCard({ name, description, highlight, githubRepo }) {
           bgGradient: "linear(to-b, whiteAlpha.50, whiteAlpha.900)",
         }}
       >
-        {description}
+        {excerpt}
       </Text>
       <Text color="brand.500" fontWeight="semibold">
         {highlight}
@@ -414,7 +429,7 @@ function ProjectCard({ name, description, highlight, githubRepo }) {
   );
 }
 
-function CurrentProjects() {
+function CurrentProjects({ projects }) {
   const bg = useColorModeValue("brand.50", "brand.800");
   const color = useColorModeValue("brand.600", "brand.50");
 
@@ -429,42 +444,21 @@ function CurrentProjects() {
       >
         <Heading>Current Projects</Heading>
 
-        <Divider />
-
         <Box w="full" overflowX="auto" marginX="auto" py={4}>
           <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={12}>
-            <ProjectCard name="Team A" description="join us" />
-            <ProjectCard
-              name="Team A"
-              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
-              highlight="Looking for Developers"
-              githubRepo="#"
-            />
-
-            <ProjectCard
-              name="Team A"
-              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
-              highlight="Team Full"
-              githubRepo="#"
-            />
-            <ProjectCard
-              name="Team A"
-              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
-              highlight="Team: 3/4"
-              githubRepo="#"
-            />
-            <ProjectCard
-              name="Team A"
-              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
-              highlight="Hiring now!"
-              githubRepo="#"
-            />
-            <ProjectCard
-              name="Team A"
-              description="From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months From idea to MVP in three months"
-              highlight="Hiring now!"
-              githubRepo="#"
-            />
+            {projects.map((p) => (
+              <Link key={p.slug} href={`/projects/${p.slug}`}>
+                <a>
+                  <motion.div whileHover={{ y: -8 }}>
+                    <ProjectCard
+                      name={p.name}
+                      excerpt={p.excerpt}
+                      highlight={p.highlight}
+                    />
+                  </motion.div>
+                </a>
+              </Link>
+            ))}
           </Grid>
         </Box>
       </Stack>
@@ -472,7 +466,7 @@ function CurrentProjects() {
   );
 }
 
-export default function ProjectsPage({ mentors }) {
+export default function ProjectsPage({ mentors, projects }) {
   return (
     <>
       <NextSeo title="Projects" />
@@ -485,7 +479,7 @@ export default function ProjectsPage({ mentors }) {
 
       <TimelineSection />
 
-      <CurrentProjects />
+      <CurrentProjects projects={projects} />
 
       <SiteFooter />
     </>
