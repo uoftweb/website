@@ -8,7 +8,7 @@
   "scripts": {
     "start": "sanity start",
     "build": "sanity build",
-    "deploy": "sanity deploy",
+    "deploy": "sanity deploy --no-minify",
     "graphql-deploy": "sanity graphql deploy"
   },
   "keywords": [
