@@ -53,6 +53,7 @@ export async function getStaticProps({ params }) {
             current
           }
           body
+          techStack
         }
       }
     `,
@@ -76,7 +77,7 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectDetailsPage({
-  project: { name: title, githubUrl, excerpt, source },
+  project: { name: title, githubUrl, excerpt, source, techStack },
 }) {
   const content = hydrate(source, { components: MDXComponents });
   const headerBg = useColorModeValue("gray.50", "gray.900");
@@ -93,7 +94,7 @@ export default function ProjectDetailsPage({
           <Box maxW="xl" mx="auto" px={3} py={5}>
             <Stack spacing={4}>
               <Box mb={2}>
-                <NextLink href="/projects" passHref>
+                <NextLink href="/projects#current-projects" passHref>
                   <Link>
                     <ArrowBackIcon />
                     Back
@@ -107,9 +108,11 @@ export default function ProjectDetailsPage({
                     <GithubIcon color="black" boxSize={8} />
                   </a>
                 )}
-                <Text as="span" fontWeight="bold">
-                  {["React", "Django", "Ruby on Rails"].join(" • ")}
-                </Text>
+                {techStack && (
+                  <Text as="span" fontWeight="bold">
+                    {techStack?.join(" • ")}
+                  </Text>
+                )}
               </HStack>
             </Stack>
           </Box>

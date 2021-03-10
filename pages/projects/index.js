@@ -298,7 +298,7 @@ function MentorSection({ mentors }) {
   const color = useColorModeValue("brand.600", "brand.50");
 
   return (
-    <Box as="section" py={16} bg={bg} color={color}>
+    <Box as="section" id="mentors" py={16} bg={bg} color={color}>
       <Stack
         as={motion.div}
         variants={{
@@ -434,7 +434,7 @@ function CurrentProjects({ projects }) {
   const color = useColorModeValue("brand.600", "brand.50");
 
   return (
-    <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
+    <Box as="section" id="current-projects" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
       <Stack
         spacing={{ base: 8, lg: 16 }}
         maxW="80rem"
