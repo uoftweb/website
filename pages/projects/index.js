@@ -14,10 +14,11 @@ import {
   Icon,
   Grid,
   Divider,
+  VStack,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 
 import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
@@ -28,6 +29,7 @@ import { features } from "../../configs/features";
 import { getSanityContent, urlFor } from "../../lib/sanityUtil";
 import GithubIcon from "../../components/GithubIcon";
 import Link from "next/link";
+import { useState } from "react";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
@@ -159,72 +161,136 @@ function ProjectPageHeader() {
   );
 }
 
-function MentorCard({ src, name, skills }) {
+function MentorCard({ index, src, name, skills, onDismiss }) {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const squaredDistance = useTransform(
+    [x, y],
+    ([latestX, latestY]) => latestX * latestX + latestY * latestY
+  );
+  const opacity = useTransform(squaredDistance, [0, 20000], [1, 0.2]);
+
   return (
-    <Stack
-      bg="white"
+    <Box
+      as={motion.div}
+      drag
+      dragMomentum
+      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+      onDragEnd={(_, info) => {
+        const { x, y } = info.point;
+        const squaredDistance = x * x + y * y;
+        if (squaredDistance > 10000) {
+          onDismiss(index);
+        }
+      }}
+      variants={{
+        initial: { opacity: 0, y: -100 },
+        animate: {
+          opacity: 1,
+          y: 0,
+          transition: {
+            type: "keyframes",
+            ease: "easeInOut",
+          },
+        },
+      }}
+      style={{
+        rotate: `${index % 2 === 0 ? "-" : ""}${3 * index}deg`,
+        scale: 1,
+        x,
+        y,
+        opacity,
+      }}
+      whileHover={{ rotate: "0deg" }}
+      whileDrag={{ rotate: "0deg" }}
+      whileTap={{ scale: 0.97 }}
+      position="absolute"
+      top={0}
+      left={0}
+      zIndex={index + 1}
+    >
+      <Stack
+        bg="white"
+        color="brand.600"
+        borderRadius="2xl"
+        boxShadow="lg"
+        fontSize="xl"
+        letterSpacing="tight"
+        w="100%"
+        h="100%"
+        overflow="hidden"
+        minW="sm"
+      >
+        {src ? (
+          <Box as="img" src={src} userSelect="none" pointerEvents="none" />
+        ) : (
+          <Box bg="gray.300" h="xs" />
+        )}
+        <Stack p={8} spacing={6}>
+          <Heading
+            as="h3"
+            fontWeight="semibold"
+            fontSize="3xl"
+            lineHeight="none"
+          >
+            {name}
+          </Heading>
+          <List as="ul" pl={6} spacing={2}>
+            {skills.map((skill) => (
+              <ListItem key={skill}>
+                <ListIcon as={CircleIcon} boxSize={4} mb={1} />
+                {skill}
+              </ListItem>
+            ))}
+          </List>
+        </Stack>
+      </Stack>
+    </Box>
+  );
+}
+
+function LastCard() {
+  return (
+    <Center
+      position={"relative"}
+      top={0}
+      left={0}
       color="brand.600"
       borderRadius="2xl"
-      boxShadow="lg"
+      borderWidth={4}
+      borderStyle="dashed"
+      borderColor="brand.100"
       fontSize="xl"
       letterSpacing="tight"
       w="100%"
       h="100%"
       overflow="hidden"
       minW="sm"
+      minH="xl"
     >
-      <Box as="img" src={src} userSelect="none" pointerEvents="none" />
-      <Stack p={8} spacing={6}>
-        <Heading as="h3" fontWeight="semibold" fontSize="3xl" lineHeight="none">
-          {name}
-        </Heading>
-        <List as="ul" pl={6} spacing={2}>
-          {skills.map((skill) => (
-            <ListItem key={skill}>
-              <ListIcon as={CircleIcon} boxSize={4} mb={1} />
-              {skill}
-            </ListItem>
-          ))}
-        </List>
-      </Stack>
-    </Stack>
+      <VStack>
+        <Heading size="md">That&apos;s all folks!</Heading>
+        <Text>Click Reset to go through them again</Text>
+      </VStack>
+    </Center>
   );
 }
 
-function MentorCardList({ mentors }) {
+function MentorCardList({ mentors, onDismiss }) {
   return (
     <Box position="relative" w="100%">
       {mentors.map(({ thumbnailUrl, name, skills }, i) => (
-        <Box
+        <MentorCard
           key={name}
-          as={motion.div}
-          drag
-          dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-          variants={{
-            initial: { opacity: 0, y: -100 },
-            animate: {
-              opacity: 1,
-              y: 0,
-              transition: {
-                type: "keyframes",
-                ease: "easeInOut",
-              },
-            },
-          }}
-          style={{
-            rotate: `${i % 2 === 0 ? "-" : ""}${3 * i}deg`,
-            scale: 1,
-          }}
-          whileHover={{ rotate: "0deg" }}
-          whileTap={{ scale: 0.97 }}
-          position={i > 0 ? "absolute" : "relative"}
-          top={0}
-          left={0}
-          zIndex={i}
-        >
-          <MentorCard src={thumbnailUrl} name={name} skills={skills} />
-        </Box>
+          index={i}
+          src={thumbnailUrl}
+          name={name}
+          skills={skills}
+          onDismiss={onDismiss}
+        />
       ))}
+      <LastCard />
     </Box>
   );
 }
@@ -293,9 +359,15 @@ export async function getStaticProps() {
   return { props: { mentors, projects } };
 }
 
-function MentorSection({ mentors }) {
+function MentorSection({ mentors: allMentors }) {
+  const [mentors, setMentors] = useState(allMentors);
   const bg = useColorModeValue("brand.50", "brand.600");
   const color = useColorModeValue("brand.600", "brand.50");
+
+  function handleDismiss(index) {
+    const newMentors = mentors.filter((_, i) => i !== index);
+    setMentors(newMentors);
+  }
 
   return (
     <Box as="section" id="mentors" py={16} bg={bg} color={color}>
@@ -313,15 +385,17 @@ function MentorSection({ mentors }) {
         initial="initial"
         animate="animate"
         direction="row"
-        spacing={{ base: 0, lg: 16 }}
+        spacing={{ base: 0, lg: 16, xl: 32 }}
         maxW="80rem"
         mx="auto"
         px={3}
         align="center"
         justify={{ base: "center", lg: "flex-start" }}
       >
-        <Box maxW="md" p={8} display={{ base: "none", lg: "block" }}>
-          {mentors && <MentorCardList mentors={mentors} />}
+        <Box w="md" p={8} display={{ base: "none", lg: "block" }}>
+          {mentors && (
+            <MentorCardList mentors={mentors} onDismiss={handleDismiss} />
+          )}
         </Box>
 
         <Stack
@@ -340,15 +414,33 @@ function MentorSection({ mentors }) {
               the various hoops of product development.
             </Text>
           </Stack>
-          {features.mentors && (
-            <Stack isInline>
+          <Stack isInline>
+            {mentors.length > 0 && (
+              <Button
+                variant="ghost"
+                colorScheme="brand"
+                onClick={() => handleDismiss(mentors.length - 1)}
+              >
+                Next
+              </Button>
+            )}
+            {mentors.length !== allMentors.length && (
+              <Button
+                variant="ghost"
+                colorScheme="brand"
+                onClick={() => setMentors(allMentors)}
+              >
+                Reset
+              </Button>
+            )}
+            {features.mentors && (
               <NextLink href="/workshops" passHref>
                 <Button as="a" size="lg" variant="link" colorScheme="brand">
                   Meet the Team
                 </Button>
               </NextLink>
-            </Stack>
-          )}
+            )}
+          </Stack>
         </Stack>
       </Stack>
     </Box>
@@ -434,7 +526,13 @@ function CurrentProjects({ projects }) {
   const color = useColorModeValue("brand.600", "brand.50");
 
   return (
-    <Box as="section" id="current-projects" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
+    <Box
+      as="section"
+      id="current-projects"
+      py={{ base: 16, lg: 32 }}
+      bg={bg}
+      color={color}
+    >
       <Stack
         spacing={{ base: 8, lg: 16 }}
         maxW="80rem"
