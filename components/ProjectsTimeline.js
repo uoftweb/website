@@ -4,10 +4,10 @@ export function ProjectsTimeline() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="1194"
+      width="1206"
       height="222"
       fill="none"
-      viewBox="0 0 1194 222"
+      viewBox="0 0 1206 222"
     >
       <path
         fill="#384EC0"
@@ -27,7 +27,6 @@ export function ProjectsTimeline() {
       ></path>
       <path
         stroke="#D6E0F3"
-        strokeDasharray="10 20"
         strokeLinecap="round"
         strokeWidth="5"
         d="M451.5 30.548L554.5 30.548"
@@ -61,8 +60,13 @@ export function ProjectsTimeline() {
         <circle cx="227" cy="30.048" r="22" fill="url(#paint2_linear)"></circle>
         <circle cx="227" cy="30.048" r="22" fill="url(#paint3_radial)"></circle>
       </g>
+      <g filter="url(#filter2_d)">
+        <circle cx="411" cy="30.048" r="22" fill="url(#paint4_linear)"></circle>
+        <circle cx="411" cy="30.048" r="22" fill="url(#paint5_radial)"></circle>
+      </g>
+
       <motion.g
-        filter="url(#filter2_d)"
+        filter="url(#filter3_d)"
         initial={{ scale: 0.85 }}
         animate={{ scale: 1.1 }}
         transition={{
@@ -72,19 +76,10 @@ export function ProjectsTimeline() {
           ease: "linear",
         }}
       >
-        <circle cx="411" cy="30.048" r="22" fill="url(#paint4_linear)"></circle>
-        <circle cx="411" cy="30.048" r="22" fill="url(#paint5_radial)"></circle>
+        <circle cx="595" cy="30.048" r="22" fill="url(#paint6_linear)"></circle>
+        <circle cx="595" cy="30.048" r="22" fill="url(#paint7_radial)"></circle>
       </motion.g>
-      <circle
-        cx="595"
-        cy="30.048"
-        r="22"
-        stroke="#D6E0F3"
-        strokeDasharray="4 14"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="5"
-      ></circle>
+
       <circle
         cx="779"
         cy="30.048"
@@ -117,12 +112,12 @@ export function ProjectsTimeline() {
       ></circle>
       <path
         fill="#D6E0F3"
-        d="M319.05 216.762h1.845v-4.325h4.23v-1.546h-4.23v-2.765h4.678v-1.546h-6.523v10.182zm8.203 0h6.662v-1.546h-4.817v-2.779h4.434v-1.546h-4.434v-2.765h4.777v-1.546h-6.622v10.182zm8.504 0h4.122c2.331 0 3.475-1.188 3.475-2.774 0-1.541-1.094-2.446-2.178-2.501v-.099c.995-.234 1.78-.93 1.78-2.168 0-1.516-1.094-2.64-3.301-2.64h-3.898v10.182zm1.845-1.541v-2.983h2.033c1.139 0 1.844.696 1.844 1.606 0 .81-.556 1.377-1.894 1.377h-1.983zm0-4.311v-2.809h1.864c1.084 0 1.646.572 1.646 1.358 0 .895-.726 1.451-1.686 1.451h-1.824zM858.042 206.58v10.182h1.77v-7.01h.095l2.814 6.98h1.322l2.814-6.965h.094v6.995h1.77V206.58h-2.257l-3.023 7.378h-.119l-3.023-7.378h-2.257zm13.995 10.182l.841-2.511h3.828l.845 2.511h1.969l-3.59-10.182h-2.277l-3.584 10.182h1.968zm1.338-3.992l1.377-4.102h.079l1.378 4.102h-2.834zm7.486 3.992h1.844v-3.729h1.879l1.999 3.729h2.058l-2.202-4.037c1.198-.482 1.829-1.506 1.829-2.888 0-1.944-1.252-3.257-3.589-3.257h-3.818v10.182zm1.844-5.26v-3.381h1.691c1.377 0 1.993.632 1.993 1.716 0 1.083-.616 1.665-1.984 1.665h-1.7z"
+        d="M268.05 216.762h1.845v-4.325h4.23v-1.546h-4.23v-2.765h4.678v-1.546h-6.523v10.182zm8.203 0h6.662v-1.546h-4.817v-2.779h4.434v-1.546h-4.434v-2.765h4.777v-1.546h-6.622v10.182zm8.504 0h4.122c2.331 0 3.475-1.188 3.475-2.774 0-1.541-1.094-2.446-2.178-2.501v-.099c.995-.234 1.78-.93 1.78-2.168 0-1.516-1.094-2.64-3.301-2.64h-3.898v10.182zm1.845-1.541v-2.983h2.033c1.139 0 1.844.696 1.844 1.606 0 .81-.556 1.377-1.894 1.377h-1.983zm0-4.311v-2.809h1.864c1.084 0 1.646.572 1.646 1.358 0 .895-.726 1.451-1.686 1.451h-1.824zM488.042 206.58v10.182h1.77v-7.01h.095l2.814 6.98h1.322l2.814-6.965h.094v6.995h1.77V206.58h-2.257l-3.023 7.378h-.119l-3.023-7.378h-2.257zm13.995 10.182l.841-2.511h3.828l.845 2.511h1.969l-3.59-10.182h-2.277l-3.584 10.182h1.968zm1.338-3.992l1.377-4.102h.079l1.378 4.102h-2.834zm7.486 3.992h1.844v-3.729h1.879l1.999 3.729h2.058l-2.202-4.037c1.198-.482 1.829-1.506 1.829-2.888 0-1.944-1.252-3.257-3.589-3.257h-3.818v10.182zm1.844-5.26v-3.381h1.691c1.377 0 1.993.632 1.993 1.716 0 1.083-.616 1.665-1.984 1.665h-1.7zM766.689 216.762l.84-2.511h3.828l.845 2.511h1.969l-3.59-10.182h-2.276l-3.585 10.182h1.969zm1.337-3.992l1.377-4.102h.08l1.377 4.102h-2.834zm7.486 3.992h1.845v-3.44h1.948c2.352 0 3.615-1.412 3.615-3.371 0-1.944-1.248-3.371-3.59-3.371h-3.818v10.182zm1.845-4.957v-3.684h1.69c1.382 0 1.993.746 1.993 1.83s-.611 1.854-1.983 1.854h-1.7zm7.165 4.957h1.844v-3.729h1.88l1.998 3.729h2.058l-2.202-4.037c1.198-.482 1.83-1.506 1.83-2.888 0-1.944-1.253-3.257-3.59-3.257h-3.818v10.182zm1.844-5.26v-3.381h1.691c1.377 0 1.993.632 1.993 1.716 0 1.083-.616 1.665-1.983 1.665h-1.701zM1175.19 206.58v10.182h1.77v-7.01h.09l2.81 6.98h1.33l2.81-6.965h.09v6.995h1.77V206.58h-2.25l-3.02 7.378h-.12l-3.03-7.378h-2.25zm13.99 10.182l.84-2.511h3.83l.84 2.511h1.97l-3.59-10.182h-2.27l-3.59 10.182h1.97zm1.34-3.992l1.38-4.102h.07l1.38 4.102h-2.83zm5.75-6.19l3.7 6.384v3.798h1.84v-3.798l3.71-6.384h-2.09l-2.49 4.504h-.1l-2.49-4.504h-2.08z"
       ></path>
       <path
         stroke="#D6E0F3"
         strokeWidth="2"
-        d="M3 176.048h327.5m860.5 0H873m0 0v13.714m0-13.714H330.5m0 0v13.714"
+        d="M3 176.048h276.5m225 0v13.714m0-13.714h-225m225 0H780m-500.5 0v13.714M780 176.048h411v13.714m-411-13.714v13.714"
       ></path>
       <defs>
         <filter
@@ -184,6 +179,33 @@ export function ProjectsTimeline() {
           width="60"
           height="60"
           x="381"
+          y="0.048"
+          colorInterpolationFilters="sRGB"
+          filterUnits="userSpaceOnUse"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          ></feColorMatrix>
+          <feOffset></feOffset>
+          <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+          <feColorMatrix values="0 0 0 0 0.129412 0 0 0 0 0.419608 0 0 0 0 1 0 0 0 1 0"></feColorMatrix>
+          <feBlend
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow"
+          ></feBlend>
+          <feBlend
+            in="SourceGraphic"
+            in2="effect1_dropShadow"
+            result="shape"
+          ></feBlend>
+        </filter>
+        <filter
+          id="filter3_d"
+          width="60"
+          height="60"
+          x="565"
           y="0.048"
           colorInterpolationFilters="sRGB"
           filterUnits="userSpaceOnUse"
@@ -270,6 +292,29 @@ export function ProjectsTimeline() {
           cy="0"
           r="1"
           gradientTransform="matrix(0 22 -22 0 411 30.048)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
+          <stop offset="1" stopColor="#ABC7FF" stopOpacity="0.26"></stop>
+        </radialGradient>
+        <linearGradient
+          id="paint6_linear"
+          x1="608.588"
+          x2="582.827"
+          y1="13.143"
+          y2="47.923"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#739BEC"></stop>
+          <stop offset="0.208" stopColor="#216BFF"></stop>
+          <stop offset="1" stopColor="#020F53"></stop>
+        </linearGradient>
+        <radialGradient
+          id="paint7_radial"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientTransform="matrix(0 22 -22 0 595 30.048)"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>

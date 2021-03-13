@@ -19,6 +19,8 @@ import {
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import Link from "next/link";
+import { useState } from "react";
 
 import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
@@ -27,9 +29,6 @@ import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { ProjectsTimeline } from "../../components/ProjectsTimeline";
 import { features } from "../../configs/features";
 import { getSanityContent, urlFor } from "../../lib/sanityUtil";
-import GithubIcon from "../../components/GithubIcon";
-import Link from "next/link";
-import { useState } from "react";
 
 const CircleIcon = (props) => (
   <Icon viewBox="0 0 72 72" {...props}>
