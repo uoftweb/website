@@ -33,14 +33,12 @@ export function ProjectsTimeline() {
       ></path>
       <path
         stroke="#D6E0F3"
-        strokeDasharray="10 20"
         strokeLinecap="round"
         strokeWidth="5"
         d="M635.5 30.548L738.5 30.548"
       ></path>
       <path
         stroke="#D6E0F3"
-        strokeDasharray="10 20"
         strokeLinecap="round"
         strokeWidth="5"
         d="M819.5 30.548L922.5 30.548"
@@ -64,9 +62,16 @@ export function ProjectsTimeline() {
         <circle cx="411" cy="30.048" r="22" fill="url(#paint4_linear)"></circle>
         <circle cx="411" cy="30.048" r="22" fill="url(#paint5_radial)"></circle>
       </g>
-
+      <g filter="url(#filter3_d)">
+        <circle cx="595" cy="30.048" r="22" fill="url(#paint6_linear)"></circle>
+        <circle cx="595" cy="30.048" r="22" fill="url(#paint7_radial)"></circle>
+      </g>
+      <g filter="url(#filter4_d)">
+        <circle cx="779" cy="30.048" r="22" fill="url(#paint8_linear)"></circle>
+        <circle cx="779" cy="30.048" r="22" fill="url(#paint9_radial)"></circle>
+      </g>
       <motion.g
-        filter="url(#filter3_d)"
+        filter="url(#filter5_d)"
         initial={{ scale: 0.85 }}
         animate={{ scale: 1.1 }}
         transition={{
@@ -76,30 +81,19 @@ export function ProjectsTimeline() {
           ease: "linear",
         }}
       >
-        <circle cx="595" cy="30.048" r="22" fill="url(#paint6_linear)"></circle>
-        <circle cx="595" cy="30.048" r="22" fill="url(#paint7_radial)"></circle>
+        <circle
+          cx="963"
+          cy="30.048"
+          r="22"
+          fill="url(#paint10_linear)"
+        ></circle>
+        <circle
+          cx="963"
+          cy="30.048"
+          r="22"
+          fill="url(#paint11_radial)"
+        ></circle>
       </motion.g>
-
-      <circle
-        cx="779"
-        cy="30.048"
-        r="22"
-        stroke="#D6E0F3"
-        strokeDasharray="4 14"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="5"
-      ></circle>
-      <circle
-        cx="963"
-        cy="30.048"
-        r="22"
-        stroke="#D6E0F3"
-        strokeDasharray="4 14"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="5"
-      ></circle>
       <circle
         cx="1147"
         cy="30.048"
@@ -228,6 +222,60 @@ export function ProjectsTimeline() {
             result="shape"
           ></feBlend>
         </filter>
+        <filter
+          id="filter4_d"
+          width="60"
+          height="60"
+          x="749"
+          y="0.048"
+          colorInterpolationFilters="sRGB"
+          filterUnits="userSpaceOnUse"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          ></feColorMatrix>
+          <feOffset></feOffset>
+          <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+          <feColorMatrix values="0 0 0 0 0.129412 0 0 0 0 0.419608 0 0 0 0 1 0 0 0 1 0"></feColorMatrix>
+          <feBlend
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow"
+          ></feBlend>
+          <feBlend
+            in="SourceGraphic"
+            in2="effect1_dropShadow"
+            result="shape"
+          ></feBlend>
+        </filter>
+        <filter
+          id="filter5_d"
+          width="60"
+          height="60"
+          x="933"
+          y="0.048"
+          colorInterpolationFilters="sRGB"
+          filterUnits="userSpaceOnUse"
+        >
+          <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
+          <feColorMatrix
+            in="SourceAlpha"
+            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          ></feColorMatrix>
+          <feOffset></feOffset>
+          <feGaussianBlur stdDeviation="4"></feGaussianBlur>
+          <feColorMatrix values="0 0 0 0 0.129412 0 0 0 0 0.419608 0 0 0 0 1 0 0 0 1 0"></feColorMatrix>
+          <feBlend
+            in2="BackgroundImageFix"
+            result="effect1_dropShadow"
+          ></feBlend>
+          <feBlend
+            in="SourceGraphic"
+            in2="effect1_dropShadow"
+            result="shape"
+          ></feBlend>
+        </filter>
         <linearGradient
           id="paint0_linear"
           x1="56.588"
@@ -315,6 +363,52 @@ export function ProjectsTimeline() {
           cy="0"
           r="1"
           gradientTransform="matrix(0 22 -22 0 595 30.048)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
+          <stop offset="1" stopColor="#ABC7FF" stopOpacity="0.26"></stop>
+        </radialGradient>
+        <linearGradient
+          id="paint8_linear"
+          x1="792.588"
+          x2="766.827"
+          y1="13.143"
+          y2="47.923"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#739BEC"></stop>
+          <stop offset="0.208" stopColor="#216BFF"></stop>
+          <stop offset="1" stopColor="#020F53"></stop>
+        </linearGradient>
+        <radialGradient
+          id="paint9_radial"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientTransform="matrix(0 22 -22 0 779 30.048)"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
+          <stop offset="1" stopColor="#ABC7FF" stopOpacity="0.26"></stop>
+        </radialGradient>
+        <linearGradient
+          id="paint10_linear"
+          x1="976.588"
+          x2="950.827"
+          y1="13.143"
+          y2="47.923"
+          gradientUnits="userSpaceOnUse"
+        >
+          <stop stopColor="#739BEC"></stop>
+          <stop offset="0.208" stopColor="#216BFF"></stop>
+          <stop offset="1" stopColor="#020F53"></stop>
+        </linearGradient>
+        <radialGradient
+          id="paint11_radial"
+          cx="0"
+          cy="0"
+          r="1"
+          gradientTransform="matrix(0 22 -22 0 963 30.048)"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0.792" stopColor="#216BFF" stopOpacity="0"></stop>
