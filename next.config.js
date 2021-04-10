@@ -13,6 +13,11 @@ module.exports = {
           "https://docs.google.com/document/d/1Md0Ba5wPPw-Qeu1-FOtnF_qV7ltgYCyhkKA63P3K9kE",
         permanent: false,
       },
+      {
+        source: "/discord",
+        destination: "https://discord.gg/J4ZhUxg",
+        permanent: false,
+      },
     ];
   },
   webpack: (config, { isServer }) => {
