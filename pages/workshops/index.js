@@ -13,7 +13,7 @@ export async function getStaticProps() {
   const data = await getSanityContent({
     query: `
       query AllWorkshops {
-        allWorkshop(sort: { start: ASC }) {
+        allWorkshop(sort: { start: DESC }) {
           title
           slug {
             current
@@ -60,7 +60,6 @@ export default function WorkshopsPage({ workshops }) {
             </Text>
             <Box>
               <Heading as="h2" fontSize="lg" mb={4}>
-                Fall 2020
               </Heading>
               <Grid
                 templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
