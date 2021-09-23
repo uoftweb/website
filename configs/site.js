@@ -1,5 +1,5 @@
 const GITHUB_BASE_URL = "https://github.com/uoftweb/website";
-const SITE_BASE_URL = "https://uoftweb.com"
+const SITE_BASE_URL = "https://uoftweb.dev"
 
 export const siteConfig = {
   siteName: "UofT Web Development Club",

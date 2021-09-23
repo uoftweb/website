@@ -180,7 +180,7 @@ export default function ArticlePage({
     url:
       typeof window !== "undefined"
         ? window.location.href
-        : "https://uoftweb.com",
+        : siteConfig.url,
     text: `${title} - ${excerpt}\nRead more at: `,
   });
 
