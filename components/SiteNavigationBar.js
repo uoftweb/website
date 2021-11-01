@@ -1,4 +1,3 @@
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -6,14 +5,12 @@ import {
   IconButton,
   Link,
   Stack,
-  Text,
-  useColorMode,
   useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import { features } from "configs/features";
 import { siteConfig } from "configs/site";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 
@@ -99,9 +96,7 @@ function SiteNavigationBarLink({ href, children, isExternal }) {
 }
 
 export function SiteNavigationBar() {
-  const [session, loading] = useSession();
-  const { colorMode, toggleColorMode } = useColorMode();
-  const ColorModeIcon = useColorModeValue(MoonIcon, SunIcon);
+  const [session] = useSession();
   const bg = useColorModeValue("brand.500", "brand.800");
   const mobileMenuBg = useColorModeValue("white", "gray.700");
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -205,16 +200,7 @@ export function SiteNavigationBar() {
                 _active={{ bg: "brand.200", color: "white" }}
               />
             </Link>
-            <IconButton
-              size="md"
-              fontSize="xl"
-              aria-label={`Switch to ${colorMode} mode`}
-              bg="transparent"
-              _hover={{ bg: "brand.300", color: "white" }}
-              _active={{ bg: "brand.200", color: "white" }}
-              onClick={toggleColorMode}
-              icon={<ColorModeIcon />}
-            />
+
             <IconButton
               display={{ base: "inline", lg: "none" }}
               size="md"

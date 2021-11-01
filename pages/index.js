@@ -1,13 +1,10 @@
-import { gql, useQuery } from "@apollo/client";
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import {
   Badge,
   Box,
   Button,
-  Code,
   Flex,
   Heading,
-  Link,
   List,
   ListIcon,
   ListItem,
@@ -15,7 +12,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { signIn } from "next-auth/client";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
@@ -195,16 +191,6 @@ function HeroSection() {
     </Box>
   );
 }
-
-const DiscordIcon = (props) => (
-  <svg viewBox="0 0 146 146" style={{ height: "1em", width: "1em" }} {...props}>
-    <path
-      fill="currentColor"
-      d="M107.75 125.001s-4.5-5.375-8.25-10.125c16.375-4.625 22.625-14.875 22.625-14.875-5.125 3.375-10 5.75-14.375 7.375-6.25 2.625-12.25 4.375-18.125 5.375-12 2.25-23 1.625-32.375-.125-7.125-1.375-13.25-3.375-18.375-5.375-2.875-1.125-6-2.5-9.125-4.25-.375-.25-.75-.375-1.125-.625-.25-.125-.375-.25-.5-.375-2.25-1.25-3.5-2.125-3.5-2.125s6 10 21.875 14.75c-3.75 4.75-8.375 10.375-8.375 10.375-27.625-.875-38.125-19-38.125-19 0-40.25 18-72.875 18-72.875 18-13.5 35.125-13.125 35.125-13.125l1.25 1.5c-22.5 6.5-32.875 16.375-32.875 16.375s2.75-1.5 7.375-3.625c13.375-5.875 24-7.5 28.375-7.875.75-.125 1.375-.25 2.125-.25 7.625-1 16.25-1.25 25.25-.25 11.875 1.375 24.625 4.875 37.625 12 0 0-9.875-9.375-31.125-15.875l1.75-2S110 19.626 128 33.126c0 0 18 32.625 18 72.875 0 0-10.625 18.125-38.25 19zM49.625 66.626c-7.125 0-12.75 6.25-12.75 13.875s5.75 13.875 12.75 13.875c7.125 0 12.75-6.25 12.75-13.875.125-7.625-5.625-13.875-12.75-13.875zm45.625 0c-7.125 0-12.75 6.25-12.75 13.875s5.75 13.875 12.75 13.875c7.125 0 12.75-6.25 12.75-13.875s-5.625-13.875-12.75-13.875z"
-      fillRule="nonzero"
-    />
-  </svg>
-);
 
 function DiscordSection() {
   const bg = useColorModeValue("accent.300", "brand.900");
@@ -394,170 +380,6 @@ function WorkshopSection() {
   );
 }
 
-function ArticleCard({
-  title = "Article Title",
-  stars = 0,
-  excerpt = "Excerpt",
-  href = "#",
-  bgImage,
-}) {
-  return (
-    <Box maxW="lg" p={6}>
-      <Box position="relative" w="100%">
-        <Box
-          position="absolute"
-          top={0}
-          left={0}
-          w="100%"
-          h="100%"
-          transform="rotateZ(6deg)"
-          borderRadius="2xl"
-          boxShadow="lg"
-          bgImage={bgImage}
-        />
-        <Stack
-          position="relative"
-          bg="brand.700"
-          color="brand.100"
-          borderRadius="2xl"
-          boxShadow="lg"
-          p={8}
-          spacing={6}
-          fontSize="xl"
-          letterSpacing="tight"
-          w="100%"
-        >
-          <Stack>
-            <Heading
-              as="h3"
-              color="white"
-              fontWeight="normal"
-              lineHeight="none"
-            >
-              {title}
-            </Heading>
-            <Text
-              as="span"
-              fontWeight="bold"
-              bgImage={bgImage}
-              bgSize="100%"
-              style={{
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                MozBackgroundClip: "text",
-                MozTextFillColor: "transparent",
-              }}
-            >
-              {stars} stars
-            </Text>
-          </Stack>
-          <Text>{excerpt}</Text>
-          <NextLink href={href} passHref>
-            <Button as="a" variant="solid" colorScheme="brand">
-              Read now
-            </Button>
-          </NextLink>
-        </Stack>
-      </Box>
-    </Box>
-  );
-}
-
-const GET_ARTICLES = gql`
-  query GetArticles {
-    articles {
-      slug
-      stargazers {
-        id
-      }
-    }
-  }
-`;
-
-function ArticleSection({ articles }) {
-  const bg = useColorModeValue("white", "brand.800");
-  const color = useColorModeValue("brand.600", "brand.50");
-  const codeBg = useColorModeValue("brand.800", "brand.900");
-
-  const { data } = useQuery(GET_ARTICLES);
-
-  const articleDynamicData = data
-    ? Object.fromEntries(data?.articles.map((a) => [a.slug, a]))
-    : {};
-
-  const featuredArticles = articles.slice(0, 2);
-
-  return (
-    <Box as="section" py={{ base: 16, lg: 32 }} bg={bg} color={color}>
-      <Stack
-        spacing={{ base: 8, lg: 16 }}
-        maxW="80rem"
-        mx="auto"
-        px={3}
-        align="center"
-        justify={{ base: "center", lg: "flex-start" }}
-      >
-        <Stack spacing={3} textAlign="center" align="center">
-          <Heading>Take a deep-dive into foundational web dev concepts</Heading>
-          <Text fontSize="lg" maxW="3xl">
-            Check out some of the <strong>articles</strong> we’ve written on
-            different topics like Javascript fundamentals and cool CSS tricks!
-          </Text>
-        </Stack>
-
-        <Stack spacing={4} align="center">
-          <Code
-            bg={codeBg}
-            color="brand.50"
-            fontSize={{ base: "sm", sm: "xl", md: "2xl" }}
-            py={3}
-            px={5}
-            borderRadius="lg"
-            fontWeight="medium"
-            letterSpacing="tighter"
-            whiteSpace="nowrap"
-          >
-            <Text as="span" color="accent.400">
-              $
-            </Text>{" "}
-            curl /articles | sort -k 2 | head -n 2
-          </Code>
-          <Text fontSize="sm" color="gray.500" textAlign="center">
-            Wondering what this means? Read our{" "}
-            <NextLink href="/articles/bash-tutorial">
-              <Link fontWeight="semibold">Bash Tutorial</Link>
-            </NextLink>{" "}
-            to learn more
-          </Text>
-        </Stack>
-
-        <Stack isInline flexWrap="wrap" justify="center">
-          {featuredArticles?.map((article, index) => (
-            <ArticleCard
-              key={article.slug}
-              title={article.title}
-              stars={articleDynamicData[article.slug]?.stargazers.length}
-              excerpt={article.excerpt}
-              href={`/articles/${article.slug}`}
-              bgImage={
-                index % 2 === 0
-                  ? "linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
-                  : "linear-gradient(221.84deg, #E96B6B 2.35%, #EBCC2A 96.6%)"
-              }
-            />
-          ))}
-        </Stack>
-
-        <NextLink href="/articles" passHref>
-          <Button as="a" variant="ghost">
-            Read More
-          </Button>
-        </NextLink>
-      </Stack>
-    </Box>
-  );
-}
-
 export default function HomePage({ articles }) {
   return (
     <>
@@ -567,7 +389,6 @@ export default function HomePage({ articles }) {
 
       <HeroSection />
       <WorkshopSection />
-      <ArticleSection articles={articles} />
       <DiscordSection />
 
       <SiteFooter />
