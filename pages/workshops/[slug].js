@@ -160,18 +160,6 @@ export default function WorkshopPage({ workshop }) {
               {workshop?.excerpt}
             </Text>
           </Stack>
-          <Stack isInline>
-            {session ? (
-              <Button colorScheme="green" onClick={() => setShouldPlay(true)}>
-                Watch
-              </Button>
-            ) : (
-              <Button colorScheme="green" onClick={signIn}>
-                Sign in to watch
-              </Button>
-            )}
-            <Button colorScheme="purple">Discuss on Discord</Button>
-          </Stack>
         </Stack>
         <Box width="100%">
           <AspectRatio
@@ -182,45 +170,16 @@ export default function WorkshopPage({ workshop }) {
             boxShadow="lg"
             bg="gray.900"
           >
-            {session ? (
-              <Box
-                as="iframe"
-                title={workshop?.title}
-                frameborder="0"
-                src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
-                  shouldPlay ? "&autoplay=1" : ""
-                }`}
-                allowFullScreen
-                allow="autoplay; encrypted-media"
-              />
-            ) : (
-              <Box zIndex="0">
-                <Box
-                  as="img"
-                  position="absolute"
-                  opacity="0.3"
-                  zIndex="-1"
-                  style={{ filter: "blur(10px)" }}
-                  transform="scale(1.1)"
-                  src={`https://img.youtube.com/vi/${workshop?.youtubeId}/maxresdefault.jpg`}
-                />
-                <Stack
-                  align="center"
-                  justify="center"
-                  w="full"
-                  h="full"
-                  spacing={4}
-                >
-                  <LockIcon size={16} />
-                  <Text>
-                    Sorry! This content is only available to registered members
-                  </Text>
-                  <Button colorScheme="green" onClick={signIn}>
-                    Sign in to watch
-                  </Button>
-                </Stack>
-              </Box>
-            )}
+            <Box
+              as="iframe"
+              title={workshop?.title}
+              frameborder="0"
+              src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
+                shouldPlay ? "&autoplay=1" : ""
+              }`}
+              allowFullScreen
+              allow="autoplay; encrypted-media"
+            />
           </AspectRatio>
         </Box>
       </Grid>

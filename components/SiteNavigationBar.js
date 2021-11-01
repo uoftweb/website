@@ -167,9 +167,6 @@ export function SiteNavigationBar() {
             spacing={4}
             display={{ base: "none", lg: "flex" }}
           >
-            <SiteNavigationBarLink href="/articles">
-              Articles
-            </SiteNavigationBarLink>
             {features.workshops && (
               <SiteNavigationBarLink href="/workshops">
                 Workshops
@@ -180,12 +177,6 @@ export function SiteNavigationBar() {
                 Projects
               </SiteNavigationBarLink>
             )}
-            <SiteNavigationBarLink
-              href="https://trello.com/b/p5fiez3v/public-roadmap"
-              isExternal
-            >
-              Roadmap
-            </SiteNavigationBarLink>
           </Stack>
         </Stack>
 
@@ -236,45 +227,6 @@ export function SiteNavigationBar() {
               icon={<MenuIcon />}
             />
           </Stack>
-          {features.accounts &&
-            (session ? (
-              <Stack
-                isInline
-                spacing={6}
-                align="center"
-                display={{ base: "none", lg: "flex" }}
-              >
-                <Text>
-                  Signed in as{" "}
-                  <Text
-                    as="span"
-                    fontWeight="bold"
-                    color="white"
-                    whiteSpace="nowrap"
-                  >
-                    {/* <Link as={NextLink} href={`/user/${session?.user?.id}`}> */}
-                    {session?.user?.name}
-                    {/* </Link> */}
-                  </Text>
-                </Text>
-                <Button colorScheme="green" onClick={signOut}>
-                  Sign out
-                </Button>
-              </Stack>
-            ) : (
-              <Stack
-                isInline
-                spacing={6}
-                display={{ base: "none", lg: "flex" }}
-              >
-                <Button colorScheme="brand" onClick={signIn}>
-                  Sign in
-                </Button>
-                <Link as={NextLink} href="/membership">
-                  <Button colorScheme="green">Become a member</Button>
-                </Link>
-              </Stack>
-            ))}
         </Stack>
 
         {/* Mobile Menu */}
@@ -327,37 +279,7 @@ export function SiteNavigationBar() {
                     Projects
                   </SiteNavigationBarLink>
                 )}
-                <SiteNavigationBarLink
-                  href="https://trello.com/b/p5fiez3v/public-roadmap"
-                  isExternal
-                >
-                  Roadmap
-                </SiteNavigationBarLink>
               </Stack>
-
-              {features.accounts &&
-                (session ? (
-                  <Stack isInline spacing={3} align="center">
-                    <Text>
-                      Signed in as{" "}
-                      <Text as="span" fontWeight="bold" whiteSpace="nowrap">
-                        <Link as={NextLink} href={`/user/${session?.user?.id}`}>
-                          {session?.user?.name}
-                        </Link>
-                      </Text>
-                    </Text>
-                    <Button colorScheme="green" onClick={signOut}>
-                      Sign out
-                    </Button>
-                  </Stack>
-                ) : (
-                  <Stack isInline spacing={3}>
-                    <Button onClick={signIn}>Sign in</Button>
-                    <Link as={NextLink} href="/membership">
-                      <Button colorScheme="green">Become a member</Button>
-                    </Link>
-                  </Stack>
-                ))}
             </Stack>
           </Box>
         )}

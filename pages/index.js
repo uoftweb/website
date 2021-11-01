@@ -386,17 +386,6 @@ function WorkshopSection() {
                   Next.js
                 </ListItem>
               </List>
-              <Button
-                onClick={() =>
-                  signIn(undefined, {
-                    callbackUrl: `${window.location.origin}/workshops`,
-                  })
-                }
-                variant="solid"
-                colorScheme="brand"
-              >
-                Sign up now
-              </Button>
             </Stack>
           </Box>
         </Box>
