@@ -173,7 +173,7 @@ export default function WorkshopPage({ workshop }) {
             <Box
               as="iframe"
               title={workshop?.title}
-              frameborder="0"
+              frameBorder="0"
               src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
                 shouldPlay ? "&autoplay=1" : ""
               }`}
