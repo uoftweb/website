@@ -5,14 +5,14 @@ import {
   Text,
   useColorModeValue,
   Grid,
-} from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
-import { motion } from "framer-motion";
-import Link from "next/link";
+} from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
-import { SiteFooter } from "../../components/SiteFooter";
-import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { getSanityContent, urlFor } from "../../lib/sanityUtil";
+import { SiteFooter } from '../../components/SiteFooter';
+import { SiteNavigationBar } from '../../components/SiteNavigationBar';
+import { getSanityContent, urlFor } from '../../lib/sanityUtil';
 
 export const getStaticProps = async () => {
   const projectsData = await getSanityContent({
@@ -101,13 +101,13 @@ function ProjectCard({ name, excerpt, highlight }) {
         position="relative"
         _after={{
           content: '""',
-          position: "absolute",
-          display: "block",
+          position: 'absolute',
+          display: 'block',
           bottom: 0,
           left: 0,
-          width: "full",
+          width: 'full',
           height: 12,
-          bgGradient: "linear(to-b, whiteAlpha.50, whiteAlpha.900)",
+          bgGradient: 'linear(to-b, whiteAlpha.50, whiteAlpha.900)',
         }}
       >
         {excerpt}
@@ -120,8 +120,8 @@ function ProjectCard({ name, excerpt, highlight }) {
 }
 
 const CurrentProjects = ({ projects }) => {
-  const bg = useColorModeValue("brand.50", "brand.800");
-  const color = useColorModeValue("brand.600", "brand.50");
+  const bg = useColorModeValue('brand.50', 'brand.800');
+  const color = useColorModeValue('brand.600', 'brand.50');
 
   return (
     <Box
@@ -136,7 +136,7 @@ const CurrentProjects = ({ projects }) => {
         maxW="80rem"
         mx="auto"
         px={3}
-        justify={{ base: "center", lg: "flex-start" }}
+        justify={{ base: 'center', lg: 'flex-start' }}
       >
         <Heading>Current Projects</Heading>
 

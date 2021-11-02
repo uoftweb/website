@@ -1,13 +1,14 @@
-import { CalendarIcon } from "@chakra-ui/icons";
-import { Badge, Box } from "@chakra-ui/react";
+import { CalendarIcon } from '@chakra-ui/icons';
+import { Badge, Box } from '@chakra-ui/react';
+import React from 'react';
 
-const format = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "numeric",
-  day: "numeric",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
+const format = new Intl.DateTimeFormat('en-US', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+  day: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
 });
 
 export function WorkshopCard({ workshop }) {
@@ -57,7 +58,10 @@ export function WorkshopCard({ workshop }) {
         <Box d="flex" mt="2" alignItems="center">
           <CalendarIcon color="teal.500" />
           <Box as="span" ml="2" color="gray.600" fontSize="sm">
-            {format.format(startDate)} - {format.format(endDate)}
+            {format.format(startDate)}
+            {' '}
+            -
+            {format.format(endDate)}
           </Box>
         </Box>
       </Box>

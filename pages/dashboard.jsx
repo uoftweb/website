@@ -1,9 +1,12 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/react";
+import {
+  Box, Heading, Stack, Text,
+} from '@chakra-ui/react';
+import React from "react";
 
-import { Container } from "../components/Container";
-import { PageHeader } from "../components/PageHeader";
-import { SiteFooter } from "../components/SiteFooter";
-import { SiteNavigationBar } from "../components/SiteNavigationBar";
+import { Container } from '../components/Container';
+import { PageHeader } from '../components/PageHeader';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteNavigationBar } from '../components/SiteNavigationBar';
 
 export default function DashboardPage() {
   return (

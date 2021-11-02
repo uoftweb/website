@@ -1,4 +1,5 @@
-import { CheckCircleIcon } from "@chakra-ui/icons";
+import React from "react";
+import { CheckCircleIcon } from '@chakra-ui/icons';
 import {
   Badge,
   Box,
@@ -11,15 +12,17 @@ import {
   Stack,
   Text,
   useColorModeValue,
-} from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
-import NextLink from "next/link";
+} from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
+import NextLink from 'next/link';
 
-import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
-import { SiteFooter } from "../components/SiteFooter";
-import { SiteNavigationBar } from "../components/SiteNavigationBar";
-import { siteConfig } from "../configs/site";
-import { getSanityContent } from "../lib/sanityUtil";
+import {
+  BlueBall, GreenBall, OrangeBall, TealBall,
+} from '../components/Ball';
+import { SiteFooter } from '../components/SiteFooter';
+import { SiteNavigationBar } from '../components/SiteNavigationBar';
+import { siteConfig } from '../configs/site';
+import { getSanityContent } from '../lib/sanityUtil';
 
 export async function getStaticProps() {
   const data = await getSanityContent({
@@ -43,15 +46,17 @@ export async function getStaticProps() {
   return { props: { articles } };
 }
 
-function Message({ name, text, accent = false, ...props }) {
-  const bg = useColorModeValue("white", "gray.800");
-  const color = useColorModeValue("gray.700", "gray.300");
+function Message({
+  name, text, accent = false, ...props
+}) {
+  const bg = useColorModeValue('white', 'gray.800');
+  const color = useColorModeValue('gray.700', 'gray.300');
 
   return (
     <Stack
       spacing={2}
-      color={accent ? "white" : color}
-      bg={accent ? "brand.600" : bg}
+      color={accent ? 'white' : color}
+      bg={accent ? 'brand.600' : bg}
       borderRadius="lg"
       boxShadow="lg"
       p={6}
@@ -60,7 +65,7 @@ function Message({ name, text, accent = false, ...props }) {
     >
       <Text
         as="h3"
-        color={accent ? "accent.300" : "brand.300"}
+        color={accent ? 'accent.300' : 'brand.300'}
         fontWeight="medium"
       >
         {name}
@@ -72,14 +77,14 @@ function Message({ name, text, accent = false, ...props }) {
 
 function HeroSection() {
   const bgImage = useColorModeValue(
-    "linear-gradient(180deg, #0821A8 0%, #08142D 100%)",
-    "linear-gradient(180deg,#03143b 0%,#000612 100%)"
+    'linear-gradient(180deg, #0821A8 0%, #08142D 100%)',
+    'linear-gradient(180deg,#03143b 0%,#000612 100%)',
   );
-  const color = useColorModeValue("brand.50", "brand.200");
+  const color = useColorModeValue('brand.50', 'brand.200');
 
   const ballBgImage = useColorModeValue(
-    "radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(216.53deg, #739BEC 14.79%, #216BFF 29.44%, #020F53 85.11%)",
-    "radial-gradient(50% 50% at 50% 50%,rgba(33,107,255,0) 79.17%,rgb(171 199 255 / 11%) 100%), linear-gradient(216.53deg,#345aa6 14.79%,#113681 29.44%,#010624 85.11%)"
+    'radial-gradient(50% 50% at 50% 50%, rgba(33, 107, 255, 0) 79.17%, rgba(171, 199, 255, 0.26) 100%), linear-gradient(216.53deg, #739BEC 14.79%, #216BFF 29.44%, #020F53 85.11%)',
+    'radial-gradient(50% 50% at 50% 50%,rgba(33,107,255,0) 79.17%,rgb(171 199 255 / 11%) 100%), linear-gradient(216.53deg,#345aa6 14.79%,#113681 29.44%,#010624 85.11%)',
   );
 
   return (
@@ -97,8 +102,8 @@ function HeroSection() {
           <Flex
             align="center"
             justify="center"
-            w={["sm", "md", "lg", "lg"]}
-            h={["sm", "md", "lg", "lg"]}
+            w={['sm', 'md', 'lg', 'lg']}
+            h={['sm', 'md', 'lg', 'lg']}
             bgImage={ballBgImage}
             borderRadius="full"
             position="relative"
@@ -168,10 +173,10 @@ function HeroSection() {
               bgImage="linear-gradient(243.27deg, #E8F552 -0.15%, #1FF6E9 47.65%, #F68AF1 101.83%)"
               bgSize="100%"
               style={{
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                MozBackgroundClip: "text",
-                MozTextFillColor: "transparent",
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                MozBackgroundClip: 'text',
+                MozTextFillColor: 'transparent',
               }}
             >
               Web Dev Club
@@ -193,8 +198,8 @@ function HeroSection() {
 }
 
 function DiscordSection() {
-  const bg = useColorModeValue("accent.300", "brand.900");
-  const color = useColorModeValue("brand.600", "brand.50");
+  const bg = useColorModeValue('accent.300', 'brand.900');
+  const color = useColorModeValue('brand.600', 'brand.50');
 
   return (
     <Box as="section" py={16} bg={bg} color={color}>
@@ -205,18 +210,21 @@ function DiscordSection() {
         mx="auto"
         px={3}
         align="center"
-        justify={{ base: "center", lg: "flex-start" }}
+        justify={{ base: 'center', lg: 'flex-start' }}
       >
         <Stack
           spacing={6}
           maxW="2xl"
-          align={{ base: "center", lg: "flex-start" }}
-          textAlign={{ base: "center", lg: "left" }}
+          align={{ base: 'center', lg: 'flex-start' }}
+          textAlign={{ base: 'center', lg: 'left' }}
         >
           <Stack spacing={3}>
             <Heading>Join the conversation on Discord</Heading>
             <Text fontSize="lg">
-              Become a part of our <strong>growing community</strong>! Get help
+              Become a part of our
+              {' '}
+              <strong>growing community</strong>
+              ! Get help
               with projects you’re working on and keep in touch with like-minded
               individuals.
             </Text>
@@ -238,7 +246,7 @@ function DiscordSection() {
           spacing={-3}
           minW="lg"
           px={6}
-          display={{ base: "none", lg: "block" }}
+          display={{ base: 'none', lg: 'block' }}
         >
           <Message
             name="Umar"
@@ -264,8 +272,8 @@ function DiscordSection() {
 }
 
 function WorkshopSection() {
-  const bg = useColorModeValue("brand.50", "brand.600");
-  const color = useColorModeValue("brand.600", "brand.50");
+  const bg = useColorModeValue('brand.50', 'brand.600');
+  const color = useColorModeValue('brand.600', 'brand.50');
 
   return (
     <Box as="section" py={16} bg={bg} color={color}>
@@ -276,13 +284,13 @@ function WorkshopSection() {
         mx="auto"
         px={3}
         align="center"
-        justify={{ base: "center", lg: "flex-start" }}
+        justify={{ base: 'center', lg: 'flex-start' }}
       >
         <Stack
           spacing={6}
           maxW="2xl"
-          align={{ base: "center", lg: "flex-start" }}
-          textAlign={{ base: "center", lg: "left" }}
+          align={{ base: 'center', lg: 'flex-start' }}
+          textAlign={{ base: 'center', lg: 'left' }}
         >
           <Stack spacing={3}>
             <Box>
@@ -292,8 +300,15 @@ function WorkshopSection() {
             </Box>
             <Heading>Build new skills every month</Heading>
             <Text fontSize="lg">
-              Attend our <strong>workshops</strong> and learn from our{" "}
-              <strong>talented instructors</strong> within the community and
+              Attend our
+              {' '}
+              <strong>workshops</strong>
+              {' '}
+              and learn from our
+              {' '}
+              <strong>talented instructors</strong>
+              {' '}
+              within the community and
               level-up your web dev skills with us.
             </Text>
           </Stack>
@@ -306,7 +321,7 @@ function WorkshopSection() {
           </Stack>
         </Stack>
 
-        <Box maxW="md" p={6} display={{ base: "none", lg: "block" }}>
+        <Box maxW="md" p={6} display={{ base: 'none', lg: 'block' }}>
           <Box position="relative" w="100%">
             <Box
               position="absolute"
@@ -345,10 +360,10 @@ function WorkshopSection() {
                   bgImage="linear-gradient(261.22deg, #6BE99D 4.04%, #2AB1EB 98.62%)"
                   bgSize="100%"
                   style={{
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    MozBackgroundClip: "text",
-                    MozTextFillColor: "transparent",
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    MozBackgroundClip: 'text',
+                    MozTextFillColor: 'transparent',
                   }}
                 >
                   6 Workshops

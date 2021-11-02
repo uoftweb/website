@@ -1,13 +1,16 @@
-import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
-import { NextSeo } from "next-seo";
-import NextLink from "next/link";
+import {
+  Box, Grid, Heading, Stack, Text,
+} from '@chakra-ui/react';
+import { NextSeo } from 'next-seo';
+import NextLink from 'next/link';
+import React from "react";
 
-import { Container } from "../../components/Container";
-import { PageHeader } from "../../components/PageHeader";
-import { SiteFooter } from "../../components/SiteFooter";
-import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { WorkshopCard } from "../../components/WorkshopCard";
-import { getSanityContent } from "../../lib/sanityUtil";
+import { Container } from '../../components/Container';
+import { PageHeader } from '../../components/PageHeader';
+import { SiteFooter } from '../../components/SiteFooter';
+import { SiteNavigationBar } from '../../components/SiteNavigationBar';
+import { WorkshopCard } from '../../components/WorkshopCard';
+import { getSanityContent } from '../../lib/sanityUtil';
 
 export async function getStaticProps() {
   const data = await getSanityContent({
@@ -59,8 +62,7 @@ export default function WorkshopsPage({ workshops }) {
               amazing workshop instructors.
             </Text>
             <Box>
-              <Heading as="h2" fontSize="lg" mb={4}>
-              </Heading>
+              <Heading as="h2" fontSize="lg" mb={4} />
               <Grid
                 templateColumns="repeat(auto-fit, minmax(300px, 1fr))"
                 gap={3}

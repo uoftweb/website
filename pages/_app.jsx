@@ -1,3 +1,4 @@
+import React from "react";
 import "focus-visible/dist/focus-visible";
 
 import { ChakraProvider } from "@chakra-ui/react";
@@ -8,9 +9,9 @@ import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import { ApolloProvider } from "@apollo/client";
 
-import { useApollo } from "../lib/apolloClient";
-import { theme } from "../theme";
 import { DefaultSeo } from "next-seo";
+import { useApollo } from "../lib/apolloClient";
+import theme from "../theme";
 import { siteConfig } from "../configs/site";
 
 NProgress.configure({ showSpinner: false, parent: "#site-header" });
@@ -31,7 +32,7 @@ function App({ Component, pageProps }) {
           locale: "en_US",
           url: siteConfig.url,
           site_name: siteConfig.siteName,
-          images: siteConfig.images
+          images: siteConfig.images,
         }}
       />
       <Head>

@@ -6,19 +6,19 @@ import {
   Stack,
   Text,
   useColorModeValue,
-} from "@chakra-ui/react";
-import hydrate from "next-mdx-remote/hydrate";
-import NextLink from "next/link";
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { NextSeo } from "next-seo";
-import RemarkSlugPlugin from "remark-slug";
-import renderToString from "next-mdx-remote/render-to-string";
+} from '@chakra-ui/react';
+import hydrate from 'next-mdx-remote/hydrate';
+import NextLink from 'next/link';
+import { ArrowBackIcon } from '@chakra-ui/icons';
+import { NextSeo } from 'next-seo';
+import RemarkSlugPlugin from 'remark-slug';
+import renderToString from 'next-mdx-remote/render-to-string';
 
-import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { MDXComponents } from "../../lib/articles";
-import { SiteFooter } from "../../components/SiteFooter";
-import { getSanityContent } from "../../lib/sanityUtil";
-import GithubIcon from "../../components/GithubIcon";
+import { SiteNavigationBar } from '../../components/SiteNavigationBar';
+import { MDXComponents } from '../../lib/articles';
+import { SiteFooter } from '../../components/SiteFooter';
+import { getSanityContent } from '../../lib/sanityUtil';
+import GithubIcon from '../../components/GithubIcon';
 
 export async function getStaticPaths() {
   const data = await getSanityContent({
@@ -77,11 +77,13 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectDetailsPage({
-  project: { name: title, githubUrl, excerpt, source, techStack },
+  project: {
+    name: title, githubUrl, excerpt, source, techStack,
+  },
 }) {
   const content = hydrate(source, { components: MDXComponents });
-  const headerBg = useColorModeValue("gray.50", "gray.900");
-  const headerColor = useColorModeValue("gray.900", "gray.100");
+  const headerBg = useColorModeValue('gray.50', 'gray.900');
+  const headerColor = useColorModeValue('gray.900', 'gray.100');
 
   return (
     <>
@@ -110,7 +112,7 @@ export default function ProjectDetailsPage({
                 )}
                 {techStack && (
                   <Text as="span" fontWeight="bold">
-                    {techStack?.join(" • ")}
+                    {techStack?.join(' • ')}
                   </Text>
                 )}
               </HStack>

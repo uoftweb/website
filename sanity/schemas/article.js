@@ -1,65 +1,63 @@
 export default {
-  name: "article",
-  title: "Article",
-  type: "document",
+  name: 'article',
+  title: 'Article',
+  type: 'document',
   fields: [
     {
-      name: "title",
-      title: "Title",
-      type: "string",
+      name: 'title',
+      title: 'Title',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "slug",
-      title: "Slug",
-      type: "slug",
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
       validation: (Rule) => Rule.required(),
       options: {
-        source: "title",
+        source: 'title',
         maxLength: 96,
       },
     },
     {
-      name: "author",
-      title: "Author",
-      type: "reference",
-      to: { type: "author" },
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: { type: 'author' },
     },
     {
-      name: "excerpt",
-      title: "Excerpt",
-      type: "string",
+      name: 'excerpt',
+      title: 'Excerpt',
+      type: 'string',
     },
     {
-      name: "categories",
-      title: "Categories",
-      type: "array",
-      of: [{ type: "reference", to: { type: "category" } }],
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: { type: 'category' } }],
     },
     {
-      name: "publishedAt",
-      title: "Published at",
-      type: "datetime",
+      name: 'publishedAt',
+      title: 'Published at',
+      type: 'datetime',
       validation: (Rule) => Rule.required(),
     },
     {
-      name: "body",
-      title: "Body",
-      type: "markdown",
+      name: 'body',
+      title: 'Body',
+      type: 'markdown',
     },
   ],
 
   preview: {
     select: {
-      title: "title",
-      author: "author.name",
-      media: "mainImage",
+      title: 'title',
+      author: 'author.name',
+      media: 'mainImage',
     },
     prepare(selection) {
       const { author } = selection;
-      return Object.assign({}, selection, {
-        subtitle: author && `by ${author}`,
-      });
+      return { ...selection, subtitle: author && `by ${author}` };
     },
   },
 };

@@ -1,10 +1,13 @@
-import { Box, Heading, Link, Stack, useColorModeValue } from "@chakra-ui/react";
-import NextLink from "next/link";
+import {
+  Box, Heading, Link, Stack, useColorModeValue,
+} from '@chakra-ui/react';
+import NextLink from 'next/link';
+import React from 'react';
 
-import { BlueBall } from "./Ball";
+import { BlueBall } from './Ball';
 
 export function PageHeader({ title, back }) {
-  const bg = useColorModeValue("brand.600", "brand.900");
+  const bg = useColorModeValue('brand.600', 'brand.900');
   return (
     <Box
       as="header"
@@ -52,7 +55,7 @@ export function PageHeader({ title, back }) {
 }
 
 export function LargePageHeader({ title }) {
-  const bg = useColorModeValue("brand.600", "brand.900");
+  const bg = useColorModeValue('brand.600', 'brand.900');
   return (
     <Box
       as="header"
