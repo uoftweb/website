@@ -31,11 +31,12 @@
     "@sanity/image-url": "^0.140.19",
     "apollo-server-micro": "^2.19.2",
     "date-fns": "^2.16.1",
+    "eslint": "^8.1.0",
     "focus-visible": "^5.2.0",
     "framer-motion": "^3.2.1",
     "get-youtube-id": "^1.0.1",
     "graphql": "^15.5.0",
-    "next": "^10.0.3",
+    "next": "^10.2.3",
     "next-auth": "^3.3.0",
     "next-mdx-remote": "^1.0.0",
     "next-seo": "^4.17.0",
@@ -50,7 +51,6 @@
     "remark-slug": "^6.0.0"
   },
   "devDependencies": {
-    "@prisma/cli": "^2.12.1",
     "@types/next-auth": "^3.1.10",
     "@types/react": "^17.0.0",
     "dotenv": "^8.2.0",
