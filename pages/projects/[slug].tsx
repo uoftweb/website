@@ -7,7 +7,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React from "react";
 
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";

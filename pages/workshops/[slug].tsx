@@ -1,30 +1,27 @@
-import { ArrowBackIcon, CalendarIcon, LockIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon, CalendarIcon } from "@chakra-ui/icons";
 import {
   AspectRatio,
   Box,
-  Button,
   Flex,
   Grid,
   Heading,
-  Icon,
   Link,
   Stack,
   Text,
   useColorModeValue,
-} from '@chakra-ui/react';
-import React from "react";
+} from "@chakra-ui/react";
+import { useState } from "react";
 
-import getYouTubeID from 'get-youtube-id';
-import { signIn, useSession } from 'next-auth/client';
-import { NextSeo } from 'next-seo';
-import NextLink from 'next/link';
-import { useState } from 'react';
+import getYouTubeID from "get-youtube-id";
+import { useSession } from "next-auth/client";
+import { NextSeo } from "next-seo";
+import NextLink from "next/link";
 
-import { BlueBall } from '../../components/Ball';
-import { Container } from '../../components/Container';
-import { SiteFooter } from '../../components/SiteFooter';
-import { SiteNavigationBar } from '../../components/SiteNavigationBar';
-import { getSanityContent } from '../../lib/sanityUtil';
+import { BlueBall } from "../../components/Ball";
+import { Container } from "../../components/Container";
+import { SiteFooter } from "../../components/SiteFooter";
+import { SiteNavigationBar } from "../../components/SiteNavigationBar";
+import { getSanityContent } from "../../lib/sanityUtil";
 
 export async function getStaticPaths() {
   const data = await getSanityContent({
@@ -74,13 +71,13 @@ export async function getStaticProps({ params }) {
   return { props: { workshop } };
 }
 
-const format = new Intl.DateTimeFormat('en-US', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-  day: 'numeric',
-  hour: 'numeric',
-  minute: 'numeric',
+const format = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "numeric",
+  day: "numeric",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
 });
 
 export default function WorkshopPage({ workshop }) {
@@ -91,10 +88,10 @@ export default function WorkshopPage({ workshop }) {
   const endDate = new Date(Date.parse(workshop.end));
   const youtubeId = getYouTubeID(workshop?.youtubeVideoUrl);
 
-  const bg = useColorModeValue('brand.600', 'gray.700');
-  const secondBg = useColorModeValue('brand.700', 'gray.800');
-  const cardBg = useColorModeValue('white', 'gray.900');
-  const cardColor = useColorModeValue('gray.800', 'gray.50');
+  const bg = useColorModeValue("brand.600", "gray.700");
+  const secondBg = useColorModeValue("brand.700", "gray.800");
+  const cardBg = useColorModeValue("white", "gray.900");
+  const cardColor = useColorModeValue("gray.800", "gray.50");
 
   return (
     <>
@@ -105,8 +102,8 @@ export default function WorkshopPage({ workshop }) {
       <Grid
         as="section"
         templateColumns={{
-          base: '1fr',
-          lg: 'minmax(30ch, 60ch) minmax(500px, 1fr)',
+          base: "1fr",
+          lg: "minmax(30ch, 60ch) minmax(500px, 1fr)",
         }}
         gap={16}
         p={[4, 8, 16]}
@@ -148,7 +145,7 @@ export default function WorkshopPage({ workshop }) {
               />
             </Box>
             <Heading as="h1" fontSize="3xl" zIndex="1" letterSpacing="tight">
-              {workshop?.title ?? 'Untitled Workshop'}
+              {workshop?.title ?? "Untitled Workshop"}
             </Heading>
           </Stack>
           <Stack spacing={3}>
@@ -156,7 +153,7 @@ export default function WorkshopPage({ workshop }) {
               <CalendarIcon color="teal.300" />
               <Text as="span" ml={2} color="brand.100" fontSize="sm">
                 {format.format(startDate)}
-                {' '}
+                {" "}
                 -
                 {format.format(endDate)}
               </Text>
@@ -180,7 +177,7 @@ export default function WorkshopPage({ workshop }) {
               title={workshop?.title}
               frameBorder="0"
               src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
-                shouldPlay ? '&autoplay=1' : ''
+                shouldPlay ? "&autoplay=1" : ""
               }`}
               allowFullScreen
               allow="autoplay; encrypted-media"
@@ -204,9 +201,9 @@ export default function WorkshopPage({ workshop }) {
             >
               {workshop?.shownotes
                 ? workshop?.shownotes
-                  ?.split('\n')
+                  ?.split("\n")
                   .map((line, i) => <p key={i}>{line}</p>)
-                : 'Not available'}
+                : "Not available"}
             </Box>
           </Stack>
         </Container>

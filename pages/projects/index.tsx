@@ -6,7 +6,6 @@ import {
   useColorModeValue,
   Grid,
 } from "@chakra-ui/react";
-import React from "react";
 
 import { NextSeo } from "next-seo";
 import { motion } from "framer-motion";

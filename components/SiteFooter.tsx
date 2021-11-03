@@ -1,15 +1,14 @@
 import {
   Box, Link, Stack, Text, useColorModeValue,
-} from '@chakra-ui/react';
-import React from 'react';
+} from "@chakra-ui/react";
 
 export function SiteFooter() {
-  const bg = useColorModeValue('brand.500', 'brand.800');
+  const bg = useColorModeValue("brand.500", "brand.800");
 
   return (
     <Box as="footer" id="site-footer" py={1} bg={bg} color="white">
       <Stack
-        direction={{ base: 'column', md: 'row' }}
+        direction={{ base: "column", md: "row" }}
         spacing={4}
         align="center"
         justify="space-between"

@@ -81,7 +81,9 @@ export const MDXComponents = {
         language={language}
         theme={theme}
       >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        {({
+          className, style, tokens, getLineProps, getTokenProps,
+        }) => (
           <Box
             as="pre"
             className={className}

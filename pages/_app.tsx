@@ -1,4 +1,3 @@
-import React from "react";
 import "focus-visible/dist/focus-visible";
 
 import { ChakraProvider } from "@chakra-ui/react";
