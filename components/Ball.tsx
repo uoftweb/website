@@ -1,6 +1,11 @@
-import { Box, useColorModeValue } from "@chakra-ui/react";
+import { Box, useColorModeValue, BoxProps } from "@chakra-ui/react";
 
-export function Ball({ size = 24, blur = 0, ...props }) {
+export interface BallProps {
+  size: number;
+  blur: number;
+  props: BoxProps;
+}
+export function Ball({ size = 24, blur = 0, ...props }: BallProps) {
   return (
     <Box
       w={size}

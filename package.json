@@ -13,7 +13,7 @@
     "sanity:build": "yarn workspace uoftwebcom build",
     "sanity:deploy": "yarn workspace uoftwebcom deploy",
     "sanity:graphql-deploy": "yarn workspace uoftwebcom graphql-deploy",
-    "lint": "eslint ./ --fix"
+    "lint": "eslint ./"
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",

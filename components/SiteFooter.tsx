@@ -1,6 +1,4 @@
-import {
-  Box, Link, Stack, Text, useColorModeValue,
-} from "@chakra-ui/react";
+import { Box, Link, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 
 export function SiteFooter() {
   const bg = useColorModeValue("brand.500", "brand.800");

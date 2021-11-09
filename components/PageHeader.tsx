@@ -1,11 +1,15 @@
-import {
-  Box, Heading, Link, Stack, useColorModeValue,
-} from "@chakra-ui/react";
+import { ArrowBackIcon } from "@chakra-ui/icons";
+import { Box, Heading, Link, Stack, useColorModeValue } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import { BlueBall } from "./Ball";
 
-export function PageHeader({ title, back }) {
+export interface PageHeaderProps {
+  title: string;
+  /** url to go back to */
+  back?: string;
+}
+export function PageHeader({ title, back }: PageHeaderProps) {
   const bg = useColorModeValue("brand.600", "brand.900");
   return (
     <Box
@@ -52,8 +56,10 @@ export function PageHeader({ title, back }) {
     </Box>
   );
 }
-
-export function LargePageHeader({ title }) {
+export interface LargePageHeaderProps {
+  title: string;
+}
+export function LargePageHeader({ title }: LargePageHeaderProps) {
   const bg = useColorModeValue("brand.600", "brand.900");
   return (
     <Box

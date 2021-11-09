@@ -4,8 +4,8 @@
     "es2021": true
   },
   "extends": [
-    "plugin:react/recommended",
     "eslint:recommended",
+    "plugin:react/recommended",
     "airbnb-typescript",
     "plugin:react/jsx-runtime"
   ],
@@ -16,10 +16,19 @@
     },
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "./tsconfig.eslint.json"]
   },
   "plugins": ["react", "@typescript-eslint", "import"],
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
   "rules": {
-    "@typescript-eslint/quotes": ["error", "double"]
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ]
   }
 }
