@@ -8,21 +8,20 @@ This is the source code repository for the UofT Web Development Club. The websit
 
 ## Prerequisites
 
-1. [Node.js 12](https://nodejs.org/en/)
-1. [Yarn 2](https://yarnpkg.com/)
+1. [Node.js 14](https://nodejs.org/en/)
 
 ## Getting Started
 
 First install dependencies:
 
 ```bash
-yarn install
+npm install
 ```
 
 Then, run the development server:
 
 ```bash
-yarn dev
+npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
