@@ -10,10 +10,8 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
 
 import getYouTubeID from "get-youtube-id";
-import { useSession } from "next-auth/client";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
@@ -22,9 +20,10 @@ import { Container } from "../../components/Container";
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { getSanityContent } from "../../lib/sanityUtil";
+import { WorkshopData } from ".";
 
 export async function getStaticPaths() {
-  const data = await getSanityContent({
+  const data = (await getSanityContent({
     query: `
       query AllWorkshops {
         allWorkshop {
@@ -34,7 +33,7 @@ export async function getStaticPaths() {
         }
       }
     `,
-  });
+  })) as { allWorkshop: { slug: { current: string } }[] };
   const paths = data.allWorkshop.map((w) => ({
     params: { slug: w.slug.current },
   }));
@@ -75,15 +74,11 @@ const format = new Intl.DateTimeFormat("en-US", {
   year: "numeric",
   month: "numeric",
   day: "numeric",
-  day: "numeric",
   hour: "numeric",
   minute: "numeric",
 });
 
-export default function WorkshopPage({ workshop }) {
-  const [session] = useSession();
-  const [shouldPlay, setShouldPlay] = useState(false);
-
+export default function WorkshopPage({ workshop }: { workshop: WorkshopData }) {
   const startDate = new Date(Date.parse(workshop.start));
   const endDate = new Date(Date.parse(workshop.end));
   const youtubeId = getYouTubeID(workshop?.youtubeVideoUrl);
@@ -92,7 +87,6 @@ export default function WorkshopPage({ workshop }) {
   const secondBg = useColorModeValue("brand.700", "gray.800");
   const cardBg = useColorModeValue("white", "gray.900");
   const cardColor = useColorModeValue("gray.800", "gray.50");
-
   return (
     <>
       <NextSeo title={workshop?.title} description={workshop?.excerpt} />
@@ -152,10 +146,7 @@ export default function WorkshopPage({ workshop }) {
             <Flex mt="2" align="center">
               <CalendarIcon color="teal.300" />
               <Text as="span" ml={2} color="brand.100" fontSize="sm">
-                {format.format(startDate)}
-                {" "}
-                -
-                {format.format(endDate)}
+                {format.format(startDate)} -{format.format(endDate)}
               </Text>
             </Flex>
             <Text fontSize="lg" lineHeight="tall">
@@ -176,9 +167,7 @@ export default function WorkshopPage({ workshop }) {
               as="iframe"
               title={workshop?.title}
               frameBorder="0"
-              src={`https://www.youtube.com/embed/${youtubeId}?rel=0${
-                shouldPlay ? "&autoplay=1" : ""
-              }`}
+              src={`https://www.youtube.com/embed/${youtubeId}?rel=0`}
               allowFullScreen
               allow="autoplay; encrypted-media"
             />
@@ -199,10 +188,10 @@ export default function WorkshopPage({ workshop }) {
               boxShadow="md"
               color={cardColor}
             >
-              {workshop?.shownotes
-                ? workshop?.shownotes
-                  ?.split("\n")
-                  .map((line, i) => <p key={i}>{line}</p>)
+              {workshop.shownotes
+                ? workshop.shownotes
+                    .split("\n")
+                    .map((line, i) => <p key={i}>{line}</p>)
                 : "Not available"}
             </Box>
           </Stack>

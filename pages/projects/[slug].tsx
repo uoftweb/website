@@ -7,7 +7,6 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-
 import hydrate from "next-mdx-remote/hydrate";
 import NextLink from "next/link";
 import { ArrowBackIcon } from "@chakra-ui/icons";
@@ -22,7 +21,7 @@ import { getSanityContent } from "../../lib/sanityUtil";
 import GithubIcon from "../../components/GithubIcon";
 
 export async function getStaticPaths() {
-  const data = await getSanityContent({
+  const data = (await getSanityContent({
     query: `
       query AllProjects {
         allProject {
@@ -32,7 +31,7 @@ export async function getStaticPaths() {
         }
       }
     `,
-  });
+  })) as { allProject: { slug: { current: string } }[] };
   const paths = data.allProject.map((a) => ({
     params: { slug: a.slug.current },
   }));
@@ -41,9 +40,20 @@ export async function getStaticPaths() {
     paths,
   };
 }
-
-export async function getStaticProps({ params }) {
-  const data = await getSanityContent({
+export interface RawProjectDetail {
+  name: string;
+  excerpt: string;
+  githubUrl: string;
+  slug: { current: string };
+  body: string;
+  techStack: string[];
+}
+type ProjectDetail = Omit<RawProjectDetail, "slug"> & {
+  slug: string;
+  source: string;
+};
+export async function getStaticProps({ params }: { params: { slug: string } }) {
+  const data = (await getSanityContent({
     query: `
       query ProjectBySlug($slug: String!) {
         allProject(where: { slug: { current: {eq: $slug }}}) {
@@ -61,15 +71,14 @@ export async function getStaticProps({ params }) {
     variables: {
       slug: params.slug,
     },
-  });
-  const _project = data.allProject[0];
-  const mdxSource = await renderToString(_project.body, {
+  })) as { allProject: RawProjectDetail[] };
+  const mdxSource: string = await renderToString(data.allProject[0].body, {
     components: MDXComponents,
     mdxOptions: { remarkPlugins: [RemarkSlugPlugin] },
   });
   const project = {
-    ..._project,
-    slug: _project.slug.current,
+    ...data.allProject[0],
+    slug: data.allProject[0].slug.current,
     source: mdxSource,
   };
   return {
@@ -78,14 +87,14 @@ export async function getStaticProps({ params }) {
 }
 
 export default function ProjectDetailsPage({
-  project: {
-    name: title, githubUrl, excerpt, source, techStack,
-  },
+  project,
+}: {
+  project: ProjectDetail;
 }) {
+  const { name: title, githubUrl, excerpt, source, techStack } = project;
   const content = hydrate(source, { components: MDXComponents });
   const headerBg = useColorModeValue("gray.50", "gray.900");
   const headerColor = useColorModeValue("gray.900", "gray.100");
-
   return (
     <>
       <NextSeo title={title} description={excerpt} />

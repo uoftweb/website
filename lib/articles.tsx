@@ -1,4 +1,4 @@
-import Highlight, { defaultProps } from "prism-react-renderer";
+import Highlight, { defaultProps, Language } from "prism-react-renderer";
 import dracula from "prism-react-renderer/themes/dracula";
 import {
   Box,
@@ -8,31 +8,35 @@ import {
   ListItem,
   Text,
   useColorModeValue,
+  BoxProps,
 } from "@chakra-ui/react";
+import React, { ReactNode } from "react";
 
 export const MDXComponents = {
-  h1: (props) => (
+  h1: (props: { children: ReactNode }) => (
     <Heading as="h2" size="lg" mb={3} mt={8}>
       {props.children}
     </Heading>
   ),
-  h2: (props) => (
+  h2: (props: { children: ReactNode }) => (
     <Heading as="h3" size="md" mb={3} mt={8}>
       {props.children}
     </Heading>
   ),
-  p: (props) => (
+  p: (props: { children: ReactNode }) => (
     <Text as="p" lineHeight="tall" mb={3}>
       {props.children}
     </Text>
   ),
-  strong: (props) => <Box as="strong" fontWeight="semibold" {...props} />,
-  a: (props) => (
+  strong: (props: BoxProps) => (
+    <Box as="strong" fontWeight="semibold" {...props} />
+  ),
+  a: (props: { children: ReactNode; href: string }) => (
     <Link isExternal href={props.href} color="blue.500">
       {props.children}
     </Link>
   ),
-  ul: (props) => (
+  ul: (props: { children: ReactNode }) => (
     <List
       as="ul"
       listStyleType="disc"
@@ -43,7 +47,7 @@ export const MDXComponents = {
       {props.children}
     </List>
   ),
-  ol: (props) => (
+  ol: (props: { children: ReactNode }) => (
     <List
       as="ol"
       listStyleType="decimal"
@@ -54,12 +58,12 @@ export const MDXComponents = {
       {props.children}
     </List>
   ),
-  li: (props) => (
+  li: (props: { children: ReactNode }) => (
     <ListItem as="li" py={2} ml={3}>
       {props.children}
     </ListItem>
   ),
-  inlineCode: (props) => (
+  inlineCode: (props: BoxProps) => (
     <Box
       as="code"
       color={useColorModeValue("purple.500", "purple.200")}
@@ -69,21 +73,25 @@ export const MDXComponents = {
       {...props}
     />
   ),
-  pre: (props) => <div {...props} />,
-  code: ({ children, className }) => {
-    const code = children.trim();
-    const language = className?.replace(/language-/, "");
+  pre: (
+    props: React.DetailedHTMLProps<
+      React.HtmlHTMLAttributes<HTMLDivElement>,
+      HTMLDivElement
+    >,
+  ) => <div {...props} />,
+  code: (props: { children: string, className?: string }) => {
+
+    const code = props.children.trim();
+    const language = props.className?.replace(/language-/, "");
     const theme = dracula;
     return (
       <Highlight
         {...defaultProps}
         code={code}
-        language={language}
+        language={language as Language}
         theme={theme}
       >
-        {({
-          className, style, tokens, getLineProps, getTokenProps,
-        }) => (
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <Box
             as="pre"
             className={className}

@@ -11,43 +11,26 @@ import {
   Stack,
   Text,
   useColorModeValue,
+  StackProps,
 } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
-import {
-  BlueBall, GreenBall, OrangeBall, TealBall,
-} from "../components/Ball";
+import { BlueBall, GreenBall, OrangeBall, TealBall } from "../components/Ball";
 import { SiteFooter } from "../components/SiteFooter";
 import { SiteNavigationBar } from "../components/SiteNavigationBar";
 import { siteConfig } from "../configs/site";
-import { getSanityContent } from "../lib/sanityUtil";
-
-export async function getStaticProps() {
-  const data = await getSanityContent({
-    query: `
-      query AllPublishedArticles {
-        allArticle(
-          where: { publishedAt: { gt: "0000-01-01T00:00:00.000Z" } }
-          sort: { publishedAt: ASC }
-        ) {
-          title
-          slug {
-            current
-          }
-          excerpt
-          publishedAt
-        }
-      }    
-    `,
-  });
-  const articles = data.allArticle.map((a) => ({ ...a, slug: a.slug.current }));
-  return { props: { articles } };
-}
 
 function Message({
-  name, text, accent = false, ...props
-}) {
+  name,
+  text,
+  accent = false,
+  ...props
+}: {
+  name: string;
+  text: string;
+  accent?: boolean;
+} & StackProps) {
   const bg = useColorModeValue("white", "gray.800");
   const color = useColorModeValue("gray.700", "gray.300");
 
@@ -175,7 +158,6 @@ function HeroSection() {
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 MozBackgroundClip: "text",
-                MozTextFillColor: "transparent",
               }}
             >
               Web Dev Club
@@ -220,10 +202,7 @@ function DiscordSection() {
           <Stack spacing={3}>
             <Heading>Join the conversation on Discord</Heading>
             <Text fontSize="lg">
-              Become a part of our
-              {" "}
-              <strong>growing community</strong>
-              ! Get help
+              Become a part of our <strong>growing community</strong>! Get help
               with projects you’re working on and keep in touch with like-minded
               individuals.
             </Text>
@@ -299,15 +278,8 @@ function WorkshopSection() {
             </Box>
             <Heading>Build new skills every month</Heading>
             <Text fontSize="lg">
-              Attend our
-              {" "}
-              <strong>workshops</strong>
-              {" "}
-              and learn from our
-              {" "}
-              <strong>talented instructors</strong>
-              {" "}
-              within the community and
+              Attend our <strong>workshops</strong> and learn from our{" "}
+              <strong>talented instructors</strong> within the community and
               level-up your web dev skills with us.
             </Text>
           </Stack>
@@ -362,7 +334,6 @@ function WorkshopSection() {
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                     MozBackgroundClip: "text",
-                    MozTextFillColor: "transparent",
                   }}
                 >
                   6 Workshops
@@ -394,7 +365,7 @@ function WorkshopSection() {
   );
 }
 
-export default function HomePage({ articles }) {
+export default function HomePage() {
   return (
     <>
       <NextSeo title="Home" />

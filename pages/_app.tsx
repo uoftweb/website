@@ -19,7 +19,7 @@ Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
-function App({ Component, pageProps }) {
+function App({ Component, pageProps }: { Component: any; pageProps: any }) {
   const apolloClient = useApollo(pageProps.initialApolloState);
   return (
     <>

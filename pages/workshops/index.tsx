@@ -1,6 +1,4 @@
-import {
-  Box, Grid, Heading, Stack, Text,
-} from "@chakra-ui/react";
+import { Box, Grid, Heading, Stack, Text } from "@chakra-ui/react";
 import { NextSeo } from "next-seo";
 import NextLink from "next/link";
 
@@ -10,9 +8,27 @@ import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
 import { WorkshopCard } from "../../components/WorkshopCard";
 import { getSanityContent } from "../../lib/sanityUtil";
-
+export interface RawWorkshopData {
+  title: string;
+  slug: { current: string };
+  excerpt: string;
+  start: string;
+  end: string;
+  mainImage: {
+    asset: { url: string };
+  };
+  youtubeVideo: {
+    url: string;
+  };
+  shownotes?: string;
+}
+export type WorkshopData = Omit<RawWorkshopData, "slug"> & {
+  slug: string;
+  thumbnail: string;
+  youtubeVideoUrl: string;
+};
 export async function getStaticProps() {
-  const data = await getSanityContent({
+  const data = (await getSanityContent({
     query: `
       query AllWorkshops {
         allWorkshop(sort: { start: DESC }) {
@@ -34,7 +50,7 @@ export async function getStaticProps() {
         }
       }
     `,
-  });
+  })) as { allWorkshop: RawWorkshopData[] };
   const workshops = data.allWorkshop.map((w) => ({
     ...w,
     slug: w.slug.current,
@@ -44,7 +60,11 @@ export async function getStaticProps() {
   return { props: { workshops } };
 }
 
-export default function WorkshopsPage({ workshops }) {
+export default function WorkshopsPage({
+  workshops,
+}: {
+  workshops: WorkshopData[];
+}) {
   return (
     <>
       <NextSeo title="Workshops" />

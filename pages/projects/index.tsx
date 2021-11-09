@@ -13,10 +13,17 @@ import Link from "next/link";
 
 import { SiteFooter } from "../../components/SiteFooter";
 import { SiteNavigationBar } from "../../components/SiteNavigationBar";
-import { getSanityContent, urlFor } from "../../lib/sanityUtil";
+import { getSanityContent } from "../../lib/sanityUtil";
 
+export interface RawProjectData {
+  name: string;
+  excerpt: string;
+  highlight: string;
+  slug: { current: string };
+}
+export type ProjectData = Omit<RawProjectData, "slug"> & { slug: string };
 export const getStaticProps = async () => {
-  const projectsData = await getSanityContent({
+  const projectsData = (await getSanityContent({
     query: `
       query AllProjects {
         allProject {
@@ -29,48 +36,17 @@ export const getStaticProps = async () => {
         }
       }
     `,
-  });
+  })) as { allProject: RawProjectData[] };
   const projects = projectsData.allProject.map((p) => ({
     ...p,
     slug: p.slug.current,
   }));
 
-  const mentorsData = await getSanityContent({
-    query: `
-      query MentorSkills {
-        allMentor {
-          name
-          skills
-          image {
-            asset {
-              _id
-              url
-            }
-            crop {
-              top
-              left
-              bottom
-              right
-            }
-            hotspot {
-              x
-              y
-              height
-              width
-            }
-          }
-        }
-      }
-    `,
-  });
-  const mentors = mentorsData.allMentor.map((m) => ({
-    ...m,
-    thumbnailUrl: urlFor(m.image).url(),
-  }));
-  return { props: { mentors, projects } };
+  return { props: { projects } };
 };
 
-function ProjectCard({ name, excerpt, highlight }) {
+function ProjectCard({ project }: { project: ProjectData }) {
+  const { name, excerpt, highlight } = project;
   return (
     <Stack
       bg="white"
@@ -101,7 +77,7 @@ function ProjectCard({ name, excerpt, highlight }) {
         overflow="hidden"
         position="relative"
         _after={{
-          content: "\"\"",
+          content: '""', //eslint-disable-line
           position: "absolute",
           display: "block",
           bottom: 0,
@@ -120,7 +96,7 @@ function ProjectCard({ name, excerpt, highlight }) {
   );
 }
 
-const CurrentProjects = ({ projects }) => {
+const CurrentProjects = ({ projects }: { projects: ProjectData[] }) => {
   const bg = useColorModeValue("brand.50", "brand.800");
   const color = useColorModeValue("brand.600", "brand.50");
 
@@ -147,11 +123,7 @@ const CurrentProjects = ({ projects }) => {
               <Link key={p.slug} href={`/projects/${p.slug}`}>
                 <a>
                   <motion.div whileHover={{ y: -8 }}>
-                    <ProjectCard
-                      name={p.name}
-                      excerpt={p.excerpt}
-                      highlight={p.highlight}
-                    />
+                    <ProjectCard project={p} />
                   </motion.div>
                 </a>
               </Link>
@@ -163,7 +135,11 @@ const CurrentProjects = ({ projects }) => {
   );
 };
 
-export default function ProjectsPage({ projects }) {
+export default function ProjectsPage({
+  projects,
+}: {
+  projects: ProjectData[];
+}) {
   return (
     <>
       <NextSeo title="Projects" />

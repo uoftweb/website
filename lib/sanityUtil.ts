@@ -8,6 +8,7 @@ const client = sanityClient({
   dataset: sanityConfig.api.dataset,
   token: "", // or leave blank to be anonymous user
   useCdn: process.env.NODE_ENV === "production", // `false` if you want to ensure fresh data
+  apiVersion: "2021-11-09",
 });
 
 // Get a pre-configured url-builder from your sanity client
