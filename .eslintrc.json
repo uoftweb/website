@@ -1,0 +1,36 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "airbnb-typescript",
+    "plugin:react/jsx-runtime",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["react", "@typescript-eslint", "import"],
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  },
+  "rules": {
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ]
+  },
+  "ignorePatterns": "**/*.js"
+}

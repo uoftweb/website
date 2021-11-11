@@ -1,9 +1,3 @@
-import React from "react";
-
-function YouTubePreview(props) {
-  return <pre>{JSON.stringify(props, null, 2)}</pre>;
-}
-
 export default {
   name: "youtube",
   type: "object",
@@ -20,6 +14,6 @@ export default {
     select: {
       url: "url",
     },
-    component: YouTubePreview,
+    component: (props) => <pre>{JSON.stringify(props, null, 2)}</pre>,
   },
 };
