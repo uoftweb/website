@@ -373,8 +373,8 @@ export default function HomePage() {
       <SiteNavigationBar />
 
       <HeroSection />
-      <WorkshopSection />
       <DiscordSection />
+      <WorkshopSection />
 
       <SiteFooter />
     </>
