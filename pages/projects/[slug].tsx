@@ -19,6 +19,7 @@ import { MDXComponents } from "../../lib/articles";
 import { SiteFooter } from "../../components/SiteFooter";
 import { getSanityContent } from "../../lib/sanityUtil";
 import GithubIcon from "../../components/GithubIcon";
+import { MdxRemote } from "next-mdx-remote/types";
 
 export async function getStaticPaths() {
   const data = (await getSanityContent({
@@ -50,7 +51,7 @@ export interface RawProjectDetail {
 }
 type ProjectDetail = Omit<RawProjectDetail, "slug"> & {
   slug: string;
-  source: string;
+  source: MdxRemote.Source;
 };
 export async function getStaticProps({ params }: { params: { slug: string } }) {
   const data = (await getSanityContent({
@@ -72,7 +73,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
       slug: params.slug,
     },
   })) as { allProject: RawProjectDetail[] };
-  const mdxSource: string = await renderToString(data.allProject[0].body, {
+  const mdxSource = await renderToString(data.allProject[0].body, {
     components: MDXComponents,
     mdxOptions: { remarkPlugins: [RemarkSlugPlugin] },
   });
