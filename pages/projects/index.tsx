@@ -20,6 +20,8 @@ export interface RawProjectData {
   excerpt: string;
   highlight: string;
   slug: { current: string };
+  /* This is a date object but in string form */
+  _createdAt: string;
 }
 export type ProjectData = Omit<RawProjectData, "slug"> & { slug: string };
 export const getStaticProps = async () => {
@@ -33,6 +35,7 @@ export const getStaticProps = async () => {
           slug {
             current
           }
+          _createdAt
         }
       }
     `,
@@ -95,10 +98,41 @@ function ProjectCard({ project }: { project: ProjectData }) {
     </Stack>
   );
 }
+const ProjectsDisplay = ({ projects }: { projects: ProjectData[] }) => (
+  <Box w="full" overflowX="auto" marginX="auto" py={4}>
+    <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={12}>
+      {projects.map((p) => (
+        <Link key={p.slug} href={`/projects/${p.slug}`}>
+          <a>
+            <motion.div whileHover={{ y: -8 }}>
+              <ProjectCard project={p} />
+            </motion.div>
+          </a>
+        </Link>
+      ))}
+    </Grid>
+  </Box>
+);
 
-const CurrentProjects = ({ projects }: { projects: ProjectData[] }) => {
+const ProjectsSection = ({ projects }: { projects: ProjectData[] }) => {
   const bg = useColorModeValue("brand.50", "brand.800");
   const color = useColorModeValue("brand.600", "brand.50");
+
+  const oldProjects: ProjectData[] = [];
+  const recentProjects: ProjectData[] = [];
+  projects.forEach((project) => {
+    const projectDate = new Date(project._createdAt);
+    // Number of months off to be considered a recent project
+    const threshhold = 6;
+    if (
+      new Date() <=
+      new Date(projectDate.getFullYear(), projectDate.getMonth() + threshhold)
+    ) {
+      recentProjects.push(project);
+    } else {
+      oldProjects.push(project);
+    }
+  });
 
   return (
     <Box
@@ -115,21 +149,18 @@ const CurrentProjects = ({ projects }: { projects: ProjectData[] }) => {
         px={3}
         justify={{ base: "center", lg: "flex-start" }}
       >
-        <Heading>Current Projects</Heading>
-
-        <Box w="full" overflowX="auto" marginX="auto" py={4}>
-          <Grid templateColumns="repeat(auto-fit, minmax(300px, 1fr))" gap={12}>
-            {projects.map((p) => (
-              <Link key={p.slug} href={`/projects/${p.slug}`}>
-                <a>
-                  <motion.div whileHover={{ y: -8 }}>
-                    <ProjectCard project={p} />
-                  </motion.div>
-                </a>
-              </Link>
-            ))}
-          </Grid>
-        </Box>
+        {recentProjects.length && (
+          <>
+            <Heading>Recent Projects</Heading>
+            <ProjectsDisplay projects={recentProjects} />
+          </>
+        )}
+        {oldProjects.length && (
+          <>
+            <Heading>Old Projects</Heading>
+            <ProjectsDisplay projects={oldProjects} />
+          </>
+        )}
       </Stack>
     </Box>
   );
@@ -144,7 +175,7 @@ export default function ProjectsPage({
     <>
       <NextSeo title="Projects" />
       <SiteNavigationBar />
-      <CurrentProjects projects={projects} />
+      <ProjectsSection projects={projects} />
       <SiteFooter />
     </>
   );
