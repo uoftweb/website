@@ -9,7 +9,8 @@
     "start": "sanity start",
     "build": "sanity build",
     "deploy": "sanity deploy --no-minify",
-    "graphql-deploy": "sanity graphql deploy"
+    "graphql-deploy": "sanity graphql deploy",
+    "graphql-deploy-dev": "sanity graphql deploy --dataset development"
   },
   "keywords": [
     "sanity"
@@ -25,7 +26,8 @@
     "prop-types": "^15.7",
     "react": "^17.0",
     "react-dom": "^17.0",
-    "sanity-plugin-markdown": "^1.0.1"
+    "sanity-plugin-markdown": "^2.1.0",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@sanity/cli": "^2.1.0"
