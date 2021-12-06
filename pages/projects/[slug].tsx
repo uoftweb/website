@@ -48,6 +48,8 @@ export interface RawProjectDetail {
   slug: { current: string };
   body: string;
   techStack: string[];
+  /* This is a date object but in string form */
+  _createdAt: string;
 }
 type ProjectDetail = Omit<RawProjectDetail, "slug"> & {
   slug: string;
@@ -66,6 +68,7 @@ export async function getStaticProps({ params }: { params: { slug: string } }) {
           }
           body
           techStack
+          _createdAt
         }
       }
     `,
@@ -92,10 +95,18 @@ export default function ProjectDetailsPage({
 }: {
   project: ProjectDetail;
 }) {
-  const { name: title, githubUrl, excerpt, source, techStack } = project;
+  const {
+    name: title,
+    githubUrl,
+    excerpt,
+    source,
+    techStack,
+    _createdAt, // eslint-disable-line
+  } = project;
   const content = hydrate(source, { components: MDXComponents });
   const headerBg = useColorModeValue("gray.50", "gray.900");
   const headerColor = useColorModeValue("gray.900", "gray.100");
+  const date = new Date(_createdAt);
   return (
     <>
       <NextSeo title={title} description={excerpt} />
@@ -114,7 +125,7 @@ export default function ProjectDetailsPage({
                   </Link>
                 </NextLink>
               </Box>
-              <Heading>{title}</Heading>
+              <Heading size="xl">{title}</Heading>
               <HStack spacing={6}>
                 {githubUrl && (
                   <a href={githubUrl} target="_blank" rel="noopener noreferrer">
@@ -127,6 +138,12 @@ export default function ProjectDetailsPage({
                   </Text>
                 )}
               </HStack>
+              <Heading as="div" size="md">
+                {date.toLocaleString("default", {
+                  month: "long",
+                  year: "numeric",
+                })}
+              </Heading>
             </Stack>
           </Box>
         </Box>

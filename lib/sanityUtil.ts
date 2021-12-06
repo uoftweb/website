@@ -5,7 +5,10 @@ import sanityConfig from "../sanity/sanity.json";
 
 const client = sanityClient({
   projectId: sanityConfig.api.projectId,
-  dataset: sanityConfig.api.dataset,
+  dataset:
+    process.env.NODE_ENV === "production"
+      ? sanityConfig.api.dataset
+      : "develpoment",
   token: "", // or leave blank to be anonymous user
   useCdn: process.env.NODE_ENV === "production", // `false` if you want to ensure fresh data
   apiVersion: "2021-11-09",
