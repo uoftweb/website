@@ -16,10 +16,10 @@
     "lint": "eslint ./"
   },
   "dependencies": {
-    "@apollo/client": "^3.4.17",
+    "@apollo/client": "^3.5.5",
     "@chakra-ui/icons": "^1.1.1",
-    "@chakra-ui/react": "^1.7.1",
-    "@emotion/react": "^11.6.0",
+    "@chakra-ui/react": "^1.7.2",
+    "@emotion/react": "^11.7.0",
     "@emotion/styled": "^11.6.0",
     "@sanity/client": "^2.21.10",
     "@sanity/image-url": "^0.140.19",
@@ -40,18 +40,18 @@
   "devDependencies": {
     "@types/next-auth": "^3.1.10",
     "@types/nprogress": "^0.2.0",
-    "@types/react": "^17.0.35",
+    "@types/react": "^17.0.37",
     "@typescript-eslint/eslint-plugin": "^4.33.0",
     "@typescript-eslint/parser": "^4.33.0",
-    "dotenv": "^8.2.0",
+    "dotenv": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-airbnb-typescript": "^14.0.2",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.27.0",
+    "eslint-plugin-react": "^7.27.1",
     "eslint-plugin-react-hooks": "^4.3.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.5.2"
   }
 }
