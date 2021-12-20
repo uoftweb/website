@@ -9,10 +9,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "sanity:start": "yarn workspace uoftwebcom start",
-    "sanity:build": "yarn workspace uoftwebcom build",
-    "sanity:deploy": "yarn workspace uoftwebcom deploy",
-    "sanity:graphql-deploy": "yarn workspace uoftwebcom graphql-deploy",
+    "sanity:start": "npm start -w uoftwebcom",
+    "sanity:build": "npm run build -w uoftwebcom",
+    "sanity:deploy": "npm run deploy -w uoftwebcom",
+    "sanity:graphql-deploy": "npm run graphql-deploy -w uoftwebcom",
     "lint": "eslint ./"
   },
   "dependencies": {
