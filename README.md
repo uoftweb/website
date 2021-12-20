@@ -10,6 +10,8 @@ This is the source code repository for the UofT Web Development Club. The websit
 
 1. [Node.js 14](https://nodejs.org/en/)
 
+   - npm 7 should be installed
+
 ## Getting Started
 
 First install dependencies:
