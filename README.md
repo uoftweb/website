@@ -42,3 +42,9 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The website is auto-deployed to the [Vercel Platform](https://vercel.com?utm_source=uoftweb/website&utm_campaign=oss) on commits to master. Any PRs you open will also be automatically deployed for testing.
 
 [![Vercel logo](./public/images/powered-by-vercel.svg)](https://vercel.com?utm_source=uoftweb/website&utm_campaign=oss)
+
+
+
+EDITS: 10/22/2025
+
+when coding on this repository, 1. ensure that Node 16 is installed 2. run "npm install --legacy-peer-deps" in the terminal
